@@ -41,12 +41,11 @@ avg_f1 = 0
 
 for i, tree in enumerate(model):
     pred = tree.predict(x_test)
-    pred_proba = tree.predict_proba(x_test)
     acc = float(accuracy_score(y_test, pred))
     prec = float(precision_score(y_test, pred))
     rec = float(recall_score(y_test, pred))
     f1 = float(f1_score(y_test, pred))
-    loss = float(log_loss(y_test, pred_proba))
+    loss = float((pred == y_test).sum()) / len(y_test)
 
     avg_accuracy += acc
     avg_precision += prec
@@ -66,8 +65,8 @@ for i, tree in enumerate(model):
     })
 
 # Add average row and calculate average loss
-avg_loss = sum(r['Loss'] for r in results) / len(results)
 n = len(model)
+avg_loss = sum(r['Loss'] for r in results) / len(results) + config['regularization'] * n
 results.append({
     'Tree': 'Avg',
     'Model': f'RESPLIT (avg of {n} trees)',
