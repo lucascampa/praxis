@@ -115,11 +115,10 @@ praxis/
 │   └── reporting.py                      # Confusion matrices & plots
 │
 ├── notebooks/                             # Analysis notebooks
-│   ├── Black-Box to Glass-Box modeling [RANDOM_SEED=42].ipynb       # DIMEX notebooks
-│   ├── Black-Box to Glass-Box modeling [RANDOM_SEED=50].ipynb
-│   ├── Black-Box to Glass-Box modeling [RANDOM_SEED=99].ipynb
-│   ├── (original)/                       # Backups
-│   └── RESPLIT_vs_PRAXIS_comparison.ipynb (TO CREATE)              # Main comparison
+│   ├── Black-Box to Glass-Box modeling [RANDOM_SEED=42].ipynb       # DIMEX: SPLIT vs XGBoost
+│   ├── Black-Box to Glass-Box modeling [RANDOM_SEED=50].ipynb       # DIMEX: SPLIT vs XGBoost (seed=50)
+│   ├── Black-Box to Glass-Box modeling [RANDOM_SEED=99].ipynb       # DIMEX: SPLIT vs XGBoost (seed=99)
+│   └── (original)/                       # Backups
 │
 ├── results/                               # Output figures & tables
 │   └── Results.png                       # DIMEX comparison chart
@@ -137,9 +136,8 @@ praxis/
 | `dimex/preprocessing.py` | Data cleaning & encoding | `clean_missing()`, `binarize_encode()`, `smote()` |
 | `dimex/xgb_runner.py` | XGBoost training & feature selection | `train_xgb()`, `cumulative_gain()` |
 | `dimex/split_runner.py` | SPLIT algorithm interface | `train_split()`, `prediction_split()` |
-| `dimex/praxis_runner.py` | PRAXIS algorithm interface (NEW) | `train_praxis()`, `prediction_praxis()`, `get_rashomon_stats()` |
 | `dimex/reporting.py` | Visualization | `cm()` (confusion matrices) |
-| `notebooks/*.ipynb` | Analysis workflows | Load data → train → evaluate → compare |
+| `notebooks/*.ipynb` | Analysis workflows (DIMEX) | SPLIT vs XGBoost comparison across 3 random seeds |
 
 ---
 
@@ -242,13 +240,14 @@ python -c "from praxis import PRAXIS; print('✓ PRAXIS')"
 python -c "import dimex; print('✓ dimex')"
 ```
 
-### Quick Start (Preprocessing Already Complete)
+### Quick Start: XGBoost → SPLIT → RESPLIT → PRAXIS
+
+**Part 1: XGBoost and SPLIT (Jupyter-friendly)**
 ```python
 import dimex as dx
 import pandas as pd
+from sklearn.metrics import accuracy_score, precision_score, recall_score, f1_score
 
-# Load pre-processed data (contains ALL 23 features after encoding)
-# Feature selection already identified these 9 optimal features:
 SELECTED_FEATURES = [
     'Online_boarding', 'Type_of_Travel_Personal Travel', 'Class_Eco', 
     'Inflight_wifi_service', 'On_board_service', 'Customer_Type_disloyal Customer', 
@@ -256,53 +255,56 @@ SELECTED_FEATURES = [
 ]
 
 data = pd.read_csv('airline-passenger-satisfaction/train_clean_encoded_balanced.csv')
-
-# For model training: use only selected 9 features
-x_train_subset, x_test_subset, y_train, y_test = dx.split_dataset(
+x_train, x_test, y_train, y_test = dx.split_dataset(
     data[SELECTED_FEATURES], 
     data['satisfaction'], 
     test_size=0.3, random_state=42
 )
 
-# For feature importance comparison: keep full feature set for XGBoost comparison
-x_train_full, x_test_full, _, _ = dx.split_dataset(
-    data.drop('satisfaction', axis=1),
-    data['satisfaction'], 
-    test_size=0.3, random_state=42
-)
+results = []
 
-# Train SPLIT (single optimal tree on 9-feature subset)
-split_model, split_tree, split_meta = dx.train_split(x_train_subset, y_train, 
-                                                       lookahead=2, full_depth=5, reg=0.01)
-split_pred, split_acc = dx.prediction_split(split_model, x_test_subset, y_test)
-print(f"SPLIT: acc={split_acc:.4f}, leaves={split_meta['leaves']}, time={split_meta['runtime']:.2f}s")
+# 1. Train XGBoost
+print("Training XGBoost...")
+xgb_model, xgb_size, xgb_runtime = dx.train_xgb(x_train, y_train)
+xgb_pred, _ = dx.prediction_xgb(xgb_model, x_test, y_test)
+results.append({
+    'Model': 'XGBoost',
+    'Accuracy': accuracy_score(y_test, xgb_pred),
+    'Precision': precision_score(y_test, xgb_pred),
+    'Recall': recall_score(y_test, xgb_pred),
+    'F1': f1_score(y_test, xgb_pred),
+    'Size': f"{xgb_size['trees']} trees, {xgb_size['leaves']} leaves"
+})
 
-# Train PRAXIS (Rashomon set enumeration on 9-feature subset)
-praxis_model, x_binary, praxis_meta = dx.train_praxis(x_train_subset, y_train, 
-                                                        lambda_reg=0.01, depth_budget=5, 
-                                                        rashomon_mult=0.03, lookahead_k=1)
-praxis_pred, praxis_acc, details = dx.prediction_praxis(praxis_model, x_test_subset, y_test, 
-                                                         use_ensemble=False)
-print(f"PRAXIS: acc={praxis_acc:.4f}, trees={praxis_meta['n_trees']}, time={praxis_meta['runtime']:.2f}s")
+# 2. Train SPLIT
+print("Training SPLIT...")
+split_model, split_tree, split_meta = dx.train_split(x_train, y_train, 
+                                                      lookahead=2, full_depth=6, reg=0.005)
+split_pred, _ = dx.prediction_split(split_model, x_test, y_test)
+results.append({
+    'Model': 'SPLIT',
+    'Accuracy': accuracy_score(y_test, split_pred),
+    'Precision': precision_score(y_test, split_pred),
+    'Recall': recall_score(y_test, split_pred),
+    'F1': f1_score(y_test, split_pred),
+    'Size': f"{split_meta['leaves']} leaves"
+})
 
-# Get RID scores for feature stability analysis (on 9-feature subset)
-rid_scores = praxis_model.compute_rid()
-print(f"RID scores: {rid_scores}")
-
-# Feature importance comparison: 
-# Compare PRAXIS RID scores (from 9 features) vs. XGBoost importance (from all 23 features)
-xgb_model, _, _ = dx.train_xgb(x_train_full, y_train)
-xgb_importance = xgb_model.get_booster().get_score(importance_type='weight')
-# Filter to selected features for comparison
-selected_importance = {f: xgb_importance.get(f, 0) for f in SELECTED_FEATURES}
-print(f"XGBoost importance (selected features): {selected_importance}")
+# Display table (will add RESPLIT and PRAXIS results here)
+results_df = pd.DataFrame(results)
+print("\n" + "="*100)
+print(results_df.to_string(index=False))
+print("="*100)
 ```
 
-**For RESPLIT** (must run via command-line script, see `run_resplit.py` example below):
+**Part 2: RESPLIT (Command-line Script Only)**
+
+Create `run_resplit.py`:
 ```python
-# Create run_resplit.py with your config, then execute: python run_resplit.py
 from resplit import RESPLIT
 import pandas as pd
+import json
+from sklearn.metrics import accuracy_score, precision_score, recall_score, f1_score
 
 SELECTED_FEATURES = [
     'Online_boarding', 'Type_of_Travel_Personal Travel', 'Class_Eco', 
@@ -313,47 +315,117 @@ SELECTED_FEATURES = [
 data = pd.read_csv('airline-passenger-satisfaction/train_clean_encoded_balanced.csv')
 x_train = data[SELECTED_FEATURES]
 y_train = data['satisfaction']
-x_test = data[SELECTED_FEATURES]  # or your test set
-y_test = data['satisfaction']     # or your test labels
+x_test = data[SELECTED_FEATURES]
+y_test = data['satisfaction']
 
 config = {
-    "regularization": 0.01,
-    "rashomon_bound_multiplier": 0.03,  # 3% slack
-    "depth_budget": 5,
+    "regularization": 0.005,
+    "rashomon_bound_multiplier": 0.03,
+    "depth_budget": 6,
     "cart_lookahead_depth": 2,
     "verbose": True
 }
 
+print("Training RESPLIT...")
 model = RESPLIT(config, fill_tree="treefarms")
 model.fit(x_train, y_train)
 
-# Model now contains the Rashomon set
-print(f"Trees in set: {len(model)}")
+print(f"\nRashomon set size: {len(model)} trees\n")
+
+results = []
 for i, tree in enumerate(model):
     pred = tree.predict(x_test)
-    acc = (pred == y_test).mean()
-    print(f"Tree {i}: accuracy={acc:.4f}")
+    results.append({
+        'Tree': i,
+        'Model': f'RESPLIT (Tree {i})',
+        'Accuracy': float(accuracy_score(y_test, pred)),
+        'Precision': float(precision_score(y_test, pred)),
+        'Recall': float(recall_score(y_test, pred)),
+        'F1': float(f1_score(y_test, pred)),
+        'Size': f"Tree {i} of {len(model)}"
+    })
+
+results_df = pd.DataFrame(results)
+print("="*80)
+print(results_df.to_string(index=False))
+print("="*80)
+
+# Save to JSON for comparison notebook
+output_file = 'results/resplit_metrics.json'
+with open(output_file, 'w') as f:
+    json.dump(results, f, indent=2)
+
+print(f"\n✓ Results saved to {output_file}")
 ```
 
-### Run RESPLIT (Command-line Only)
-⚠️ **CRITICAL**: RESPLIT must be run via command-line scripts, NOT Jupyter notebooks.
-
-From the SPLIT-ICML README:
-- RESPLIT has known timeout issues in Jupyter
-- Always run via `python script.py` or SLURM scripts
-- Use Jupyter only for PRAXIS and analysis
-
-Example:
+Execute:
 ```bash
-# Create run_resplit.py with your config, then execute:
 python run_resplit.py
-
-# Save results to JSON/CSV, then analyze in Jupyter
 ```
 
-### Run the Comparison Notebook
-```bash
-jupyter notebook notebooks/RESPLIT_vs_PRAXIS_comparison.ipynb
+This saves results to `results/resplit_metrics.json` for the comparison notebook to read.
+
+**Part 3: PRAXIS + RESPLIT Comparison (Jupyter-friendly)**
+
+```python
+import json
+
+# 3. Load RESPLIT results from run_resplit.py output
+try:
+    with open('results/resplit_metrics.json', 'r') as f:
+        resplit_results = json.load(f)
+    # Add average RESPLIT result to comparison
+    avg_accuracy = sum(r['Accuracy'] for r in resplit_results) / len(resplit_results)
+    avg_precision = sum(r['Precision'] for r in resplit_results) / len(resplit_results)
+    avg_recall = sum(r['Recall'] for r in resplit_results) / len(resplit_results)
+    avg_f1 = sum(r['F1'] for r in resplit_results) / len(resplit_results)
+    
+    results.append({
+        'Model': f'RESPLIT (avg of {len(resplit_results)} trees)',
+        'Accuracy': avg_accuracy,
+        'Precision': avg_precision,
+        'Recall': avg_recall,
+        'F1': avg_f1,
+        'Size': f"{len(resplit_results)} trees"
+    })
+    print(f"✓ Loaded RESPLIT results ({len(resplit_results)} trees)")
+except FileNotFoundError:
+    print("⚠ RESPLIT results not found. Run `python run_resplit.py` first.")
+
+# 4. Train PRAXIS
+print("Training PRAXIS...")
+from praxis import PRAXIS
+praxis_model = PRAXIS(lambda_reg=0.005, depth_budget=6, rashomon_mult=0.03, lookahead_k=1)
+praxis_model.fit(x_train, y_train)
+
+praxis_pred_single = praxis_model.predict(x_test)
+praxis_pred_ensemble = praxis_model.predict_ensemble(x_test)
+
+results.append({
+    'Model': 'PRAXIS (Best Tree)',
+    'Accuracy': accuracy_score(y_test, praxis_pred_single),
+    'Precision': precision_score(y_test, praxis_pred_single),
+    'Recall': recall_score(y_test, praxis_pred_single),
+    'F1': f1_score(y_test, praxis_pred_single),
+    'Size': f"1 of {len(praxis_model)} trees"
+})
+
+results.append({
+    'Model': 'PRAXIS (Ensemble)',
+    'Accuracy': accuracy_score(y_test, praxis_pred_ensemble),
+    'Precision': precision_score(y_test, praxis_pred_ensemble),
+    'Recall': recall_score(y_test, praxis_pred_ensemble),
+    'F1': f1_score(y_test, praxis_pred_ensemble),
+    'Size': f"{len(praxis_model)} trees (voting)"
+})
+
+# Final comparison table
+results_df = pd.DataFrame(results)
+print("\n" + "="*100)
+print("FINAL COMPARISON: XGBoost vs SPLIT vs PRAXIS vs RESPLIT")
+print("="*100)
+print(results_df.to_string(index=False))
+print("="*100)
 ```
 
 ---
@@ -589,37 +661,28 @@ pip install -e .
 
 ## Notes for Future Work
 
-### ✅ Completed
-- [x] **Data Preprocessing**: Missing values, encoding, SMOTE balancing (9-feature subset selected)
-- [x] **Feature Selection via XGBoost**: Identified optimal feature set at 80% cumulative gain threshold
-- [x] **Paper Analysis**: Integrated SPLIT and PRAXIS paper insights into CLAUDE.md
+### ✅ Completed (DIMEX Work)
+- [x] **Data Preprocessing**: Missing values, encoding, SMOTE balancing
+- [x] **Feature Selection via XGBoost**: Identified 9 optimal features at 80% cumulative gain
+- [x] **SPLIT Training**: Trained on 9-feature subset with lookahead=2, depth=6, reg=0.005
+- [x] **SPLIT vs XGBoost Comparison**: Across 3 random seeds (42, 50, 99) in Black-Box notebooks
+- [x] **Paper Analysis**: SPLIT and PRAXIS papers reviewed and contextualized
 
-### Active Work (RESPLIT vs. PRAXIS Comparison)
+### Remaining Work (RESPLIT vs PRAXIS Comparison)
 
-#### SPLIT Training
-- [ ] **SPLIT script**: Train SPLIT on airline 9-feature subset
-- [ ] **Metrics**: Accuracy, precision, recall, F1, # leaves, runtime
-
-#### RESPLIT Training (Command-line only)
-- [ ] **RESPLIT script**: Create `run_resplit.py` to execute RESPLIT on airline data
+#### RESPLIT Command-line Execution
+- [ ] **RESPLIT script**: Create `run_resplit.py` to execute RESPLIT on airline 9-feature subset (cmd-line only)
 - [ ] **Config tuning**: Test `rashomon_bound_multiplier` values (0.01, 0.03, 0.05, 0.1)
-- [ ] **Save results**: JSON with Rashomon set trees, collection size, feature importance correlation
+- [ ] **Results export**: Save Rashomon set trees and statistics to JSON
 
-#### PRAXIS Training
-- [ ] **PRAXIS notebook**: Train PRAXIS on airline 9-feature subset with varying `rashomon_mult`
-- [ ] **RID analysis**: Extract and compare `compute_rid()` scores vs. XGBoost feature importance
-- [ ] **Top-tree comparison**: Compare PRAXIS's best tree (by loss) against SPLIT result
-
-#### Comparative Analysis
-- [ ] **Main comparison**: RESPLIT vs. PRAXIS
-  - [ ] Set size comparison (n_trees_praxis / n_trees_resplit ratio)
+#### RESPLIT vs. PRAXIS Comparative Analysis
+- [ ] **Direct comparison**: Run RESPLIT and compare against PRAXIS:
+  - [ ] Rashomon set sizes (expect PRAXIS ≥ 98% recall of RESPLIT set)
   - [ ] Runtime ratio (target: 100-1000× speedup for PRAXIS)
-  - [ ] Feature stability: RID scores vs. RESPLIT correlation
-  - [ ] Tree structure similarity (same splits, same features?)
-- [ ] **Uncertainty analysis**: Per-instance disagreement rate, identify ambiguous cases
-- [ ] **Scaling experiment**: Optional—test on 16 or 19 features to see where PRAXIS gains advantage
-- [ ] **Visualization**: Performance curves, feature importance comparison, uncertainty heatmaps
-- [ ] **Notebook**: Create `RESPLIT_vs_PRAXIS_comparison.ipynb` with full pipeline and analysis
+  - [ ] Feature importance stability comparison
+  - [ ] Tree structure similarity (same splits, thresholds?)
+- [ ] **Multi-seed robustness**: Test across multiple random seeds (42, 50, 99)
+- [ ] **Scaling experiment**: Test on 16 or 19 features to identify PRAXIS advantage threshold
 
 ---
 

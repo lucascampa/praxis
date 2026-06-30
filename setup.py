@@ -1,6 +1,6 @@
 from setuptools import setup, find_packages
 
 setup(
-    name="praxis",
+    name="dimex",
     packages=find_packages(),
 )
