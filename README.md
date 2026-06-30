@@ -1,22 +1,25 @@
-# DIMEX
-Dimex is a library I created for all the utilities related to the Rutgers MBS Summer 2025 DIMACS externship.
+# PRAXIS
+This project extends the original [DIMEX](../dimex/) work by comparing two Rashomon set enumeration algorithms: **RESPLIT** (from the SPLIT paper) and **PRAXIS** (an evolution with a proxy-based approach).
 
-An externship is a project facilitated by the Rutgers University MBS program, in which students inside a company under an academic capacity.
+## Project Goals
+Build on the DIMACS externship work demonstrating interpretable ML can match black-box performance. This phase compares two methods for exploring sets of near-optimal sparse decision trees:
+- **RESPLIT**: Enumerates Rashomon sets using TreeFARMS at leaf subproblems
+- **PRAXIS** ([paper](https://arxiv.org/abs/2606.00202), [repo](https://github.com/zakk-h/PRAXIS)): Enumerates Rashomon sets using a proxy-based algorithm with iterative refinement
 
-In this project, I worked with DIMACS — Rutgers' Center for Discrete Mathematics and Theoretical Computer Science. Our aim was to demonstrate whether interpretable Machine Learning models are able to reach a satisfying level of performance relative to black box models when ran on tabular data. The performance of the interpretable algorithm SPLIT ([paper](https://arxiv.org/abs/2502.15988), [repository](https://github.com/VarunBabbar/SPLIT-ICML/)) was benchmarked against that of XGBoost.
+Both are applied to the same airline satisfaction dataset to evaluate scalability, Rashomon set size, tree quality, and feature importance stability.
 
-See the full [write-up](https://medium.com/@lucascampagnaro/i-built-an-end-to-end-interpretable-machine-learning-research-pipeline-0ba67d0ba700) of this project for a deeper dive into the methodology.
+See the original [write-up](https://medium.com/@lucascampagnaro/i-built-an-end-to-end-interpretable-machine-learning-research-pipeline-0ba67d0ba700) for DIMEX context.
 
 ## Features & Workflow
 - **Preprocessing**: Missing-value cleaning, label binarization, categorical encoding, SMOTE, and undersampling
 - **XGBoost toolkit**: Training, model metadata, feature selection, and predictions
-- **SPLIT toolkit**: Training, model metadata, and predictions
+- **SPLIT toolkit**: Training, model metadata, predictions, and RESPLIT Rashomon set enumeration
+- **PRAXIS toolkit**: Training, Rashomon set enumeration, disagreement analysis, and RID (Rashomon Importance Distribution)
 
-1. Preprocess the data
-2. SPLIT first iterations and fine-tuning
-3. Feature selection with XGBoost
-4. Final SPLIT iteration
-5. Model comparison
+1. Preprocess the data (same as DIMEX)
+2. Feature selection with XGBoost (same as DIMEX)
+3. Train RESPLIT and PRAXIS on selected features
+4. Compare Rashomon sets, tree counts, runtimes, and feature importance
 
 ## Project Structure
 ```
@@ -35,36 +38,70 @@ See the full [write-up](https://medium.com/@lucascampagnaro/i-built-an-end-to-en
 ## Installation
 See [SETUP.md](SETUP.md) for full installation instructions.
 
-## Usage
+## Quick Start
+
 ```python
 import dimex as dx
 
-# Clean, encode, and binarize the data
-dataset_clean, dataset_missing_stats, dataset_clean_filename = dx.clean_missing('your_data.csv')
-dataset_encoded, dataset_encoded_filename = dx.binarize_encode(dataset_clean_filename, 'non-binarized class 1', 'non-binarized class 2')
+# Preprocess: clean, encode, balance
+data_clean, stats, fname = dx.clean_missing('airline-passenger-satisfaction/train.csv')
+data_encoded, fname = dx.binarize_encode(fname, 'satisfied', 'neutral or dissatisfied')
+x_train, x_test, y_train, y_test = dx.split_dataset(data_encoded, test_size=0.3, random_state=42)
+x_train_bal, y_train_bal = dx.smote(x_train, y_train)
 
-# Split between train and test
-x_train, x_test, y_train, y_test = dx.split_dataset(dataset_encoded, test_size=0.7, random_state=42)
+# Feature selection with XGBoost
+xgb_model, _, _ = dx.train_xgb(x_train_bal, y_train_bal)
+x_selected, gain_info = dx.cumulative_gain(xgb_model, x_train_bal, y_train_bal, 0.80)
 
-# Train models
-xgb_model, xgb_size, runtime = dx.train_xgb(x_train, y_train)
-split_model, tree, meta = dx.train_split(x_train, y_train, 2, 5, 0.01)
+# Train SPLIT (single optimal tree)
+split_model, split_tree, split_meta = dx.train_split(x_selected, y_train_bal, 
+                                                      lookahead=2, full_depth=5, reg=0.01)
+split_pred, split_acc = dx.prediction_split(split_model, x_test, y_test)
 
-# Evaluate
-xgb_pred, xgb_acc = dx.prediction_xgb(xgb_model, x_test, y_test)
-dx.cm(y_test, xgb_pred)
-split_pred = dx.prediction_split(split_model, x_test, y_test)
-dx.cm(y_test, split_pred[0], cmap='Purples')
+# Train PRAXIS (Rashomon set)
+praxis_model, x_binary, praxis_meta = dx.train_praxis(x_selected, y_train_bal,
+                                                       lambda_reg=0.01, depth_budget=5, 
+                                                       rashomon_mult=0.03, lookahead_k=1)
+praxis_pred, praxis_acc, details = dx.prediction_praxis(praxis_model, x_test, y_test, use_ensemble=False)
+
+print(f"SPLIT:  {split_acc:.4f} accuracy, {split_meta['leaves']} leaves, {split_meta['runtime']:.2f}s")
+print(f"PRAXIS: {praxis_acc:.4f} accuracy, {praxis_meta['n_trees']} trees, {praxis_meta['runtime']:.2f}s")
+
+# Visualize
+dx.cm(y_test, split_pred[0])
 ```
 
-Refer to the notebooks for a more detailed guide.
+**For detailed workflows**, see notebooks:
+- `notebooks/Black-Box to Glass-Box modeling [RANDOM_SEED=42].ipynb` — DIMEX baseline
+- `notebooks/RESPLIT_vs_PRAXIS_comparison.ipynb` — Full RESPLIT vs. PRAXIS comparison
 
-## Results
-Representative outcomes (3 random seeds) comparing SPLIT against XGBoost on the Airline Passenger Satisfaction dataset:
+## Expected Results
 
-![Results](results/Results.png)
+**From DIMEX (SPLIT baseline):**
+- SPLIT: 91.97% accuracy, 8 leaves, ~5s on 9-feature subset
+- XGBoost: 93.58% accuracy, 755 leaves
+- **Tradeoff**: 1.6% accuracy loss for 94% fewer leaves (interpretability win)
+
+**PRAXIS Comparison Targets:**
+- How large is the PRAXIS Rashomon set vs. RESPLIT's?
+- Do PRAXIS trees have better feature importance stability (RID)?
+- Runtime: PRAXIS vs. RESPLIT?
+- Uncertainty quantification: Can Rashomon disagreement improve model calibration?
+
+Results will be in `notebooks/RESPLIT_vs_PRAXIS_comparison.ipynb` and `results/`.
 
 ## References
-Babbar, V., McTavish, H., Rudin, C., Seltzer, M. (2025). Near-Optimal Decision Trees in a SPLIT Second. arXiv preprint arXiv:2502.15988
 
-Campagnaro, L. (2025, October). _I built an end-to-end interpretable Machine Learning research pipeline_. Medium. https://medium.com/@lucascampagnaro/i-built-an-end-to-end-interpretable-machine-learning-research-pipeline-0ba67d0ba700
+**Algorithms:**
+- Babbar, V., McTavish, H., Rudin, C., Seltzer, M. (2025). Near-Optimal Decision Trees in a SPLIT Second. *arXiv preprint* arXiv:2502.15988. [[Link](https://arxiv.org/abs/2502.15988)]
+- Harary, Z., et al. (2026). Fast Rashomon Sets for Sparse Decision Trees. *ICML 2026*. [[Link](https://arxiv.org/abs/2606.00202)]
+
+**Original DIMEX Work:**
+- Campagnaro, L. (2025). _I built an end-to-end interpretable Machine Learning research pipeline_. Medium. [[Link](https://medium.com/@lucascampagnaro/i-built-an-end-to-end-interpretable-machine-learning-research-pipeline-0ba67d0ba700)]
+
+**Dataset:**
+- Airline Passenger Satisfaction. Kaggle. [[Link](https://www.kaggle.com/datasets/teejmahal20/airline-passenger-satisfaction)]
+
+## Documentation
+
+For complete context, see [CLAUDE.md](CLAUDE.md) and [SPLIT context.md](SPLIT%20context.md).

@@ -1,4 +1,4 @@
-name: dimex-env
+name: praxis-env
 channels:
   - conda-forge
   - defaults
@@ -10,3 +10,7 @@ dependencies:
   - matplotlib=3.10.3
   - xgboost=3.0.2
   - jupyter
+  - ipywidgets
+  - pip
+  - pip:
+    - tree-praxis
