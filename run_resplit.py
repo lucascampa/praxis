@@ -2,7 +2,16 @@ from resplit import RESPLIT
 import pandas as pd
 import json
 import time
+import numpy as np
 from sklearn.metrics import accuracy_score, precision_score, recall_score, f1_score, log_loss
+from split._tree import Leaf
+
+def get_num_leaves(tree):
+    if isinstance(tree, Leaf) or tree is None:
+        return 1
+    if isinstance(tree, tuple):
+        return 1
+    return get_num_leaves(tree.left_child) + get_num_leaves(tree.right_child)
 
 SELECTED_FEATURES = [
     'Online_boarding', 'Type_of_Travel_Personal Travel', 'Class_Eco',
@@ -10,11 +19,13 @@ SELECTED_FEATURES = [
     'Inflight_entertainment', 'Checkin_service', 'Leg_room_service'
 ]
 
-data = pd.read_csv('airline-passenger-satisfaction/train_clean_encoded_balanced.csv')
-x_train = data[SELECTED_FEATURES]
-y_train = data['satisfaction']
-x_test = data[SELECTED_FEATURES]
-y_test = data['satisfaction']
+train_data = pd.read_csv('airline-passenger-satisfaction/praxis_dataset_balanced.csv')
+x_train = train_data[SELECTED_FEATURES]
+y_train = train_data['satisfaction']
+
+test_data = pd.read_csv('airline-passenger-satisfaction/test_clean_encoded.csv')
+x_test = test_data[SELECTED_FEATURES]
+y_test = test_data['satisfaction']
 
 config = {
     "regularization": 0.005,
@@ -28,12 +39,14 @@ print("Training RESPLIT...")
 start_time = time.perf_counter()
 model = RESPLIT(config, fill_tree="treefarms")
 model.fit(x_train, y_train)
+
 total_runtime = time.perf_counter() - start_time
 
 print(f"\nRashomon set size: {len(model)} trees")
 print(f"Total runtime: {total_runtime:.3f} seconds\n")
 
 results = []
+
 avg_accuracy = 0
 avg_precision = 0
 avg_recall = 0
@@ -45,7 +58,6 @@ for i, tree in enumerate(model):
     prec = float(precision_score(y_test, pred))
     rec = float(recall_score(y_test, pred))
     f1 = float(f1_score(y_test, pred))
-    loss = float((pred == y_test).sum()) / len(y_test)
 
     avg_accuracy += acc
     avg_precision += prec
@@ -84,8 +96,11 @@ print("="*100)
 print(results_df.to_string(index=False))
 print("="*100)
 
+
+
 # Save to JSON for comparison notebook
-output_file = 'results/resplit_metrics.json'
+output_file = 'results2.json'
+
 with open(output_file, 'w') as f:
     json.dump(results, f, indent=2)
 
