@@ -5,9 +5,10 @@
         "Precision": 0.9056860742254,
         "Recall": 0.9362076550813903,
         "F1": 0.9206939817418769,
-        "Loss": 0.070791,
+        "Loss": 0.082193,
         "Size": "100 trees, 741 leaves",
-        "Runtime (s)": 0.305
+        "Runtime (s)": 2.277,
+        "Peak_Memory (MB)": 4.63
     },
     {
         "Model": "SPLIT",
@@ -15,8 +16,9 @@
         "Precision": 0.8992248062015504,
         "Recall": 0.9186097668279807,
         "F1": 0.9088139281828074,
-        "Loss": 0.12091,
+        "Loss": 0.136402,
         "Size": "8 leaves",
-        "Runtime (s)": 5.145
+        "Runtime (s)": 6.717,
+        "Peak_Memory (MB)": 42.96
     }
 ]
