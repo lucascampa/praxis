@@ -1,0 +1,2575 @@
+Using configuration: {
+  "balance": false,
+  "cancellation": true,
+  "cart_lookahead_depth": 3,
+  "continuous_feature_exchange": false,
+  "costs": "",
+  "covered_sets_thresholds": [],
+  "datatset_encoding": "",
+  "depth_budget": 6,
+  "diagnostics": false,
+  "feature_exchange": false,
+  "feature_transform": true,
+  "look_ahead": true,
+  "memory_checkpoints": [],
+  "minimum_captured_points": 0,
+  "model": "",
+  "model_limit": 10000,
+  "non_binary": false,
+  "output_accuracy_model_set": false,
+  "output_covered_sets": [],
+  "precision_limit": 0,
+  "profile": "",
+  "rashomon": true,
+  "rashomon_bound": 0.0,
+  "rashomon_bound_adder": 0.0,
+  "rashomon_bound_multiplier": 0.009999999776482582,
+  "rashomon_ignore_trivial_extensions": true,
+  "rashomon_model": "",
+  "rashomon_model_set_suffix": "",
+  "rashomon_trie": "",
+  "regularization": 0.004999999888241291,
+  "rule_list": false,
+  "similar_support": false,
+  "stack_limit": 0,
+  "time_limit": 0,
+  "timing": "",
+  "trace": "",
+  "tree": "",
+  "uncertainty_tolerance": 0.0,
+  "upperbound": 0.0,
+  "verbose": true,
+  "worker_limit": 1
+}
+Initializing Optimization Framework
+Feature Index: 0, Feature Name: Online_boarding <= 1.5
+  Inferred Type: Binary, Empirical Cardinality: 2, Optionality: 0
+Feature Index: 1, Feature Name: Online_boarding <= 3.5
+  Inferred Type: Binary, Empirical Cardinality: 2, Optionality: 0
+Feature Index: 2, Feature Name: Online_boarding <= 4.5
+  Inferred Type: Binary, Empirical Cardinality: 2, Optionality: 0
+Feature Index: 3, Feature Name: Type_of_Travel_Personal Travel <= 0.5
+  Inferred Type: Binary, Empirical Cardinality: 2, Optionality: 0
+Feature Index: 4, Feature Name: Class_Eco <= 0.5
+  Inferred Type: Binary, Empirical Cardinality: 2, Optionality: 0
+Feature Index: 5, Feature Name: Inflight_wifi_service <= 0.5
+  Inferred Type: Binary, Empirical Cardinality: 2, Optionality: 0
+Feature Index: 6, Feature Name: Inflight_wifi_service <= 1.5
+  Inferred Type: Binary, Empirical Cardinality: 2, Optionality: 0
+Feature Index: 7, Feature Name: Inflight_wifi_service <= 2.5
+  Inferred Type: Binary, Empirical Cardinality: 2, Optionality: 0
+Feature Index: 8, Feature Name: Inflight_wifi_service <= 3.5
+  Inferred Type: Binary, Empirical Cardinality: 2, Optionality: 0
+Feature Index: 9, Feature Name: Inflight_wifi_service <= 4.5
+  Inferred Type: Binary, Empirical Cardinality: 2, Optionality: 0
+Feature Index: 10, Feature Name: On_board_service <= 1.5
+  Inferred Type: Binary, Empirical Cardinality: 2, Optionality: 0
+Feature Index: 11, Feature Name: On_board_service <= 2.5
+  Inferred Type: Binary, Empirical Cardinality: 2, Optionality: 0
+Feature Index: 12, Feature Name: On_board_service <= 3.5
+  Inferred Type: Binary, Empirical Cardinality: 2, Optionality: 0
+Feature Index: 13, Feature Name: On_board_service <= 4.5
+  Inferred Type: Binary, Empirical Cardinality: 2, Optionality: 0
+Feature Index: 14, Feature Name: Customer_Type_disloyal Customer <= 0.5
+  Inferred Type: Binary, Empirical Cardinality: 2, Optionality: 0
+Feature Index: 15, Feature Name: Inflight_entertainment <= 0.5
+  Inferred Type: Binary, Empirical Cardinality: 2, Optionality: 0
+Feature Index: 16, Feature Name: Inflight_entertainment <= 1.5
+  Inferred Type: Binary, Empirical Cardinality: 2, Optionality: 0
+Feature Index: 17, Feature Name: Inflight_entertainment <= 2.5
+  Inferred Type: Binary, Empirical Cardinality: 2, Optionality: 0
+Feature Index: 18, Feature Name: Inflight_entertainment <= 3.5
+  Inferred Type: Binary, Empirical Cardinality: 2, Optionality: 0
+Feature Index: 19, Feature Name: Inflight_entertainment <= 4.5
+  Inferred Type: Binary, Empirical Cardinality: 2, Optionality: 0
+Feature Index: 20, Feature Name: Checkin_service <= 1.5
+  Inferred Type: Binary, Empirical Cardinality: 2, Optionality: 0
+Feature Index: 21, Feature Name: Checkin_service <= 2.5
+  Inferred Type: Binary, Empirical Cardinality: 2, Optionality: 0
+Feature Index: 22, Feature Name: Checkin_service <= 4.5
+  Inferred Type: Binary, Empirical Cardinality: 2, Optionality: 0
+Feature Index: 23, Feature Name: Leg_room_service <= 0.5
+  Inferred Type: Binary, Empirical Cardinality: 2, Optionality: 0
+Feature Index: 24, Feature Name: Leg_room_service <= 1.5
+  Inferred Type: Binary, Empirical Cardinality: 2, Optionality: 0
+Feature Index: 25, Feature Name: Leg_room_service <= 3.5
+  Inferred Type: Binary, Empirical Cardinality: 2, Optionality: 0
+Feature Index: 26, Feature Name: Leg_room_service <= 4.5
+  Inferred Type: Binary, Empirical Cardinality: 2, Optionality: 0
+Feature Index: 27, Feature Name: Online_boarding <= 2.5
+  Inferred Type: Binary, Empirical Cardinality: 2, Optionality: 0
+Feature Index: 28, Feature Name: satisfaction
+  Inferred Type: Categorical, Empirical Cardinality: 2, Optionality: 0
+Original Dataset Dimension: 117394 x 29
+Binary Dataset Dimension: 117394 x 30
+Dataset Dimensions: 117394 x 28 x 2
+Starting Search for the Optimal Solution
+Time: 0.0259945, Objective: [0.0695087, 0.222651], Boundary: 0.153143, Graph Size: 1, Queue Size: 56
+Time: 12.5302, Objective: [0.168653, 0.168653], Boundary: 0, Graph Size: 57, Queue Size: 0
+Optimal Solution Search Complete
+Training Duration: 12.53 seconds
+Number of Iterations: 57 iterations
+Size of Graph: 57 nodes
+Objective Boundary: [0.168653, 0.168653]
+Optimality Gap: 0
+Memory usage: 499
+Models Generated: 1
+Loss: 0.281522
+Complexity: 0.02
+Found Optimal Objective: 0.301522
+Starting Extraction of Rashomon Set
+Using Rashomon bound: 0.304537
+Time: 0.00840031, Objective: [0.0695087, 0.304537], Boundary: 0.235029, Graph Size: 1, Queue Size: 56
+Time: 12.8829, Objective: [0.168653, 0.304537], Boundary: 0.135885, Graph Size: 259, Queue Size: 2623
+Time: 13.3041, Objective: [0.168653, 0.304537], Boundary: 0.135885, Graph Size: 1461, Queue Size: 0
+Rashomon Set Construction Completed
+Training Duration: 13.304 seconds
+Number of Iterations: 9941 iterations
+Size of Graph: 1461 nodes
+Objective Boundary: [0.168653, 0.304537]
+Optimality Gap: 0.135885
+Cached subproblem models size: 1295
+Models calls: 2071
+Pruned combinations using scope: 116
+Pruned leaves using scope: 162
+Pruned trivial extensions: 544
+Max results size: 755
+Re-explore by scope count: 328
+Re-explore count: 328
+Extraction Duration: 0.219 seconds
+Stored keys size: 755
+Size of Rashomon Set: 861
+Memory usage after extraction: 805
+Nodes Count in Model Set: 1808
+Training RESPLIT...
+Found set of near optimal prefixes. Filling in their leaves now.
+  0%|          | 0/861 [00:00<?, ?it/s]Using configuration: {
+  "balance": false,
+  "cancellation": true,
+  "cart_lookahead_depth": 4,
+  "continuous_feature_exchange": false,
+  "costs": "",
+  "covered_sets_thresholds": [],
+  "datatset_encoding": "",
+  "depth_budget": 4,
+  "diagnostics": false,
+  "feature_exchange": false,
+  "feature_transform": true,
+  "look_ahead": true,
+  "memory_checkpoints": [],
+  "minimum_captured_points": 0,
+  "model": "",
+  "model_limit": 10000,
+  "non_binary": false,
+  "output_accuracy_model_set": false,
+  "output_covered_sets": [],
+  "precision_limit": 0,
+  "profile": "",
+  "rashomon": true,
+  "rashomon_bound": 0.16115766763687134,
+  "rashomon_bound_adder": 0.0,
+  "rashomon_bound_multiplier": 0.009999999776482582,
+  "rashomon_ignore_trivial_extensions": true,
+  "rashomon_model": "",
+  "rashomon_model_set_suffix": "",
+  "rashomon_trie": "tmp/rashomon_subtrie_27_1_5_0_.json",
+  "regularization": 0.019615359604358673,
+  "rule_list": false,
+  "similar_support": false,
+  "stack_limit": 0,
+  "time_limit": 0,
+  "timing": "",
+  "trace": "",
+  "tree": "",
+  "uncertainty_tolerance": 0.0,
+  "upperbound": 0.0,
+  "verbose": true,
+  "worker_limit": 1
+}
+Initializing Optimization Framework
+Feature Index: 0, Feature Name: Online_boarding <= 1.5
+  Inferred Type: Binary, Empirical Cardinality: 2, Optionality: 0
+Feature Index: 1, Feature Name: Online_boarding <= 3.5
+  Inferred Type: Redundant, Empirical Cardinality: 1, Optionality: 0
+Feature Index: 2, Feature Name: Online_boarding <= 4.5
+  Inferred Type: Redundant, Empirical Cardinality: 1, Optionality: 0
+Feature Index: 3, Feature Name: Type_of_Travel_Personal Travel <= 0.5
+  Inferred Type: Binary, Empirical Cardinality: 2, Optionality: 0
+Feature Index: 4, Feature Name: Class_Eco <= 0.5
+  Inferred Type: Binary, Empirical Cardinality: 2, Optionality: 0
+Feature Index: 5, Feature Name: Inflight_wifi_service <= 0.5
+  Inferred Type: Redundant, Empirical Cardinality: 1, Optionality: 0
+Feature Index: 6, Feature Name: Inflight_wifi_service <= 1.5
+  Inferred Type: Binary, Empirical Cardinality: 2, Optionality: 0
+Feature Index: 7, Feature Name: Inflight_wifi_service <= 2.5
+  Inferred Type: Binary, Empirical Cardinality: 2, Optionality: 0
+Feature Index: 8, Feature Name: Inflight_wifi_service <= 3.5
+  Inferred Type: Binary, Empirical Cardinality: 2, Optionality: 0
+Feature Index: 9, Feature Name: Inflight_wifi_service <= 4.5
+  Inferred Type: Binary, Empirical Cardinality: 2, Optionality: 0
+Feature Index: 10, Feature Name: On_board_service <= 1.5
+  Inferred Type: Binary, Empirical Cardinality: 2, Optionality: 0
+Feature Index: 11, Feature Name: On_board_service <= 2.5
+  Inferred Type: Binary, Empirical Cardinality: 2, Optionality: 0
+Feature Index: 12, Feature Name: On_board_service <= 3.5
+  Inferred Type: Binary, Empirical Cardinality: 2, Optionality: 0
+Feature Index: 13, Feature Name: On_board_service <= 4.5
+  Inferred Type: Binary, Empirical Cardinality: 2, Optionality: 0
+Feature Index: 14, Feature Name: Customer_Type_disloyal Customer <= 0.5
+  Inferred Type: Binary, Empirical Cardinality: 2, Optionality: 0
+Feature Index: 15, Feature Name: Inflight_entertainment <= 0.5
+  Inferred Type: Binary, Empirical Cardinality: 2, Optionality: 0
+Feature Index: 16, Feature Name: Inflight_entertainment <= 1.5
+  Inferred Type: Binary, Empirical Cardinality: 2, Optionality: 0
+Feature Index: 17, Feature Name: Inflight_entertainment <= 2.5
+  Inferred Type: Binary, Empirical Cardinality: 2, Optionality: 0
+Feature Index: 18, Feature Name: Inflight_entertainment <= 3.5
+  Inferred Type: Binary, Empirical Cardinality: 2, Optionality: 0
+Feature Index: 19, Feature Name: Inflight_entertainment <= 4.5
+  Inferred Type: Binary, Empirical Cardinality: 2, Optionality: 0
+Feature Index: 20, Feature Name: Checkin_service <= 1.5
+  Inferred Type: Binary, Empirical Cardinality: 2, Optionality: 0
+Feature Index: 21, Feature Name: Checkin_service <= 2.5
+  Inferred Type: Binary, Empirical Cardinality: 2, Optionality: 0
+Feature Index: 22, Feature Name: Checkin_service <= 4.5
+  Inferred Type: Binary, Empirical Cardinality: 2, Optionality: 0
+Feature Index: 23, Feature Name: Leg_room_service <= 0.5
+  Inferred Type: Binary, Empirical Cardinality: 2, Optionality: 0
+Feature Index: 24, Feature Name: Leg_room_service <= 1.5
+  Inferred Type: Binary, Empirical Cardinality: 2, Optionality: 0
+Feature Index: 25, Feature Name: Leg_room_service <= 3.5
+  Inferred Type: Binary, Empirical Cardinality: 2, Optionality: 0
+Feature Index: 26, Feature Name: Leg_room_service <= 4.5
+  Inferred Type: Binary, Empirical Cardinality: 2, Optionality: 0
+Feature Index: 27, Feature Name: Online_boarding <= 2.5
+  Inferred Type: Redundant, Empirical Cardinality: 1, Optionality: 0
+Feature Index: 28, Feature Name: satisfaction
+  Inferred Type: Categorical, Empirical Cardinality: 2, Optionality: 0
+Original Dataset Dimension: 29924 x 29
+Binary Dataset Dimension: 29924 x 26
+Dataset Dimensions: 29924 x 24 x 2
+Starting Extraction of Rashomon Set
+Using Rashomon bound: 0.161158
+Time: 0.00295113, Objective: [0.0864159, 0.161158], Boundary: 0.0747417, Graph Size: 1, Queue Size: 48
+Time: 1.42077, Objective: [0.106031, 0.161158], Boundary: 0.0551264, Graph Size: 4424, Queue Size: 15400
+Time: 1.70179, Objective: [0.106031, 0.161158], Boundary: 0.0551264, Graph Size: 6007, Queue Size: 13783
+Time: 2.20966, Objective: [0.106031, 0.161158], Boundary: 0.0551264, Graph Size: 8309, Queue Size: 10104
+Time: 2.37653, Objective: [0.106031, 0.161158], Boundary: 0.0551264, Graph Size: 9198, Queue Size: 7241
+Time: 2.402, Objective: [0.106031, 0.161158], Boundary: 0.0551264, Graph Size: 9352, Queue Size: 6703
+Time: 2.48253, Objective: [0.106031, 0.161158], Boundary: 0.0551264, Graph Size: 9689, Queue Size: 4905
+Time: 2.57736, Objective: [0.106031, 0.161158], Boundary: 0.0551264, Graph Size: 9960, Queue Size: 3269
+Time: 2.60263, Objective: [0.106098, 0.161158], Boundary: 0.0550595, Graph Size: 10016, Queue Size: 2584
+Time: 2.71701, Objective: [0.106098, 0.161158], Boundary: 0.0550595, Graph Size: 10149, Queue Size: 0
+Rashomon Set Construction Completed
+Training Duration: 2.724 seconds
+Number of Iterations: 29999 iterations
+Size of Graph: 10149 nodes
+Objective Boundary: [0.106098, 0.161158]
+Optimality Gap: 0.0550595
+Cached subproblem models size: 6643
+Models calls: 15341
+Pruned combinations using scope: 339
+Pruned leaves using scope: 278
+Pruned trivial extensions: 6421
+Max results size: 61
+Re-explore by scope count: 2861
+Re-explore count: 2861
+Extraction Duration: 0.251 seconds
+Stored keys size: 23
+Size of Rashomon Set: 39
+Memory usage after extraction: 1156
+Insertion of Rashomon Set into Trie: 0 seconds
+Storing Models in: tmp/rashomon_subtrie_27_1_5_0_.json
+Output of Rashomon Set in Trie: 0.002 seconds
+Nodes Count in Model Set: 145
+Using configuration: {
+  "balance": false,
+  "cancellation": true,
+  "cart_lookahead_depth": 4,
+  "continuous_feature_exchange": false,
+  "costs": "",
+  "covered_sets_thresholds": [],
+  "datatset_encoding": "",
+  "depth_budget": 4,
+  "diagnostics": false,
+  "feature_exchange": false,
+  "feature_transform": true,
+  "look_ahead": true,
+  "memory_checkpoints": [],
+  "minimum_captured_points": 0,
+  "model": "",
+  "model_limit": 10000,
+  "non_binary": false,
+  "output_accuracy_model_set": false,
+  "output_covered_sets": [],
+  "precision_limit": 0,
+  "profile": "",
+  "rashomon": true,
+  "rashomon_bound": 0.4159100353717804,
+  "rashomon_bound_adder": 0.0,
+  "rashomon_bound_multiplier": 0.009999999776482582,
+  "rashomon_ignore_trivial_extensions": true,
+  "rashomon_model": "",
+  "rashomon_model_set_suffix": "",
+  "rashomon_trie": "tmp/rashomon_subtrie_27_0_21_1_.json",
+  "regularization": 0.03488677740097046,
+  "rule_list": false,
+  "similar_support": false,
+  "stack_limit": 0,
+  "time_limit": 0,
+  "timing": "",
+  "trace": "",
+  "tree": "",
+  "uncertainty_tolerance": 0.0,
+  "upperbound": 0.0,
+  "verbose": true,
+  "worker_limit": 1
+}
+Initializing Optimization Framework
+Feature Index: 0, Feature Name: Online_boarding <= 1.5
+  Inferred Type: Redundant, Empirical Cardinality: 1, Optionality: 0
+Feature Index: 1, Feature Name: Online_boarding <= 3.5
+  Inferred Type: Binary, Empirical Cardinality: 2, Optionality: 0
+Feature Index: 2, Feature Name: Online_boarding <= 4.5
+  Inferred Type: Binary, Empirical Cardinality: 2, Optionality: 0
+Feature Index: 3, Feature Name: Type_of_Travel_Personal Travel <= 0.5
+  Inferred Type: Binary, Empirical Cardinality: 2, Optionality: 0
+Feature Index: 4, Feature Name: Class_Eco <= 0.5
+  Inferred Type: Binary, Empirical Cardinality: 2, Optionality: 0
+Feature Index: 5, Feature Name: Inflight_wifi_service <= 0.5
+  Inferred Type: Binary, Empirical Cardinality: 2, Optionality: 0
+Feature Index: 6, Feature Name: Inflight_wifi_service <= 1.5
+  Inferred Type: Binary, Empirical Cardinality: 2, Optionality: 0
+Feature Index: 7, Feature Name: Inflight_wifi_service <= 2.5
+  Inferred Type: Binary, Empirical Cardinality: 2, Optionality: 0
+Feature Index: 8, Feature Name: Inflight_wifi_service <= 3.5
+  Inferred Type: Binary, Empirical Cardinality: 2, Optionality: 0
+Feature Index: 9, Feature Name: Inflight_wifi_service <= 4.5
+  Inferred Type: Binary, Empirical Cardinality: 2, Optionality: 0
+Feature Index: 10, Feature Name: On_board_service <= 1.5
+  Inferred Type: Binary, Empirical Cardinality: 2, Optionality: 0
+Feature Index: 11, Feature Name: On_board_service <= 2.5
+  Inferred Type: Binary, Empirical Cardinality: 2, Optionality: 0
+Feature Index: 12, Feature Name: On_board_service <= 3.5
+  Inferred Type: Binary, Empirical Cardinality: 2, Optionality: 0
+Feature Index: 13, Feature Name: On_board_service <= 4.5
+  Inferred Type: Binary, Empirical Cardinality: 2, Optionality: 0
+Feature Index: 14, Feature Name: Customer_Type_disloyal Customer <= 0.5
+  Inferred Type: Binary, Empirical Cardinality: 2, Optionality: 0
+Feature Index: 15, Feature Name: Inflight_entertainment <= 0.5
+  Inferred Type: Binary, Empirical Cardinality: 2, Optionality: 0
+Feature Index: 16, Feature Name: Inflight_entertainment <= 1.5
+  Inferred Type: Binary, Empirical Cardinality: 2, Optionality: 0
+Feature Index: 17, Feature Name: Inflight_entertainment <= 2.5
+  Inferred Type: Binary, Empirical Cardinality: 2, Optionality: 0
+Feature Index: 18, Feature Name: Inflight_entertainment <= 3.5
+  Inferred Type: Binary, Empirical Cardinality: 2, Optionality: 0
+Feature Index: 19, Feature Name: Inflight_entertainment <= 4.5
+  Inferred Type: Binary, Empirical Cardinality: 2, Optionality: 0
+Feature Index: 20, Feature Name: Checkin_service <= 1.5
+  Inferred Type: Binary, Empirical Cardinality: 2, Optionality: 0
+Feature Index: 21, Feature Name: Checkin_service <= 2.5
+  Inferred Type: Redundant, Empirical Cardinality: 1, Optionality: 0
+Feature Index: 22, Feature Name: Checkin_service <= 4.5
+  Inferred Type: Redundant, Empirical Cardinality: 1, Optionality: 0
+Feature Index: 23, Feature Name: Leg_room_service <= 0.5
+  Inferred Type: Binary, Empirical Cardinality: 2, Optionality: 0
+Feature Index: 24, Feature Name: Leg_room_service <= 1.5
+  Inferred Type: Binary, Empirical Cardinality: 2, Optionality: 0
+Feature Index: 25, Feature Name: Leg_room_service <= 3.5
+  Inferred Type: Binary, Empirical Cardinality: 2, Optionality: 0
+Feature Index: 26, Feature Name: Leg_room_service <= 4.5
+  Inferred Type: Binary, Empirical Cardinality: 2, Optionality: 0
+Feature Index: 27, Feature Name: Online_boarding <= 2.5
+  Inferred Type: Redundant, Empirical Cardinality: 1, Optionality: 0
+Feature Index: 28, Feature Name: satisfaction
+  Inferred Type: Categorical, Empirical Cardinality: 2, Optionality: 0
+Original Dataset Dimension: 16825 x 29
+Binary Dataset Dimension: 16825 x 26
+Dataset Dimensions: 16825 x 24 x 2
+Starting Extraction of Rashomon Set
+Using Rashomon bound: 0.41591
+Time: 0.000905478, Objective: [0.187335, 0.41591], Boundary: 0.228575, Graph Size: 1, Queue Size: 48
+Time: 0.596186, Objective: [0.222222, 0.41591], Boundary: 0.193688, Graph Size: 3131, Queue Size: 23092
+Time: 0.637995, Objective: [0.222222, 0.41591], Boundary: 0.193688, Graph Size: 3407, Queue Size: 23883
+Time: 0.669493, Objective: [0.222222, 0.41591], Boundary: 0.193688, Graph Size: 3628, Queue Size: 24265
+Time: 0.726057, Objective: [0.222222, 0.41591], Boundary: 0.193688, Graph Size: 4536, Queue Size: 23493
+Time: 0.767303, Objective: [0.222222, 0.41591], Boundary: 0.193688, Graph Size: 4880, Queue Size: 23375
+Time: 0.78802, Objective: [0.222222, 0.41591], Boundary: 0.193688, Graph Size: 5305, Queue Size: 22568
+Time: 0.789636, Objective: [0.222222, 0.41591], Boundary: 0.193688, Graph Size: 5330, Queue Size: 22520
+Time: 0.793465, Objective: [0.222222, 0.41591], Boundary: 0.193688, Graph Size: 5383, Queue Size: 22420
+Time: 0.795256, Objective: [0.222222, 0.41591], Boundary: 0.193688, Graph Size: 5395, Queue Size: 22395
+Time: 0.800017, Objective: [0.222222, 0.41591], Boundary: 0.193688, Graph Size: 5497, Queue Size: 22219
+Time: 0.827268, Objective: [0.222222, 0.41591], Boundary: 0.193688, Graph Size: 5699, Queue Size: 22324
+Time: 0.838323, Objective: [0.222222, 0.41591], Boundary: 0.193688, Graph Size: 5916, Queue Size: 21917
+Time: 0.848985, Objective: [0.222222, 0.41591], Boundary: 0.193688, Graph Size: 6138, Queue Size: 21497
+Time: 0.890032, Objective: [0.222222, 0.41591], Boundary: 0.193688, Graph Size: 6260, Queue Size: 21979
+Time: 0.894942, Objective: [0.222222, 0.41591], Boundary: 0.193688, Graph Size: 6346, Queue Size: 21805
+Time: 0.902515, Objective: [0.222222, 0.41591], Boundary: 0.193688, Graph Size: 6451, Queue Size: 21536
+Time: 0.975702, Objective: [0.222222, 0.41591], Boundary: 0.193688, Graph Size: 7309, Queue Size: 19990
+Time: 0.977417, Objective: [0.222222, 0.41591], Boundary: 0.193688, Graph Size: 7324, Queue Size: 19948
+Time: 1.01868, Objective: [0.222222, 0.41591], Boundary: 0.193688, Graph Size: 7619, Queue Size: 19755
+Time: 1.03872, Objective: [0.222222, 0.41591], Boundary: 0.193688, Graph Size: 7922, Queue Size: 19008
+Time: 1.078, Objective: [0.222222, 0.41591], Boundary: 0.193688, Graph Size: 8556, Queue Size: 17413
+Time: 1.0791, Objective: [0.222222, 0.41591], Boundary: 0.193688, Graph Size: 8567, Queue Size: 17380
+Time: 1.11405, Objective: [0.222222, 0.41591], Boundary: 0.193688, Graph Size: 8716, Queue Size: 17245
+Time: 1.28186, Objective: [0.222222, 0.41591], Boundary: 0.193688, Graph Size: 9636, Queue Size: 15493
+Time: 1.35728, Objective: [0.222222, 0.41591], Boundary: 0.193688, Graph Size: 10222, Queue Size: 13437
+Time: 1.58384, Objective: [0.222222, 0.41591], Boundary: 0.193688, Graph Size: 11416, Queue Size: 7734
+Time: 1.61216, Objective: [0.222222, 0.41591], Boundary: 0.193688, Graph Size: 11541, Queue Size: 6805
+Time: 1.81936, Objective: [0.222222, 0.41591], Boundary: 0.193688, Graph Size: 11922, Queue Size: 0
+Rashomon Set Construction Completed
+Training Duration: 1.827 seconds
+Number of Iterations: 39999 iterations
+Size of Graph: 11922 nodes
+Objective Boundary: [0.222222, 0.41591]
+Optimality Gap: 0.193688
+Cached subproblem models size: 9499
+Models calls: 28638
+Pruned combinations using scope: 3200
+Pruned leaves using scope: 181
+Pruned trivial extensions: 9928
+Max results size: 2249
+Re-explore by scope count: 7152
+Re-explore count: 7152
+Extraction Duration: 0.33 seconds
+Stored keys size: 2249
+Size of Rashomon Set: 17045
+Memory usage after extraction: 1151
+Insertion of Rashomon Set into Trie: 0.045 seconds
+Storing Models in: tmp/rashomon_subtrie_27_0_21_1_.json
+Output of Rashomon Set in Trie: 0.059 seconds
+Nodes Count in Model Set: 15239
+Using configuration: {
+  "balance": false,
+  "cancellation": true,
+  "cart_lookahead_depth": 4,
+  "continuous_feature_exchange": false,
+  "costs": "",
+  "covered_sets_thresholds": [],
+  "datatset_encoding": "",
+  "depth_budget": 4,
+  "diagnostics": false,
+  "feature_exchange": false,
+  "feature_transform": true,
+  "look_ahead": true,
+  "memory_checkpoints": [],
+  "minimum_captured_points": 0,
+  "model": "",
+  "model_limit": 10000,
+  "non_binary": false,
+  "output_accuracy_model_set": false,
+  "output_covered_sets": [],
+  "precision_limit": 0,
+  "profile": "",
+  "rashomon": true,
+  "rashomon_bound": 0.16551360487937927,
+  "rashomon_bound_adder": 0.0,
+  "rashomon_bound_multiplier": 0.009999999776482582,
+  "rashomon_ignore_trivial_extensions": true,
+  "rashomon_model": "",
+  "rashomon_model_set_suffix": "",
+  "rashomon_trie": "tmp/rashomon_subtrie_27_0_21_0_.json",
+  "regularization": 0.008543710224330425,
+  "rule_list": false,
+  "similar_support": false,
+  "stack_limit": 0,
+  "time_limit": 0,
+  "timing": "",
+  "trace": "",
+  "tree": "",
+  "uncertainty_tolerance": 0.0,
+  "upperbound": 0.0,
+  "verbose": true,
+  "worker_limit": 1
+}
+Initializing Optimization Framework
+Feature Index: 0, Feature Name: Online_boarding <= 1.5
+  Inferred Type: Redundant, Empirical Cardinality: 1, Optionality: 0
+Feature Index: 1, Feature Name: Online_boarding <= 3.5
+  Inferred Type: Binary, Empirical Cardinality: 2, Optionality: 0
+Feature Index: 2, Feature Name: Online_boarding <= 4.5
+  Inferred Type: Binary, Empirical Cardinality: 2, Optionality: 0
+Feature Index: 3, Feature Name: Type_of_Travel_Personal Travel <= 0.5
+  Inferred Type: Binary, Empirical Cardinality: 2, Optionality: 0
+Feature Index: 4, Feature Name: Class_Eco <= 0.5
+  Inferred Type: Binary, Empirical Cardinality: 2, Optionality: 0
+Feature Index: 5, Feature Name: Inflight_wifi_service <= 0.5
+  Inferred Type: Binary, Empirical Cardinality: 2, Optionality: 0
+Feature Index: 6, Feature Name: Inflight_wifi_service <= 1.5
+  Inferred Type: Binary, Empirical Cardinality: 2, Optionality: 0
+Feature Index: 7, Feature Name: Inflight_wifi_service <= 2.5
+  Inferred Type: Binary, Empirical Cardinality: 2, Optionality: 0
+Feature Index: 8, Feature Name: Inflight_wifi_service <= 3.5
+  Inferred Type: Binary, Empirical Cardinality: 2, Optionality: 0
+Feature Index: 9, Feature Name: Inflight_wifi_service <= 4.5
+  Inferred Type: Binary, Empirical Cardinality: 2, Optionality: 0
+Feature Index: 10, Feature Name: On_board_service <= 1.5
+  Inferred Type: Binary, Empirical Cardinality: 2, Optionality: 0
+Feature Index: 11, Feature Name: On_board_service <= 2.5
+  Inferred Type: Binary, Empirical Cardinality: 2, Optionality: 0
+Feature Index: 12, Feature Name: On_board_service <= 3.5
+  Inferred Type: Binary, Empirical Cardinality: 2, Optionality: 0
+Feature Index: 13, Feature Name: On_board_service <= 4.5
+  Inferred Type: Binary, Empirical Cardinality: 2, Optionality: 0
+Feature Index: 14, Feature Name: Customer_Type_disloyal Customer <= 0.5
+  Inferred Type: Binary, Empirical Cardinality: 2, Optionality: 0
+Feature Index: 15, Feature Name: Inflight_entertainment <= 0.5
+  Inferred Type: Binary, Empirical Cardinality: 2, Optionality: 0
+Feature Index: 16, Feature Name: Inflight_entertainment <= 1.5
+  Inferred Type: Binary, Empirical Cardinality: 2, Optionality: 0
+Feature Index: 17, Feature Name: Inflight_entertainment <= 2.5
+  Inferred Type: Binary, Empirical Cardinality: 2, Optionality: 0
+Feature Index: 18, Feature Name: Inflight_entertainment <= 3.5
+  Inferred Type: Binary, Empirical Cardinality: 2, Optionality: 0
+Feature Index: 19, Feature Name: Inflight_entertainment <= 4.5
+  Inferred Type: Binary, Empirical Cardinality: 2, Optionality: 0
+Feature Index: 20, Feature Name: Checkin_service <= 1.5
+  Inferred Type: Redundant, Empirical Cardinality: 1, Optionality: 0
+Feature Index: 21, Feature Name: Checkin_service <= 2.5
+  Inferred Type: Redundant, Empirical Cardinality: 1, Optionality: 0
+Feature Index: 22, Feature Name: Checkin_service <= 4.5
+  Inferred Type: Binary, Empirical Cardinality: 2, Optionality: 0
+Feature Index: 23, Feature Name: Leg_room_service <= 0.5
+  Inferred Type: Binary, Empirical Cardinality: 2, Optionality: 0
+Feature Index: 24, Feature Name: Leg_room_service <= 1.5
+  Inferred Type: Binary, Empirical Cardinality: 2, Optionality: 0
+Feature Index: 25, Feature Name: Leg_room_service <= 3.5
+  Inferred Type: Binary, Empirical Cardinality: 2, Optionality: 0
+Feature Index: 26, Feature Name: Leg_room_service <= 4.5
+  Inferred Type: Binary, Empirical Cardinality: 2, Optionality: 0
+Feature Index: 27, Feature Name: Online_boarding <= 2.5
+  Inferred Type: Redundant, Empirical Cardinality: 1, Optionality: 0
+Feature Index: 28, Feature Name: satisfaction
+  Inferred Type: Categorical, Empirical Cardinality: 2, Optionality: 0
+Original Dataset Dimension: 68702 x 29
+Binary Dataset Dimension: 68702 x 26
+Dataset Dimensions: 68702 x 24 x 2
+Starting Extraction of Rashomon Set
+Using Rashomon bound: 0.165514
+Time: 0.00511293, Objective: [0.0865173, 0.165514], Boundary: 0.0789963, Graph Size: 1, Queue Size: 48
+Time: 5.28452, Objective: [0.0865173, 0.165514], Boundary: 0.0789963, Graph Size: 6107, Queue Size: 15953
+Time: 6.42416, Objective: [0.095061, 0.165514], Boundary: 0.0704526, Graph Size: 8719, Queue Size: 9627
+Time: 6.95912, Objective: [0.095061, 0.165514], Boundary: 0.0704526, Graph Size: 9207, Queue Size: 8161
+Time: 7.14348, Objective: [0.095061, 0.165514], Boundary: 0.0704526, Graph Size: 9486, Queue Size: 7278
+Time: 7.26737, Objective: [0.095061, 0.165514], Boundary: 0.0704526, Graph Size: 9649, Queue Size: 6591
+Time: 7.34467, Objective: [0.095061, 0.165514], Boundary: 0.0704526, Graph Size: 9732, Queue Size: 6156
+Time: 7.3915, Objective: [0.095061, 0.165514], Boundary: 0.0704526, Graph Size: 9774, Queue Size: 5904
+Time: 7.40092, Objective: [0.095061, 0.165514], Boundary: 0.0704526, Graph Size: 9790, Queue Size: 5829
+Time: 8.34417, Objective: [0.095061, 0.165514], Boundary: 0.0704526, Graph Size: 10363, Queue Size: 0
+Rashomon Set Construction Completed
+Training Duration: 8.345 seconds
+Number of Iterations: 29999 iterations
+Size of Graph: 10363 nodes
+Objective Boundary: [0.095061, 0.165514]
+Optimality Gap: 0.0704526
+Cached subproblem models size: 6442
+Models calls: 15556
+Pruned combinations using scope: 306
+Pruned leaves using scope: 391
+Pruned trivial extensions: 4991
+Max results size: 1248
+Re-explore by scope count: 3625
+Re-explore count: 3625
+Extraction Duration: 0.646 seconds
+Stored keys size: 41
+Size of Rashomon Set: 113
+Memory usage after extraction: 3727
+Insertion of Rashomon Set into Trie: 0.001 seconds
+Storing Models in: tmp/rashomon_subtrie_27_0_21_0_.json
+Output of Rashomon Set in Trie: 0.005 seconds
+Nodes Count in Model Set: 297
+  0%|          | 1/861 [04:02<57:59:17, 242.74s/it]Using configuration: {
+  "balance": false,
+  "cancellation": true,
+  "cart_lookahead_depth": 4,
+  "continuous_feature_exchange": false,
+  "costs": "",
+  "covered_sets_thresholds": [],
+  "datatset_encoding": "",
+  "depth_budget": 4,
+  "diagnostics": false,
+  "feature_exchange": false,
+  "feature_transform": true,
+  "look_ahead": true,
+  "memory_checkpoints": [],
+  "minimum_captured_points": 0,
+  "model": "",
+  "model_limit": 10000,
+  "non_binary": false,
+  "output_accuracy_model_set": false,
+  "output_covered_sets": [],
+  "precision_limit": 0,
+  "profile": "",
+  "rashomon": true,
+  "rashomon_bound": 0.16107065975666046,
+  "rashomon_bound_adder": 0.0,
+  "rashomon_bound_multiplier": 0.009999999776482582,
+  "rashomon_ignore_trivial_extensions": true,
+  "rashomon_model": "",
+  "rashomon_model_set_suffix": "",
+  "rashomon_trie": "tmp/rashomon_subtrie_27_1_8_1_.json",
+  "regularization": 0.02004542015492916,
+  "rule_list": false,
+  "similar_support": false,
+  "stack_limit": 0,
+  "time_limit": 0,
+  "timing": "",
+  "trace": "",
+  "tree": "",
+  "uncertainty_tolerance": 0.0,
+  "upperbound": 0.0,
+  "verbose": true,
+  "worker_limit": 1
+}
+Initializing Optimization Framework
+Feature Index: 0, Feature Name: Online_boarding <= 1.5
+  Inferred Type: Binary, Empirical Cardinality: 2, Optionality: 0
+Feature Index: 1, Feature Name: Online_boarding <= 3.5
+  Inferred Type: Redundant, Empirical Cardinality: 1, Optionality: 0
+Feature Index: 2, Feature Name: Online_boarding <= 4.5
+  Inferred Type: Redundant, Empirical Cardinality: 1, Optionality: 0
+Feature Index: 3, Feature Name: Type_of_Travel_Personal Travel <= 0.5
+  Inferred Type: Binary, Empirical Cardinality: 2, Optionality: 0
+Feature Index: 4, Feature Name: Class_Eco <= 0.5
+  Inferred Type: Binary, Empirical Cardinality: 2, Optionality: 0
+Feature Index: 5, Feature Name: Inflight_wifi_service <= 0.5
+  Inferred Type: Binary, Empirical Cardinality: 2, Optionality: 0
+Feature Index: 6, Feature Name: Inflight_wifi_service <= 1.5
+  Inferred Type: Binary, Empirical Cardinality: 2, Optionality: 0
+Feature Index: 7, Feature Name: Inflight_wifi_service <= 2.5
+  Inferred Type: Binary, Empirical Cardinality: 2, Optionality: 0
+Feature Index: 8, Feature Name: Inflight_wifi_service <= 3.5
+  Inferred Type: Redundant, Empirical Cardinality: 1, Optionality: 0
+Feature Index: 9, Feature Name: Inflight_wifi_service <= 4.5
+  Inferred Type: Redundant, Empirical Cardinality: 1, Optionality: 0
+Feature Index: 10, Feature Name: On_board_service <= 1.5
+  Inferred Type: Binary, Empirical Cardinality: 2, Optionality: 0
+Feature Index: 11, Feature Name: On_board_service <= 2.5
+  Inferred Type: Binary, Empirical Cardinality: 2, Optionality: 0
+Feature Index: 12, Feature Name: On_board_service <= 3.5
+  Inferred Type: Binary, Empirical Cardinality: 2, Optionality: 0
+Feature Index: 13, Feature Name: On_board_service <= 4.5
+  Inferred Type: Binary, Empirical Cardinality: 2, Optionality: 0
+Feature Index: 14, Feature Name: Customer_Type_disloyal Customer <= 0.5
+  Inferred Type: Binary, Empirical Cardinality: 2, Optionality: 0
+Feature Index: 15, Feature Name: Inflight_entertainment <= 0.5
+  Inferred Type: Binary, Empirical Cardinality: 2, Optionality: 0
+Feature Index: 16, Feature Name: Inflight_entertainment <= 1.5
+  Inferred Type: Binary, Empirical Cardinality: 2, Optionality: 0
+Feature Index: 17, Feature Name: Inflight_entertainment <= 2.5
+  Inferred Type: Binary, Empirical Cardinality: 2, Optionality: 0
+Feature Index: 18, Feature Name: Inflight_entertainment <= 3.5
+  Inferred Type: Binary, Empirical Cardinality: 2, Optionality: 0
+Feature Index: 19, Feature Name: Inflight_entertainment <= 4.5
+  Inferred Type: Binary, Empirical Cardinality: 2, Optionality: 0
+Feature Index: 20, Feature Name: Checkin_service <= 1.5
+  Inferred Type: Binary, Empirical Cardinality: 2, Optionality: 0
+Feature Index: 21, Feature Name: Checkin_service <= 2.5
+  Inferred Type: Binary, Empirical Cardinality: 2, Optionality: 0
+Feature Index: 22, Feature Name: Checkin_service <= 4.5
+  Inferred Type: Binary, Empirical Cardinality: 2, Optionality: 0
+Feature Index: 23, Feature Name: Leg_room_service <= 0.5
+  Inferred Type: Binary, Empirical Cardinality: 2, Optionality: 0
+Feature Index: 24, Feature Name: Leg_room_service <= 1.5
+  Inferred Type: Binary, Empirical Cardinality: 2, Optionality: 0
+Feature Index: 25, Feature Name: Leg_room_service <= 3.5
+  Inferred Type: Binary, Empirical Cardinality: 2, Optionality: 0
+Feature Index: 26, Feature Name: Leg_room_service <= 4.5
+  Inferred Type: Binary, Empirical Cardinality: 2, Optionality: 0
+Feature Index: 27, Feature Name: Online_boarding <= 2.5
+  Inferred Type: Redundant, Empirical Cardinality: 1, Optionality: 0
+Feature Index: 28, Feature Name: satisfaction
+  Inferred Type: Categorical, Empirical Cardinality: 2, Optionality: 0
+Original Dataset Dimension: 29282 x 29
+Binary Dataset Dimension: 29282 x 25
+Dataset Dimensions: 29282 x 23 x 2
+Starting Extraction of Rashomon Set
+Using Rashomon bound: 0.161071
+Time: 0.00681239, Objective: [0.0798071, 0.161071], Boundary: 0.0812636, Graph Size: 1, Queue Size: 46
+Time: 2.56924, Objective: [0.0798071, 0.161071], Boundary: 0.0812636, Graph Size: 5765, Queue Size: 12890
+Time: 3.3704, Objective: [0.107605, 0.161071], Boundary: 0.053466, Graph Size: 8635, Queue Size: 7077
+Time: 3.44728, Objective: [0.107605, 0.161071], Boundary: 0.053466, Graph Size: 8992, Queue Size: 5835
+Time: 3.68716, Objective: [0.107605, 0.161071], Boundary: 0.053466, Graph Size: 9563, Queue Size: 0
+Rashomon Set Construction Completed
+Training Duration: 3.695 seconds
+Number of Iterations: 29999 iterations
+Size of Graph: 9563 nodes
+Objective Boundary: [0.107605, 0.161071]
+Optimality Gap: 0.053466
+Cached subproblem models size: 6389
+Models calls: 15814
+Pruned combinations using scope: 275
+Pruned leaves using scope: 323
+Pruned trivial extensions: 6918
+Max results size: 44
+Re-explore by scope count: 3273
+Re-explore count: 3273
+Extraction Duration: 0.28 seconds
+Stored keys size: 31
+Size of Rashomon Set: 84
+Memory usage after extraction: 1413
+Insertion of Rashomon Set into Trie: 0.001 seconds
+Storing Models in: tmp/rashomon_subtrie_27_1_8_1_.json
+Output of Rashomon Set in Trie: 0.004 seconds
+Nodes Count in Model Set: 322
+Using configuration: {
+  "balance": false,
+  "cancellation": true,
+  "cart_lookahead_depth": 4,
+  "continuous_feature_exchange": false,
+  "costs": "",
+  "covered_sets_thresholds": [],
+  "datatset_encoding": "",
+  "depth_budget": 4,
+  "diagnostics": false,
+  "feature_exchange": false,
+  "feature_transform": true,
+  "look_ahead": true,
+  "memory_checkpoints": [],
+  "minimum_captured_points": 0,
+  "model": "",
+  "model_limit": 10000,
+  "non_binary": false,
+  "output_accuracy_model_set": false,
+  "output_covered_sets": [],
+  "precision_limit": 0,
+  "profile": "",
+  "rashomon": true,
+  "rashomon_bound": 0.3104769289493561,
+  "rashomon_bound_adder": 0.0,
+  "rashomon_bound_multiplier": 0.009999999776482582,
+  "rashomon_ignore_trivial_extensions": true,
+  "rashomon_model": "",
+  "rashomon_model_set_suffix": "",
+  "rashomon_trie": "tmp/rashomon_subtrie_27_1_8_0_.json",
+  "regularization": 0.10000000149011612,
+  "rule_list": false,
+  "similar_support": false,
+  "stack_limit": 0,
+  "time_limit": 0,
+  "timing": "",
+  "trace": "",
+  "tree": "",
+  "uncertainty_tolerance": 0.0,
+  "upperbound": 0.0,
+  "verbose": true,
+  "worker_limit": 1
+}
+Initializing Optimization Framework
+Feature Index: 0, Feature Name: Online_boarding <= 1.5
+  Inferred Type: Binary, Empirical Cardinality: 2, Optionality: 0
+Feature Index: 1, Feature Name: Online_boarding <= 3.5
+  Inferred Type: Redundant, Empirical Cardinality: 1, Optionality: 0
+Feature Index: 2, Feature Name: Online_boarding <= 4.5
+  Inferred Type: Redundant, Empirical Cardinality: 1, Optionality: 0
+Feature Index: 3, Feature Name: Type_of_Travel_Personal Travel <= 0.5
+  Inferred Type: Binary, Empirical Cardinality: 2, Optionality: 0
+Feature Index: 4, Feature Name: Class_Eco <= 0.5
+  Inferred Type: Binary, Empirical Cardinality: 2, Optionality: 0
+Feature Index: 5, Feature Name: Inflight_wifi_service <= 0.5
+  Inferred Type: Redundant, Empirical Cardinality: 1, Optionality: 0
+Feature Index: 6, Feature Name: Inflight_wifi_service <= 1.5
+  Inferred Type: Redundant, Empirical Cardinality: 1, Optionality: 0
+Feature Index: 7, Feature Name: Inflight_wifi_service <= 2.5
+  Inferred Type: Redundant, Empirical Cardinality: 1, Optionality: 0
+Feature Index: 8, Feature Name: Inflight_wifi_service <= 3.5
+  Inferred Type: Redundant, Empirical Cardinality: 1, Optionality: 0
+Feature Index: 9, Feature Name: Inflight_wifi_service <= 4.5
+  Inferred Type: Binary, Empirical Cardinality: 2, Optionality: 0
+Feature Index: 10, Feature Name: On_board_service <= 1.5
+  Inferred Type: Binary, Empirical Cardinality: 2, Optionality: 0
+Feature Index: 11, Feature Name: On_board_service <= 2.5
+  Inferred Type: Binary, Empirical Cardinality: 2, Optionality: 0
+Feature Index: 12, Feature Name: On_board_service <= 3.5
+  Inferred Type: Binary, Empirical Cardinality: 2, Optionality: 0
+Feature Index: 13, Feature Name: On_board_service <= 4.5
+  Inferred Type: Binary, Empirical Cardinality: 2, Optionality: 0
+Feature Index: 14, Feature Name: Customer_Type_disloyal Customer <= 0.5
+  Inferred Type: Binary, Empirical Cardinality: 2, Optionality: 0
+Feature Index: 15, Feature Name: Inflight_entertainment <= 0.5
+  Inferred Type: Binary, Empirical Cardinality: 2, Optionality: 0
+Feature Index: 16, Feature Name: Inflight_entertainment <= 1.5
+  Inferred Type: Binary, Empirical Cardinality: 2, Optionality: 0
+Feature Index: 17, Feature Name: Inflight_entertainment <= 2.5
+  Inferred Type: Binary, Empirical Cardinality: 2, Optionality: 0
+Feature Index: 18, Feature Name: Inflight_entertainment <= 3.5
+  Inferred Type: Binary, Empirical Cardinality: 2, Optionality: 0
+Feature Index: 19, Feature Name: Inflight_entertainment <= 4.5
+  Inferred Type: Binary, Empirical Cardinality: 2, Optionality: 0
+Feature Index: 20, Feature Name: Checkin_service <= 1.5
+  Inferred Type: Binary, Empirical Cardinality: 2, Optionality: 0
+Feature Index: 21, Feature Name: Checkin_service <= 2.5
+  Inferred Type: Binary, Empirical Cardinality: 2, Optionality: 0
+Feature Index: 22, Feature Name: Checkin_service <= 4.5
+  Inferred Type: Binary, Empirical Cardinality: 2, Optionality: 0
+Feature Index: 23, Feature Name: Leg_room_service <= 0.5
+  Inferred Type: Binary, Empirical Cardinality: 2, Optionality: 0
+Feature Index: 24, Feature Name: Leg_room_service <= 1.5
+  Inferred Type: Binary, Empirical Cardinality: 2, Optionality: 0
+Feature Index: 25, Feature Name: Leg_room_service <= 3.5
+  Inferred Type: Binary, Empirical Cardinality: 2, Optionality: 0
+Feature Index: 26, Feature Name: Leg_room_service <= 4.5
+  Inferred Type: Binary, Empirical Cardinality: 2, Optionality: 0
+Feature Index: 27, Feature Name: Online_boarding <= 2.5
+  Inferred Type: Redundant, Empirical Cardinality: 1, Optionality: 0
+Feature Index: 28, Feature Name: satisfaction
+  Inferred Type: Categorical, Empirical Cardinality: 2, Optionality: 0
+Original Dataset Dimension: 2585 x 29
+Binary Dataset Dimension: 2585 x 23
+Dataset Dimensions: 2585 x 21 x 2
+Starting Extraction of Rashomon Set
+Using Rashomon bound: 0.310477
+Time: 0.000776425, Objective: [0.310445, 0.310477], Boundary: 3.20673e-05, Graph Size: 1, Queue Size: 0
+Rashomon Set Construction Completed
+Training Duration: 0 seconds
+Number of Iterations: 0 iterations
+Size of Graph: 1 nodes
+Objective Boundary: [0.310445, 0.310477]
+Optimality Gap: 3.20673e-05
+Cached subproblem models size: 1
+Models calls: 1
+Pruned combinations using scope: 0
+Pruned leaves using scope: 0
+Pruned trivial extensions: 0
+Max results size: 1
+Re-explore by scope count: 0
+Re-explore count: 0
+Extraction Duration: 0 seconds
+Stored keys size: 1
+Size of Rashomon Set: 1
+Memory usage after extraction: 1260
+Insertion of Rashomon Set into Trie: 0 seconds
+Storing Models in: tmp/rashomon_subtrie_27_1_8_0_.json
+Output of Rashomon Set in Trie: 0 seconds
+Nodes Count in Model Set: 1
+Using configuration: {
+  "balance": false,
+  "cancellation": true,
+  "cart_lookahead_depth": 4,
+  "continuous_feature_exchange": false,
+  "costs": "",
+  "covered_sets_thresholds": [],
+  "datatset_encoding": "",
+  "depth_budget": 4,
+  "diagnostics": false,
+  "feature_exchange": false,
+  "feature_transform": true,
+  "look_ahead": true,
+  "memory_checkpoints": [],
+  "minimum_captured_points": 0,
+  "model": "",
+  "model_limit": 10000,
+  "non_binary": false,
+  "output_accuracy_model_set": false,
+  "output_covered_sets": [],
+  "precision_limit": 0,
+  "profile": "",
+  "rashomon": true,
+  "rashomon_bound": 0.2580288052558899,
+  "rashomon_bound_adder": 0.0,
+  "rashomon_bound_multiplier": 0.009999999776482582,
+  "rashomon_ignore_trivial_extensions": true,
+  "rashomon_model": "",
+  "rashomon_model_set_suffix": "",
+  "rashomon_trie": "tmp/rashomon_subtrie_27_0_12_1_.json",
+  "regularization": 0.015846066176891327,
+  "rule_list": false,
+  "similar_support": false,
+  "stack_limit": 0,
+  "time_limit": 0,
+  "timing": "",
+  "trace": "",
+  "tree": "",
+  "uncertainty_tolerance": 0.0,
+  "upperbound": 0.0,
+  "verbose": true,
+  "worker_limit": 1
+}
+Initializing Optimization Framework
+Feature Index: 0, Feature Name: Online_boarding <= 1.5
+  Inferred Type: Redundant, Empirical Cardinality: 1, Optionality: 0
+Feature Index: 1, Feature Name: Online_boarding <= 3.5
+  Inferred Type: Binary, Empirical Cardinality: 2, Optionality: 0
+Feature Index: 2, Feature Name: Online_boarding <= 4.5
+  Inferred Type: Binary, Empirical Cardinality: 2, Optionality: 0
+Feature Index: 3, Feature Name: Type_of_Travel_Personal Travel <= 0.5
+  Inferred Type: Binary, Empirical Cardinality: 2, Optionality: 0
+Feature Index: 4, Feature Name: Class_Eco <= 0.5
+  Inferred Type: Binary, Empirical Cardinality: 2, Optionality: 0
+Feature Index: 5, Feature Name: Inflight_wifi_service <= 0.5
+  Inferred Type: Binary, Empirical Cardinality: 2, Optionality: 0
+Feature Index: 6, Feature Name: Inflight_wifi_service <= 1.5
+  Inferred Type: Binary, Empirical Cardinality: 2, Optionality: 0
+Feature Index: 7, Feature Name: Inflight_wifi_service <= 2.5
+  Inferred Type: Binary, Empirical Cardinality: 2, Optionality: 0
+Feature Index: 8, Feature Name: Inflight_wifi_service <= 3.5
+  Inferred Type: Binary, Empirical Cardinality: 2, Optionality: 0
+Feature Index: 9, Feature Name: Inflight_wifi_service <= 4.5
+  Inferred Type: Binary, Empirical Cardinality: 2, Optionality: 0
+Feature Index: 10, Feature Name: On_board_service <= 1.5
+  Inferred Type: Binary, Empirical Cardinality: 2, Optionality: 0
+Feature Index: 11, Feature Name: On_board_service <= 2.5
+  Inferred Type: Binary, Empirical Cardinality: 2, Optionality: 0
+Feature Index: 12, Feature Name: On_board_service <= 3.5
+  Inferred Type: Redundant, Empirical Cardinality: 1, Optionality: 0
+Feature Index: 13, Feature Name: On_board_service <= 4.5
+  Inferred Type: Redundant, Empirical Cardinality: 1, Optionality: 0
+Feature Index: 14, Feature Name: Customer_Type_disloyal Customer <= 0.5
+  Inferred Type: Binary, Empirical Cardinality: 2, Optionality: 0
+Feature Index: 15, Feature Name: Inflight_entertainment <= 0.5
+  Inferred Type: Binary, Empirical Cardinality: 2, Optionality: 0
+Feature Index: 16, Feature Name: Inflight_entertainment <= 1.5
+  Inferred Type: Binary, Empirical Cardinality: 2, Optionality: 0
+Feature Index: 17, Feature Name: Inflight_entertainment <= 2.5
+  Inferred Type: Binary, Empirical Cardinality: 2, Optionality: 0
+Feature Index: 18, Feature Name: Inflight_entertainment <= 3.5
+  Inferred Type: Binary, Empirical Cardinality: 2, Optionality: 0
+Feature Index: 19, Feature Name: Inflight_entertainment <= 4.5
+  Inferred Type: Binary, Empirical Cardinality: 2, Optionality: 0
+Feature Index: 20, Feature Name: Checkin_service <= 1.5
+  Inferred Type: Binary, Empirical Cardinality: 2, Optionality: 0
+Feature Index: 21, Feature Name: Checkin_service <= 2.5
+  Inferred Type: Binary, Empirical Cardinality: 2, Optionality: 0
+Feature Index: 22, Feature Name: Checkin_service <= 4.5
+  Inferred Type: Binary, Empirical Cardinality: 2, Optionality: 0
+Feature Index: 23, Feature Name: Leg_room_service <= 0.5
+  Inferred Type: Binary, Empirical Cardinality: 2, Optionality: 0
+Feature Index: 24, Feature Name: Leg_room_service <= 1.5
+  Inferred Type: Binary, Empirical Cardinality: 2, Optionality: 0
+Feature Index: 25, Feature Name: Leg_room_service <= 3.5
+  Inferred Type: Binary, Empirical Cardinality: 2, Optionality: 0
+Feature Index: 26, Feature Name: Leg_room_service <= 4.5
+  Inferred Type: Binary, Empirical Cardinality: 2, Optionality: 0
+Feature Index: 27, Feature Name: Online_boarding <= 2.5
+  Inferred Type: Redundant, Empirical Cardinality: 1, Optionality: 0
+Feature Index: 28, Feature Name: satisfaction
+  Inferred Type: Categorical, Empirical Cardinality: 2, Optionality: 0
+Original Dataset Dimension: 37042 x 29
+Binary Dataset Dimension: 37042 x 26
+Dataset Dimensions: 37042 x 24 x 2
+Starting Extraction of Rashomon Set
+Using Rashomon bound: 0.258029
+Time: 0.00467853, Objective: [0.132334, 0.258029], Boundary: 0.125695, Graph Size: 1, Queue Size: 48
+Time: 1.08549, Objective: [0.14818, 0.258029], Boundary: 0.109849, Graph Size: 1195, Queue Size: 19294
+Time: 1.31502, Objective: [0.14818, 0.258029], Boundary: 0.109849, Graph Size: 2137, Queue Size: 20413
+Time: 1.41757, Objective: [0.14818, 0.258029], Boundary: 0.109849, Graph Size: 2539, Queue Size: 20874
+Time: 1.46725, Objective: [0.14818, 0.258029], Boundary: 0.109849, Graph Size: 2627, Queue Size: 21091
+Time: 1.49293, Objective: [0.14818, 0.258029], Boundary: 0.109849, Graph Size: 3065, Queue Size: 20489
+Time: 1.59154, Objective: [0.14818, 0.258029], Boundary: 0.109849, Graph Size: 4375, Queue Size: 18509
+Time: 1.77765, Objective: [0.14818, 0.258029], Boundary: 0.109849, Graph Size: 5407, Queue Size: 17497
+Time: 1.85959, Objective: [0.14818, 0.258029], Boundary: 0.109849, Graph Size: 6098, Queue Size: 16109
+Time: 2.37524, Objective: [0.14818, 0.258029], Boundary: 0.109849, Graph Size: 7886, Queue Size: 13582
+Time: 2.38528, Objective: [0.14818, 0.258029], Boundary: 0.109849, Graph Size: 7947, Queue Size: 13460
+Time: 2.39915, Objective: [0.14818, 0.258029], Boundary: 0.109849, Graph Size: 8024, Queue Size: 13275
+Time: 2.45763, Objective: [0.14818, 0.258029], Boundary: 0.109849, Graph Size: 8393, Queue Size: 12435
+Time: 2.74042, Objective: [0.14818, 0.258029], Boundary: 0.109849, Graph Size: 9786, Queue Size: 8114
+Time: 2.77697, Objective: [0.14818, 0.258029], Boundary: 0.109849, Graph Size: 9920, Queue Size: 7455
+Time: 2.83506, Objective: [0.14818, 0.258029], Boundary: 0.109849, Graph Size: 10096, Queue Size: 6279
+Time: 2.86183, Objective: [0.14818, 0.258029], Boundary: 0.109849, Graph Size: 10155, Queue Size: 5775
+Time: 3.07845, Objective: [0.14818, 0.258029], Boundary: 0.109849, Graph Size: 10556, Queue Size: 2174
+Time: 3.20908, Objective: [0.14818, 0.258029], Boundary: 0.109849, Graph Size: 10705, Queue Size: 24
+Time: 3.20955, Objective: [0.14818, 0.258029], Boundary: 0.109849, Graph Size: 10705, Queue Size: 0
+Rashomon Set Construction Completed
+Training Duration: 3.22 seconds
+Number of Iterations: 39999 iterations
+Size of Graph: 10705 nodes
+Objective Boundary: [0.14818, 0.258029]
+Optimality Gap: 0.109849
+Cached subproblem models size: 6727
+Models calls: 17617
+Pruned combinations using scope: 404
+Pruned leaves using scope: 320
+Pruned trivial extensions: 5927
+Max results size: 906
+Re-explore by scope count: 4084
+Re-explore count: 4084
+Extraction Duration: 0.373 seconds
+Stored keys size: 4
+Size of Rashomon Set: 7
+Memory usage after extraction: 1611
+Insertion of Rashomon Set into Trie: 0 seconds
+Storing Models in: tmp/rashomon_subtrie_27_0_12_1_.json
+Output of Rashomon Set in Trie: 0.001 seconds
+Nodes Count in Model Set: 30
+Using configuration: {
+  "balance": false,
+  "cancellation": true,
+  "cart_lookahead_depth": 4,
+  "continuous_feature_exchange": false,
+  "costs": "",
+  "covered_sets_thresholds": [],
+  "datatset_encoding": "",
+  "depth_budget": 4,
+  "diagnostics": false,
+  "feature_exchange": false,
+  "feature_transform": true,
+  "look_ahead": true,
+  "memory_checkpoints": [],
+  "minimum_captured_points": 0,
+  "model": "",
+  "model_limit": 10000,
+  "non_binary": false,
+  "output_accuracy_model_set": false,
+  "output_covered_sets": [],
+  "precision_limit": 0,
+  "profile": "",
+  "rashomon": true,
+  "rashomon_bound": 0.15618738532066345,
+  "rashomon_bound_adder": 0.0,
+  "rashomon_bound_multiplier": 0.009999999776482582,
+  "rashomon_ignore_trivial_extensions": true,
+  "rashomon_model": "",
+  "rashomon_model_set_suffix": "",
+  "rashomon_trie": "tmp/rashomon_subtrie_27_0_12_0_.json",
+  "regularization": 0.012106218375265598,
+  "rule_list": false,
+  "similar_support": false,
+  "stack_limit": 0,
+  "time_limit": 0,
+  "timing": "",
+  "trace": "",
+  "tree": "",
+  "uncertainty_tolerance": 0.0,
+  "upperbound": 0.0,
+  "verbose": true,
+  "worker_limit": 1
+}
+Initializing Optimization Framework
+Feature Index: 0, Feature Name: Online_boarding <= 1.5
+  Inferred Type: Redundant, Empirical Cardinality: 1, Optionality: 0
+Feature Index: 1, Feature Name: Online_boarding <= 3.5
+  Inferred Type: Binary, Empirical Cardinality: 2, Optionality: 0
+Feature Index: 2, Feature Name: Online_boarding <= 4.5
+  Inferred Type: Binary, Empirical Cardinality: 2, Optionality: 0
+Feature Index: 3, Feature Name: Type_of_Travel_Personal Travel <= 0.5
+  Inferred Type: Binary, Empirical Cardinality: 2, Optionality: 0
+Feature Index: 4, Feature Name: Class_Eco <= 0.5
+  Inferred Type: Binary, Empirical Cardinality: 2, Optionality: 0
+Feature Index: 5, Feature Name: Inflight_wifi_service <= 0.5
+  Inferred Type: Binary, Empirical Cardinality: 2, Optionality: 0
+Feature Index: 6, Feature Name: Inflight_wifi_service <= 1.5
+  Inferred Type: Binary, Empirical Cardinality: 2, Optionality: 0
+Feature Index: 7, Feature Name: Inflight_wifi_service <= 2.5
+  Inferred Type: Binary, Empirical Cardinality: 2, Optionality: 0
+Feature Index: 8, Feature Name: Inflight_wifi_service <= 3.5
+  Inferred Type: Binary, Empirical Cardinality: 2, Optionality: 0
+Feature Index: 9, Feature Name: Inflight_wifi_service <= 4.5
+  Inferred Type: Binary, Empirical Cardinality: 2, Optionality: 0
+Feature Index: 10, Feature Name: On_board_service <= 1.5
+  Inferred Type: Redundant, Empirical Cardinality: 1, Optionality: 0
+Feature Index: 11, Feature Name: On_board_service <= 2.5
+  Inferred Type: Redundant, Empirical Cardinality: 1, Optionality: 0
+Feature Index: 12, Feature Name: On_board_service <= 3.5
+  Inferred Type: Redundant, Empirical Cardinality: 1, Optionality: 0
+Feature Index: 13, Feature Name: On_board_service <= 4.5
+  Inferred Type: Binary, Empirical Cardinality: 2, Optionality: 0
+Feature Index: 14, Feature Name: Customer_Type_disloyal Customer <= 0.5
+  Inferred Type: Binary, Empirical Cardinality: 2, Optionality: 0
+Feature Index: 15, Feature Name: Inflight_entertainment <= 0.5
+  Inferred Type: Redundant, Empirical Cardinality: 1, Optionality: 0
+Feature Index: 16, Feature Name: Inflight_entertainment <= 1.5
+  Inferred Type: Binary, Empirical Cardinality: 2, Optionality: 0
+Feature Index: 17, Feature Name: Inflight_entertainment <= 2.5
+  Inferred Type: Binary, Empirical Cardinality: 2, Optionality: 0
+Feature Index: 18, Feature Name: Inflight_entertainment <= 3.5
+  Inferred Type: Binary, Empirical Cardinality: 2, Optionality: 0
+Feature Index: 19, Feature Name: Inflight_entertainment <= 4.5
+  Inferred Type: Binary, Empirical Cardinality: 2, Optionality: 0
+Feature Index: 20, Feature Name: Checkin_service <= 1.5
+  Inferred Type: Binary, Empirical Cardinality: 2, Optionality: 0
+Feature Index: 21, Feature Name: Checkin_service <= 2.5
+  Inferred Type: Binary, Empirical Cardinality: 2, Optionality: 0
+Feature Index: 22, Feature Name: Checkin_service <= 4.5
+  Inferred Type: Binary, Empirical Cardinality: 2, Optionality: 0
+Feature Index: 23, Feature Name: Leg_room_service <= 0.5
+  Inferred Type: Binary, Empirical Cardinality: 2, Optionality: 0
+Feature Index: 24, Feature Name: Leg_room_service <= 1.5
+  Inferred Type: Binary, Empirical Cardinality: 2, Optionality: 0
+Feature Index: 25, Feature Name: Leg_room_service <= 3.5
+  Inferred Type: Binary, Empirical Cardinality: 2, Optionality: 0
+Feature Index: 26, Feature Name: Leg_room_service <= 4.5
+  Inferred Type: Binary, Empirical Cardinality: 2, Optionality: 0
+Feature Index: 27, Feature Name: Online_boarding <= 2.5
+  Inferred Type: Redundant, Empirical Cardinality: 1, Optionality: 0
+Feature Index: 28, Feature Name: satisfaction
+  Inferred Type: Categorical, Empirical Cardinality: 2, Optionality: 0
+Original Dataset Dimension: 48485 x 29
+Binary Dataset Dimension: 48485 x 24
+Dataset Dimensions: 48485 x 22 x 2
+Starting Extraction of Rashomon Set
+Using Rashomon bound: 0.156187
+Time: 0.00427915, Objective: [0.0864991, 0.156187], Boundary: 0.0696883, Graph Size: 1, Queue Size: 44
+Time: 2.18108, Objective: [0.0864991, 0.156187], Boundary: 0.0696883, Graph Size: 5667, Queue Size: 11057
+Time: 2.53695, Objective: [0.0986053, 0.156187], Boundary: 0.0575821, Graph Size: 7159, Queue Size: 7207
+Time: 2.58863, Objective: [0.0986053, 0.156187], Boundary: 0.0575821, Graph Size: 7341, Queue Size: 6644
+Time: 2.75179, Objective: [0.0986053, 0.156187], Boundary: 0.0575821, Graph Size: 7807, Queue Size: 5314
+Time: 2.89215, Objective: [0.0986053, 0.156187], Boundary: 0.0575821, Graph Size: 8219, Queue Size: 3651
+Time: 2.93454, Objective: [0.0987291, 0.156187], Boundary: 0.0574583, Graph Size: 8271, Queue Size: 3120
+Time: 2.96084, Objective: [0.0987291, 0.156187], Boundary: 0.0574583, Graph Size: 8289, Queue Size: 2827
+Time: 2.98371, Objective: [0.0987291, 0.156187], Boundary: 0.0574583, Graph Size: 8325, Queue Size: 2558
+Time: 3.10097, Objective: [0.0987291, 0.156187], Boundary: 0.0574583, Graph Size: 8411, Queue Size: 1147
+Time: 3.16647, Objective: [0.0987291, 0.156187], Boundary: 0.0574583, Graph Size: 8457, Queue Size: 0
+Rashomon Set Construction Completed
+Training Duration: 3.179 seconds
+Number of Iterations: 29999 iterations
+Size of Graph: 8457 nodes
+Objective Boundary: [0.0987291, 0.156187]
+Optimality Gap: 0.0574583
+Cached subproblem models size: 4489
+Models calls: 10519
+Pruned combinations using scope: 429
+Pruned leaves using scope: 253
+Pruned trivial extensions: 3970
+Max results size: 226
+Re-explore by scope count: 2148
+Re-explore count: 2148
+Extraction Duration: 0.337 seconds
+Stored keys size: 66
+Size of Rashomon Set: 157
+Memory usage after extraction: 1747
+Insertion of Rashomon Set into Trie: 0.001 seconds
+Storing Models in: tmp/rashomon_subtrie_27_0_12_0_.json
+Output of Rashomon Set in Trie: 0.003 seconds
+Nodes Count in Model Set: 351
+  0%|          | 2/861 [04:26<27:14:03, 114.14s/it]  0%|          | 3/861 [04:28<14:57:50, 62.79s/it] Using configuration: {
+  "balance": false,
+  "cancellation": true,
+  "cart_lookahead_depth": 4,
+  "continuous_feature_exchange": false,
+  "costs": "",
+  "covered_sets_thresholds": [],
+  "datatset_encoding": "",
+  "depth_budget": 4,
+  "diagnostics": false,
+  "feature_exchange": false,
+  "feature_transform": true,
+  "look_ahead": true,
+  "memory_checkpoints": [],
+  "minimum_captured_points": 0,
+  "model": "",
+  "model_limit": 10000,
+  "non_binary": false,
+  "output_accuracy_model_set": false,
+  "output_covered_sets": [],
+  "precision_limit": 0,
+  "profile": "",
+  "rashomon": true,
+  "rashomon_bound": 0.18811523914337158,
+  "rashomon_bound_adder": 0.0,
+  "rashomon_bound_multiplier": 0.009999999776482582,
+  "rashomon_ignore_trivial_extensions": true,
+  "rashomon_model": "",
+  "rashomon_model_set_suffix": "",
+  "rashomon_trie": "tmp/rashomon_subtrie_27_1_9_1_.json",
+  "regularization": 0.018986575305461884,
+  "rule_list": false,
+  "similar_support": false,
+  "stack_limit": 0,
+  "time_limit": 0,
+  "timing": "",
+  "trace": "",
+  "tree": "",
+  "uncertainty_tolerance": 0.0,
+  "upperbound": 0.0,
+  "verbose": true,
+  "worker_limit": 1
+}
+Initializing Optimization Framework
+Feature Index: 0, Feature Name: Online_boarding <= 1.5
+  Inferred Type: Binary, Empirical Cardinality: 2, Optionality: 0
+Feature Index: 1, Feature Name: Online_boarding <= 3.5
+  Inferred Type: Redundant, Empirical Cardinality: 1, Optionality: 0
+Feature Index: 2, Feature Name: Online_boarding <= 4.5
+  Inferred Type: Redundant, Empirical Cardinality: 1, Optionality: 0
+Feature Index: 3, Feature Name: Type_of_Travel_Personal Travel <= 0.5
+  Inferred Type: Binary, Empirical Cardinality: 2, Optionality: 0
+Feature Index: 4, Feature Name: Class_Eco <= 0.5
+  Inferred Type: Binary, Empirical Cardinality: 2, Optionality: 0
+Feature Index: 5, Feature Name: Inflight_wifi_service <= 0.5
+  Inferred Type: Binary, Empirical Cardinality: 2, Optionality: 0
+Feature Index: 6, Feature Name: Inflight_wifi_service <= 1.5
+  Inferred Type: Binary, Empirical Cardinality: 2, Optionality: 0
+Feature Index: 7, Feature Name: Inflight_wifi_service <= 2.5
+  Inferred Type: Binary, Empirical Cardinality: 2, Optionality: 0
+Feature Index: 8, Feature Name: Inflight_wifi_service <= 3.5
+  Inferred Type: Binary, Empirical Cardinality: 2, Optionality: 0
+Feature Index: 9, Feature Name: Inflight_wifi_service <= 4.5
+  Inferred Type: Redundant, Empirical Cardinality: 1, Optionality: 0
+Feature Index: 10, Feature Name: On_board_service <= 1.5
+  Inferred Type: Binary, Empirical Cardinality: 2, Optionality: 0
+Feature Index: 11, Feature Name: On_board_service <= 2.5
+  Inferred Type: Binary, Empirical Cardinality: 2, Optionality: 0
+Feature Index: 12, Feature Name: On_board_service <= 3.5
+  Inferred Type: Binary, Empirical Cardinality: 2, Optionality: 0
+Feature Index: 13, Feature Name: On_board_service <= 4.5
+  Inferred Type: Binary, Empirical Cardinality: 2, Optionality: 0
+Feature Index: 14, Feature Name: Customer_Type_disloyal Customer <= 0.5
+  Inferred Type: Binary, Empirical Cardinality: 2, Optionality: 0
+Feature Index: 15, Feature Name: Inflight_entertainment <= 0.5
+  Inferred Type: Binary, Empirical Cardinality: 2, Optionality: 0
+Feature Index: 16, Feature Name: Inflight_entertainment <= 1.5
+  Inferred Type: Binary, Empirical Cardinality: 2, Optionality: 0
+Feature Index: 17, Feature Name: Inflight_entertainment <= 2.5
+  Inferred Type: Binary, Empirical Cardinality: 2, Optionality: 0
+Feature Index: 18, Feature Name: Inflight_entertainment <= 3.5
+  Inferred Type: Binary, Empirical Cardinality: 2, Optionality: 0
+Feature Index: 19, Feature Name: Inflight_entertainment <= 4.5
+  Inferred Type: Binary, Empirical Cardinality: 2, Optionality: 0
+Feature Index: 20, Feature Name: Checkin_service <= 1.5
+  Inferred Type: Binary, Empirical Cardinality: 2, Optionality: 0
+Feature Index: 21, Feature Name: Checkin_service <= 2.5
+  Inferred Type: Binary, Empirical Cardinality: 2, Optionality: 0
+Feature Index: 22, Feature Name: Checkin_service <= 4.5
+  Inferred Type: Binary, Empirical Cardinality: 2, Optionality: 0
+Feature Index: 23, Feature Name: Leg_room_service <= 0.5
+  Inferred Type: Binary, Empirical Cardinality: 2, Optionality: 0
+Feature Index: 24, Feature Name: Leg_room_service <= 1.5
+  Inferred Type: Binary, Empirical Cardinality: 2, Optionality: 0
+Feature Index: 25, Feature Name: Leg_room_service <= 3.5
+  Inferred Type: Binary, Empirical Cardinality: 2, Optionality: 0
+Feature Index: 26, Feature Name: Leg_room_service <= 4.5
+  Inferred Type: Binary, Empirical Cardinality: 2, Optionality: 0
+Feature Index: 27, Feature Name: Online_boarding <= 2.5
+  Inferred Type: Redundant, Empirical Cardinality: 1, Optionality: 0
+Feature Index: 28, Feature Name: satisfaction
+  Inferred Type: Categorical, Empirical Cardinality: 2, Optionality: 0
+Original Dataset Dimension: 30915 x 29
+Binary Dataset Dimension: 30915 x 26
+Dataset Dimensions: 30915 x 24 x 2
+Starting Extraction of Rashomon Set
+Using Rashomon bound: 0.188115
+Time: 0.0021384, Objective: [0.083387, 0.188115], Boundary: 0.104728, Graph Size: 1, Queue Size: 48
+Time: 1.52528, Objective: [0.083387, 0.188115], Boundary: 0.104728, Graph Size: 6059, Queue Size: 19893
+Time: 2.11994, Objective: [0.083387, 0.188115], Boundary: 0.104728, Graph Size: 9794, Queue Size: 12294
+Time: 2.30963, Objective: [0.110331, 0.188115], Boundary: 0.0777843, Graph Size: 10715, Queue Size: 8682
+Time: 2.58218, Objective: [0.110331, 0.188115], Boundary: 0.0777843, Graph Size: 11475, Queue Size: 3596
+Time: 2.5837, Objective: [0.110331, 0.188115], Boundary: 0.0777843, Graph Size: 11476, Queue Size: 3573
+Time: 2.75274, Objective: [0.110331, 0.188115], Boundary: 0.0777843, Graph Size: 11638, Queue Size: 0
+Rashomon Set Construction Completed
+Training Duration: 2.762 seconds
+Number of Iterations: 39999 iterations
+Size of Graph: 11638 nodes
+Objective Boundary: [0.110331, 0.188115]
+Optimality Gap: 0.0777843
+Cached subproblem models size: 8951
+Models calls: 24137
+Pruned combinations using scope: 1064
+Pruned leaves using scope: 185
+Pruned trivial extensions: 10096
+Max results size: 247
+Re-explore by scope count: 5608
+Re-explore count: 5608
+Extraction Duration: 0.388 seconds
+Stored keys size: 247
+Size of Rashomon Set: 806
+Memory usage after extraction: 1413
+Insertion of Rashomon Set into Trie: 0.004 seconds
+Storing Models in: tmp/rashomon_subtrie_27_1_9_1_.json
+Output of Rashomon Set in Trie: 0.008 seconds
+Nodes Count in Model Set: 2134
+Using configuration: {
+  "balance": false,
+  "cancellation": true,
+  "cart_lookahead_depth": 4,
+  "continuous_feature_exchange": false,
+  "costs": "",
+  "covered_sets_thresholds": [],
+  "datatset_encoding": "",
+  "depth_budget": 4,
+  "diagnostics": false,
+  "feature_exchange": false,
+  "feature_transform": true,
+  "look_ahead": true,
+  "memory_checkpoints": [],
+  "minimum_captured_points": 0,
+  "model": "",
+  "model_limit": 10000,
+  "non_binary": false,
+  "output_accuracy_model_set": false,
+  "output_covered_sets": [],
+  "precision_limit": 0,
+  "profile": "",
+  "rashomon": true,
+  "rashomon_bound": 0.3972300589084625,
+  "rashomon_bound_adder": 0.0,
+  "rashomon_bound_multiplier": 0.009999999776482582,
+  "rashomon_ignore_trivial_extensions": true,
+  "rashomon_model": "",
+  "rashomon_model_set_suffix": "",
+  "rashomon_trie": "tmp/rashomon_subtrie_27_0_11_1_.json",
+  "regularization": 0.030647974461317062,
+  "rule_list": false,
+  "similar_support": false,
+  "stack_limit": 0,
+  "time_limit": 0,
+  "timing": "",
+  "trace": "",
+  "tree": "",
+  "uncertainty_tolerance": 0.0,
+  "upperbound": 0.0,
+  "verbose": true,
+  "worker_limit": 1
+}
+Initializing Optimization Framework
+Feature Index: 0, Feature Name: Online_boarding <= 1.5
+  Inferred Type: Redundant, Empirical Cardinality: 1, Optionality: 0
+Feature Index: 1, Feature Name: Online_boarding <= 3.5
+  Inferred Type: Binary, Empirical Cardinality: 2, Optionality: 0
+Feature Index: 2, Feature Name: Online_boarding <= 4.5
+  Inferred Type: Binary, Empirical Cardinality: 2, Optionality: 0
+Feature Index: 3, Feature Name: Type_of_Travel_Personal Travel <= 0.5
+  Inferred Type: Binary, Empirical Cardinality: 2, Optionality: 0
+Feature Index: 4, Feature Name: Class_Eco <= 0.5
+  Inferred Type: Binary, Empirical Cardinality: 2, Optionality: 0
+Feature Index: 5, Feature Name: Inflight_wifi_service <= 0.5
+  Inferred Type: Binary, Empirical Cardinality: 2, Optionality: 0
+Feature Index: 6, Feature Name: Inflight_wifi_service <= 1.5
+  Inferred Type: Binary, Empirical Cardinality: 2, Optionality: 0
+Feature Index: 7, Feature Name: Inflight_wifi_service <= 2.5
+  Inferred Type: Binary, Empirical Cardinality: 2, Optionality: 0
+Feature Index: 8, Feature Name: Inflight_wifi_service <= 3.5
+  Inferred Type: Binary, Empirical Cardinality: 2, Optionality: 0
+Feature Index: 9, Feature Name: Inflight_wifi_service <= 4.5
+  Inferred Type: Binary, Empirical Cardinality: 2, Optionality: 0
+Feature Index: 10, Feature Name: On_board_service <= 1.5
+  Inferred Type: Binary, Empirical Cardinality: 2, Optionality: 0
+Feature Index: 11, Feature Name: On_board_service <= 2.5
+  Inferred Type: Redundant, Empirical Cardinality: 1, Optionality: 0
+Feature Index: 12, Feature Name: On_board_service <= 3.5
+  Inferred Type: Redundant, Empirical Cardinality: 1, Optionality: 0
+Feature Index: 13, Feature Name: On_board_service <= 4.5
+  Inferred Type: Redundant, Empirical Cardinality: 1, Optionality: 0
+Feature Index: 14, Feature Name: Customer_Type_disloyal Customer <= 0.5
+  Inferred Type: Binary, Empirical Cardinality: 2, Optionality: 0
+Feature Index: 15, Feature Name: Inflight_entertainment <= 0.5
+  Inferred Type: Binary, Empirical Cardinality: 2, Optionality: 0
+Feature Index: 16, Feature Name: Inflight_entertainment <= 1.5
+  Inferred Type: Binary, Empirical Cardinality: 2, Optionality: 0
+Feature Index: 17, Feature Name: Inflight_entertainment <= 2.5
+  Inferred Type: Binary, Empirical Cardinality: 2, Optionality: 0
+Feature Index: 18, Feature Name: Inflight_entertainment <= 3.5
+  Inferred Type: Binary, Empirical Cardinality: 2, Optionality: 0
+Feature Index: 19, Feature Name: Inflight_entertainment <= 4.5
+  Inferred Type: Binary, Empirical Cardinality: 2, Optionality: 0
+Feature Index: 20, Feature Name: Checkin_service <= 1.5
+  Inferred Type: Binary, Empirical Cardinality: 2, Optionality: 0
+Feature Index: 21, Feature Name: Checkin_service <= 2.5
+  Inferred Type: Binary, Empirical Cardinality: 2, Optionality: 0
+Feature Index: 22, Feature Name: Checkin_service <= 4.5
+  Inferred Type: Binary, Empirical Cardinality: 2, Optionality: 0
+Feature Index: 23, Feature Name: Leg_room_service <= 0.5
+  Inferred Type: Binary, Empirical Cardinality: 2, Optionality: 0
+Feature Index: 24, Feature Name: Leg_room_service <= 1.5
+  Inferred Type: Binary, Empirical Cardinality: 2, Optionality: 0
+Feature Index: 25, Feature Name: Leg_room_service <= 3.5
+  Inferred Type: Binary, Empirical Cardinality: 2, Optionality: 0
+Feature Index: 26, Feature Name: Leg_room_service <= 4.5
+  Inferred Type: Binary, Empirical Cardinality: 2, Optionality: 0
+Feature Index: 27, Feature Name: Online_boarding <= 2.5
+  Inferred Type: Redundant, Empirical Cardinality: 1, Optionality: 0
+Feature Index: 28, Feature Name: satisfaction
+  Inferred Type: Categorical, Empirical Cardinality: 2, Optionality: 0
+Original Dataset Dimension: 19152 x 29
+Binary Dataset Dimension: 19152 x 25
+Dataset Dimensions: 19152 x 23 x 2
+Starting Extraction of Rashomon Set
+Using Rashomon bound: 0.39723
+Time: 0.00520873, Objective: [0.17298, 0.39723], Boundary: 0.22425, Graph Size: 1, Queue Size: 46
+Time: 0.822549, Objective: [0.203628, 0.39723], Boundary: 0.193602, Graph Size: 2978, Queue Size: 19936
+Time: 0.877365, Objective: [0.203628, 0.39723], Boundary: 0.193602, Graph Size: 3113, Queue Size: 20727
+Time: 0.884137, Objective: [0.203628, 0.39723], Boundary: 0.193602, Graph Size: 3207, Queue Size: 20581
+Time: 0.933964, Objective: [0.203628, 0.39723], Boundary: 0.193602, Graph Size: 3583, Queue Size: 20613
+Time: 0.938679, Objective: [0.203628, 0.39723], Boundary: 0.193602, Graph Size: 3649, Queue Size: 20495
+Time: 0.940114, Objective: [0.203628, 0.39723], Boundary: 0.193602, Graph Size: 3666, Queue Size: 20464
+Time: 0.941159, Objective: [0.203628, 0.39723], Boundary: 0.193602, Graph Size: 3677, Queue Size: 20445
+Time: 0.955862, Objective: [0.203628, 0.39723], Boundary: 0.193602, Graph Size: 3896, Queue Size: 20090
+Time: 0.988733, Objective: [0.203628, 0.39723], Boundary: 0.193602, Graph Size: 4434, Queue Size: 19255
+Time: 1.01714, Objective: [0.203628, 0.39723], Boundary: 0.193602, Graph Size: 4517, Queue Size: 19514
+Time: 1.11769, Objective: [0.203628, 0.39723], Boundary: 0.193602, Graph Size: 5309, Queue Size: 18997
+Time: 1.12861, Objective: [0.203628, 0.39723], Boundary: 0.193602, Graph Size: 5460, Queue Size: 18699
+Time: 1.16426, Objective: [0.203628, 0.39723], Boundary: 0.193602, Graph Size: 5935, Queue Size: 17764
+Time: 1.16776, Objective: [0.203628, 0.39723], Boundary: 0.193602, Graph Size: 5985, Queue Size: 17664
+Time: 1.23366, Objective: [0.203628, 0.39723], Boundary: 0.193602, Graph Size: 6346, Queue Size: 17384
+Time: 1.25131, Objective: [0.203628, 0.39723], Boundary: 0.193602, Graph Size: 6536, Queue Size: 16930
+Time: 1.26723, Objective: [0.203628, 0.39723], Boundary: 0.193602, Graph Size: 6739, Queue Size: 16467
+Time: 1.27219, Objective: [0.203628, 0.39723], Boundary: 0.193602, Graph Size: 6772, Queue Size: 16348
+Time: 1.47468, Objective: [0.234695, 0.39723], Boundary: 0.162535, Graph Size: 8007, Queue Size: 14294
+Time: 1.58015, Objective: [0.234695, 0.39723], Boundary: 0.162535, Graph Size: 8754, Queue Size: 12094
+Time: 1.66764, Objective: [0.234695, 0.39723], Boundary: 0.162535, Graph Size: 9157, Queue Size: 10752
+Time: 1.7732, Objective: [0.234695, 0.39723], Boundary: 0.162535, Graph Size: 9651, Queue Size: 8840
+Time: 1.79896, Objective: [0.234695, 0.39723], Boundary: 0.162535, Graph Size: 9709, Queue Size: 8571
+Time: 1.81314, Objective: [0.234695, 0.39723], Boundary: 0.162535, Graph Size: 9772, Queue Size: 8171
+Time: 1.82681, Objective: [0.234695, 0.39723], Boundary: 0.162535, Graph Size: 9844, Queue Size: 7788
+Time: 1.97625, Objective: [0.234695, 0.39723], Boundary: 0.162535, Graph Size: 10344, Queue Size: 3608
+Time: 2.01632, Objective: [0.234695, 0.39723], Boundary: 0.162535, Graph Size: 10420, Queue Size: 2282
+Time: 2.09452, Objective: [0.234695, 0.39723], Boundary: 0.162535, Graph Size: 10471, Queue Size: 0
+Rashomon Set Construction Completed
+Training Duration: 2.101 seconds
+Number of Iterations: 39999 iterations
+Size of Graph: 10471 nodes
+Objective Boundary: [0.234695, 0.39723]
+Optimality Gap: 0.162535
+Cached subproblem models size: 7430
+Models calls: 20529
+Pruned combinations using scope: 2867
+Pruned leaves using scope: 154
+Pruned trivial extensions: 6793
+Max results size: 1632
+Re-explore by scope count: 4886
+Re-explore count: 4886
+Extraction Duration: 0.256 seconds
+Stored keys size: 1632
+Size of Rashomon Set: 9502
+Memory usage after extraction: 1203
+Insertion of Rashomon Set into Trie: 0.024 seconds
+Storing Models in: tmp/rashomon_subtrie_27_0_11_1_.json
+Output of Rashomon Set in Trie: 0.031 seconds
+Nodes Count in Model Set: 11351
+Using configuration: {
+  "balance": false,
+  "cancellation": true,
+  "cart_lookahead_depth": 4,
+  "continuous_feature_exchange": false,
+  "costs": "",
+  "covered_sets_thresholds": [],
+  "datatset_encoding": "",
+  "depth_budget": 4,
+  "diagnostics": false,
+  "feature_exchange": false,
+  "feature_transform": true,
+  "look_ahead": true,
+  "memory_checkpoints": [],
+  "minimum_captured_points": 0,
+  "model": "",
+  "model_limit": 10000,
+  "non_binary": false,
+  "output_accuracy_model_set": false,
+  "output_covered_sets": [],
+  "precision_limit": 0,
+  "profile": "",
+  "rashomon": true,
+  "rashomon_bound": 0.17246133089065552,
+  "rashomon_bound_adder": 0.0,
+  "rashomon_bound_multiplier": 0.009999999776482582,
+  "rashomon_ignore_trivial_extensions": true,
+  "rashomon_model": "",
+  "rashomon_model_set_suffix": "",
+  "rashomon_trie": "tmp/rashomon_subtrie_27_0_11_0_.json",
+  "regularization": 0.008843239396810532,
+  "rule_list": false,
+  "similar_support": false,
+  "stack_limit": 0,
+  "time_limit": 0,
+  "timing": "",
+  "trace": "",
+  "tree": "",
+  "uncertainty_tolerance": 0.0,
+  "upperbound": 0.0,
+  "verbose": true,
+  "worker_limit": 1
+}
+Initializing Optimization Framework
+Feature Index: 0, Feature Name: Online_boarding <= 1.5
+  Inferred Type: Redundant, Empirical Cardinality: 1, Optionality: 0
+Feature Index: 1, Feature Name: Online_boarding <= 3.5
+  Inferred Type: Binary, Empirical Cardinality: 2, Optionality: 0
+Feature Index: 2, Feature Name: Online_boarding <= 4.5
+  Inferred Type: Binary, Empirical Cardinality: 2, Optionality: 0
+Feature Index: 3, Feature Name: Type_of_Travel_Personal Travel <= 0.5
+  Inferred Type: Binary, Empirical Cardinality: 2, Optionality: 0
+Feature Index: 4, Feature Name: Class_Eco <= 0.5
+  Inferred Type: Binary, Empirical Cardinality: 2, Optionality: 0
+Feature Index: 5, Feature Name: Inflight_wifi_service <= 0.5
+  Inferred Type: Binary, Empirical Cardinality: 2, Optionality: 0
+Feature Index: 6, Feature Name: Inflight_wifi_service <= 1.5
+  Inferred Type: Binary, Empirical Cardinality: 2, Optionality: 0
+Feature Index: 7, Feature Name: Inflight_wifi_service <= 2.5
+  Inferred Type: Binary, Empirical Cardinality: 2, Optionality: 0
+Feature Index: 8, Feature Name: Inflight_wifi_service <= 3.5
+  Inferred Type: Binary, Empirical Cardinality: 2, Optionality: 0
+Feature Index: 9, Feature Name: Inflight_wifi_service <= 4.5
+  Inferred Type: Binary, Empirical Cardinality: 2, Optionality: 0
+Feature Index: 10, Feature Name: On_board_service <= 1.5
+  Inferred Type: Redundant, Empirical Cardinality: 1, Optionality: 0
+Feature Index: 11, Feature Name: On_board_service <= 2.5
+  Inferred Type: Redundant, Empirical Cardinality: 1, Optionality: 0
+Feature Index: 12, Feature Name: On_board_service <= 3.5
+  Inferred Type: Binary, Empirical Cardinality: 2, Optionality: 0
+Feature Index: 13, Feature Name: On_board_service <= 4.5
+  Inferred Type: Binary, Empirical Cardinality: 2, Optionality: 0
+Feature Index: 14, Feature Name: Customer_Type_disloyal Customer <= 0.5
+  Inferred Type: Binary, Empirical Cardinality: 2, Optionality: 0
+Feature Index: 15, Feature Name: Inflight_entertainment <= 0.5
+  Inferred Type: Redundant, Empirical Cardinality: 1, Optionality: 0
+Feature Index: 16, Feature Name: Inflight_entertainment <= 1.5
+  Inferred Type: Binary, Empirical Cardinality: 2, Optionality: 0
+Feature Index: 17, Feature Name: Inflight_entertainment <= 2.5
+  Inferred Type: Binary, Empirical Cardinality: 2, Optionality: 0
+Feature Index: 18, Feature Name: Inflight_entertainment <= 3.5
+  Inferred Type: Binary, Empirical Cardinality: 2, Optionality: 0
+Feature Index: 19, Feature Name: Inflight_entertainment <= 4.5
+  Inferred Type: Binary, Empirical Cardinality: 2, Optionality: 0
+Feature Index: 20, Feature Name: Checkin_service <= 1.5
+  Inferred Type: Binary, Empirical Cardinality: 2, Optionality: 0
+Feature Index: 21, Feature Name: Checkin_service <= 2.5
+  Inferred Type: Binary, Empirical Cardinality: 2, Optionality: 0
+Feature Index: 22, Feature Name: Checkin_service <= 4.5
+  Inferred Type: Binary, Empirical Cardinality: 2, Optionality: 0
+Feature Index: 23, Feature Name: Leg_room_service <= 0.5
+  Inferred Type: Binary, Empirical Cardinality: 2, Optionality: 0
+Feature Index: 24, Feature Name: Leg_room_service <= 1.5
+  Inferred Type: Binary, Empirical Cardinality: 2, Optionality: 0
+Feature Index: 25, Feature Name: Leg_room_service <= 3.5
+  Inferred Type: Binary, Empirical Cardinality: 2, Optionality: 0
+Feature Index: 26, Feature Name: Leg_room_service <= 4.5
+  Inferred Type: Binary, Empirical Cardinality: 2, Optionality: 0
+Feature Index: 27, Feature Name: Online_boarding <= 2.5
+  Inferred Type: Redundant, Empirical Cardinality: 1, Optionality: 0
+Feature Index: 28, Feature Name: satisfaction
+  Inferred Type: Categorical, Empirical Cardinality: 2, Optionality: 0
+Original Dataset Dimension: 66375 x 29
+Binary Dataset Dimension: 66375 x 25
+Dataset Dimensions: 66375 x 23 x 2
+Starting Extraction of Rashomon Set
+Using Rashomon bound: 0.172461
+Time: 0.011385, Objective: [0.0871248, 0.172461], Boundary: 0.0853365, Graph Size: 1, Queue Size: 46
+Time: 4.02276, Objective: [0.0959681, 0.172461], Boundary: 0.0764933, Graph Size: 5969, Queue Size: 16188
+Time: 4.13076, Objective: [0.0959681, 0.172461], Boundary: 0.0764933, Graph Size: 6190, Queue Size: 15903
+Time: 4.50328, Objective: [0.0959681, 0.172461], Boundary: 0.0764933, Graph Size: 7031, Queue Size: 14417
+Time: 4.56376, Objective: [0.0959681, 0.172461], Boundary: 0.0764933, Graph Size: 7230, Queue Size: 13902
+Time: 4.80905, Objective: [0.0959681, 0.172461], Boundary: 0.0764933, Graph Size: 7692, Queue Size: 13018
+Time: 5.09911, Objective: [0.0959681, 0.172461], Boundary: 0.0764933, Graph Size: 8327, Queue Size: 11560
+Time: 5.29936, Objective: [0.0959681, 0.172461], Boundary: 0.0764933, Graph Size: 8849, Queue Size: 9726
+Time: 5.49655, Objective: [0.0959681, 0.172461], Boundary: 0.0764933, Graph Size: 9100, Queue Size: 8681
+Time: 5.62001, Objective: [0.0959681, 0.172461], Boundary: 0.0764933, Graph Size: 9419, Queue Size: 7620
+Time: 5.95267, Objective: [0.0959681, 0.172461], Boundary: 0.0764933, Graph Size: 9935, Queue Size: 5765
+Time: 5.99585, Objective: [0.0959681, 0.172461], Boundary: 0.0764933, Graph Size: 9993, Queue Size: 5340
+Time: 6.25366, Objective: [0.0959681, 0.172461], Boundary: 0.0764933, Graph Size: 10291, Queue Size: 3410
+Time: 6.579, Objective: [0.0960886, 0.172461], Boundary: 0.0763727, Graph Size: 10470, Queue Size: 349
+Time: 6.59035, Objective: [0.0960886, 0.172461], Boundary: 0.0763727, Graph Size: 10470, Queue Size: 0
+Rashomon Set Construction Completed
+Training Duration: 6.591 seconds
+Number of Iterations: 29999 iterations
+Size of Graph: 10470 nodes
+Objective Boundary: [0.0960886, 0.172461]
+Optimality Gap: 0.0763727
+Cached subproblem models size: 6942
+Models calls: 17313
+Pruned combinations using scope: 1319
+Pruned leaves using scope: 233
+Pruned trivial extensions: 5992
+Max results size: 879
+Re-explore by scope count: 4237
+Re-explore count: 4237
+Extraction Duration: 0.728 seconds
+Stored keys size: 79
+Size of Rashomon Set: 196
+Memory usage after extraction: 3803
+Insertion of Rashomon Set into Trie: 0.002 seconds
+Storing Models in: tmp/rashomon_subtrie_27_0_11_0_.json
+Output of Rashomon Set in Trie: 0.01 seconds
+Nodes Count in Model Set: 456
+  0%|          | 4/861 [07:00<23:21:27, 98.12s/it]  1%|          | 5/861 [07:02<15:04:08, 63.37s/it]Using configuration: {
+  "balance": false,
+  "cancellation": true,
+  "cart_lookahead_depth": 4,
+  "continuous_feature_exchange": false,
+  "costs": "",
+  "covered_sets_thresholds": [],
+  "datatset_encoding": "",
+  "depth_budget": 4,
+  "diagnostics": false,
+  "feature_exchange": false,
+  "feature_transform": true,
+  "look_ahead": true,
+  "memory_checkpoints": [],
+  "minimum_captured_points": 0,
+  "model": "",
+  "model_limit": 10000,
+  "non_binary": false,
+  "output_accuracy_model_set": false,
+  "output_covered_sets": [],
+  "precision_limit": 0,
+  "profile": "",
+  "rashomon": true,
+  "rashomon_bound": 0.24117760360240936,
+  "rashomon_bound_adder": 0.0,
+  "rashomon_bound_multiplier": 0.009999999776482582,
+  "rashomon_ignore_trivial_extensions": true,
+  "rashomon_model": "",
+  "rashomon_model_set_suffix": "",
+  "rashomon_trie": "tmp/rashomon_subtrie_27_0_25_1_.json",
+  "regularization": 0.015406036749482155,
+  "rule_list": false,
+  "similar_support": false,
+  "stack_limit": 0,
+  "time_limit": 0,
+  "timing": "",
+  "trace": "",
+  "tree": "",
+  "uncertainty_tolerance": 0.0,
+  "upperbound": 0.0,
+  "verbose": true,
+  "worker_limit": 1
+}
+Initializing Optimization Framework
+Feature Index: 0, Feature Name: Online_boarding <= 1.5
+  Inferred Type: Redundant, Empirical Cardinality: 1, Optionality: 0
+Feature Index: 1, Feature Name: Online_boarding <= 3.5
+  Inferred Type: Binary, Empirical Cardinality: 2, Optionality: 0
+Feature Index: 2, Feature Name: Online_boarding <= 4.5
+  Inferred Type: Binary, Empirical Cardinality: 2, Optionality: 0
+Feature Index: 3, Feature Name: Type_of_Travel_Personal Travel <= 0.5
+  Inferred Type: Binary, Empirical Cardinality: 2, Optionality: 0
+Feature Index: 4, Feature Name: Class_Eco <= 0.5
+  Inferred Type: Binary, Empirical Cardinality: 2, Optionality: 0
+Feature Index: 5, Feature Name: Inflight_wifi_service <= 0.5
+  Inferred Type: Binary, Empirical Cardinality: 2, Optionality: 0
+Feature Index: 6, Feature Name: Inflight_wifi_service <= 1.5
+  Inferred Type: Binary, Empirical Cardinality: 2, Optionality: 0
+Feature Index: 7, Feature Name: Inflight_wifi_service <= 2.5
+  Inferred Type: Binary, Empirical Cardinality: 2, Optionality: 0
+Feature Index: 8, Feature Name: Inflight_wifi_service <= 3.5
+  Inferred Type: Binary, Empirical Cardinality: 2, Optionality: 0
+Feature Index: 9, Feature Name: Inflight_wifi_service <= 4.5
+  Inferred Type: Binary, Empirical Cardinality: 2, Optionality: 0
+Feature Index: 10, Feature Name: On_board_service <= 1.5
+  Inferred Type: Binary, Empirical Cardinality: 2, Optionality: 0
+Feature Index: 11, Feature Name: On_board_service <= 2.5
+  Inferred Type: Binary, Empirical Cardinality: 2, Optionality: 0
+Feature Index: 12, Feature Name: On_board_service <= 3.5
+  Inferred Type: Binary, Empirical Cardinality: 2, Optionality: 0
+Feature Index: 13, Feature Name: On_board_service <= 4.5
+  Inferred Type: Binary, Empirical Cardinality: 2, Optionality: 0
+Feature Index: 14, Feature Name: Customer_Type_disloyal Customer <= 0.5
+  Inferred Type: Binary, Empirical Cardinality: 2, Optionality: 0
+Feature Index: 15, Feature Name: Inflight_entertainment <= 0.5
+  Inferred Type: Binary, Empirical Cardinality: 2, Optionality: 0
+Feature Index: 16, Feature Name: Inflight_entertainment <= 1.5
+  Inferred Type: Binary, Empirical Cardinality: 2, Optionality: 0
+Feature Index: 17, Feature Name: Inflight_entertainment <= 2.5
+  Inferred Type: Binary, Empirical Cardinality: 2, Optionality: 0
+Feature Index: 18, Feature Name: Inflight_entertainment <= 3.5
+  Inferred Type: Binary, Empirical Cardinality: 2, Optionality: 0
+Feature Index: 19, Feature Name: Inflight_entertainment <= 4.5
+  Inferred Type: Binary, Empirical Cardinality: 2, Optionality: 0
+Feature Index: 20, Feature Name: Checkin_service <= 1.5
+  Inferred Type: Binary, Empirical Cardinality: 2, Optionality: 0
+Feature Index: 21, Feature Name: Checkin_service <= 2.5
+  Inferred Type: Binary, Empirical Cardinality: 2, Optionality: 0
+Feature Index: 22, Feature Name: Checkin_service <= 4.5
+  Inferred Type: Binary, Empirical Cardinality: 2, Optionality: 0
+Feature Index: 23, Feature Name: Leg_room_service <= 0.5
+  Inferred Type: Binary, Empirical Cardinality: 2, Optionality: 0
+Feature Index: 24, Feature Name: Leg_room_service <= 1.5
+  Inferred Type: Binary, Empirical Cardinality: 2, Optionality: 0
+Feature Index: 25, Feature Name: Leg_room_service <= 3.5
+  Inferred Type: Redundant, Empirical Cardinality: 1, Optionality: 0
+Feature Index: 26, Feature Name: Leg_room_service <= 4.5
+  Inferred Type: Redundant, Empirical Cardinality: 1, Optionality: 0
+Feature Index: 27, Feature Name: Online_boarding <= 2.5
+  Inferred Type: Redundant, Empirical Cardinality: 1, Optionality: 0
+Feature Index: 28, Feature Name: satisfaction
+  Inferred Type: Categorical, Empirical Cardinality: 2, Optionality: 0
+Original Dataset Dimension: 38100 x 29
+Binary Dataset Dimension: 38100 x 26
+Dataset Dimensions: 38100 x 24 x 2
+Starting Extraction of Rashomon Set
+Using Rashomon bound: 0.241178
+Time: 0.0049242, Objective: [0.127504, 0.241178], Boundary: 0.113673, Graph Size: 1, Queue Size: 48
+Time: 1.14852, Objective: [0.14291, 0.241178], Boundary: 0.0982674, Graph Size: 1070, Queue Size: 18427
+Time: 1.60074, Objective: [0.14291, 0.241178], Boundary: 0.0982674, Graph Size: 3289, Queue Size: 19271
+Time: 1.70223, Objective: [0.14291, 0.241178], Boundary: 0.0982674, Graph Size: 4081, Queue Size: 18380
+Time: 1.83938, Objective: [0.14291, 0.241178], Boundary: 0.0982674, Graph Size: 4865, Queue Size: 17387
+Time: 1.91315, Objective: [0.14291, 0.241178], Boundary: 0.0982674, Graph Size: 5355, Queue Size: 16835
+Time: 2.0564, Objective: [0.14291, 0.241178], Boundary: 0.0982674, Graph Size: 6117, Queue Size: 15978
+Time: 2.23808, Objective: [0.14291, 0.241178], Boundary: 0.0982674, Graph Size: 6981, Queue Size: 14668
+Time: 2.4461, Objective: [0.14291, 0.241178], Boundary: 0.0982674, Graph Size: 7895, Queue Size: 12976
+Time: 2.49583, Objective: [0.14291, 0.241178], Boundary: 0.0982674, Graph Size: 8313, Queue Size: 12032
+Time: 2.60563, Objective: [0.14291, 0.241178], Boundary: 0.0982674, Graph Size: 9053, Queue Size: 9921
+Time: 2.64392, Objective: [0.14291, 0.241178], Boundary: 0.0982674, Graph Size: 9247, Queue Size: 9245
+Time: 2.67422, Objective: [0.14291, 0.241178], Boundary: 0.0982674, Graph Size: 9378, Queue Size: 8714
+Time: 2.74992, Objective: [0.14291, 0.241178], Boundary: 0.0982674, Graph Size: 9676, Queue Size: 7350
+Time: 2.76696, Objective: [0.14291, 0.241178], Boundary: 0.0982674, Graph Size: 9721, Queue Size: 7070
+Time: 2.80795, Objective: [0.14291, 0.241178], Boundary: 0.0982674, Graph Size: 9836, Queue Size: 6307
+Time: 2.96199, Objective: [0.14291, 0.241178], Boundary: 0.0982674, Graph Size: 10206, Queue Size: 3883
+Time: 2.97341, Objective: [0.14291, 0.241178], Boundary: 0.0982674, Graph Size: 10226, Queue Size: 3687
+Time: 3.014, Objective: [0.14291, 0.241178], Boundary: 0.0982674, Graph Size: 10267, Queue Size: 2910
+Time: 3.1805, Objective: [0.14291, 0.241178], Boundary: 0.0982674, Graph Size: 10504, Queue Size: 0
+Rashomon Set Construction Completed
+Training Duration: 3.192 seconds
+Number of Iterations: 29999 iterations
+Size of Graph: 10504 nodes
+Objective Boundary: [0.14291, 0.241178]
+Optimality Gap: 0.0982674
+Cached subproblem models size: 6557
+Models calls: 17085
+Pruned combinations using scope: 623
+Pruned leaves using scope: 378
+Pruned trivial extensions: 5676
+Max results size: 900
+Re-explore by scope count: 4124
+Re-explore count: 4124
+Extraction Duration: 0.361 seconds
+Stored keys size: 4
+Size of Rashomon Set: 7
+Memory usage after extraction: 1791
+Insertion of Rashomon Set into Trie: 0 seconds
+Storing Models in: tmp/rashomon_subtrie_27_0_25_1_.json
+Output of Rashomon Set in Trie: 0.002 seconds
+Nodes Count in Model Set: 30
+Using configuration: {
+  "balance": false,
+  "cancellation": true,
+  "cart_lookahead_depth": 4,
+  "continuous_feature_exchange": false,
+  "costs": "",
+  "covered_sets_thresholds": [],
+  "datatset_encoding": "",
+  "depth_budget": 4,
+  "diagnostics": false,
+  "feature_exchange": false,
+  "feature_transform": true,
+  "look_ahead": true,
+  "memory_checkpoints": [],
+  "minimum_captured_points": 0,
+  "model": "",
+  "model_limit": 10000,
+  "non_binary": false,
+  "output_accuracy_model_set": false,
+  "output_covered_sets": [],
+  "precision_limit": 0,
+  "profile": "",
+  "rashomon": true,
+  "rashomon_bound": 0.18027372658252716,
+  "rashomon_bound_adder": 0.0,
+  "rashomon_bound_multiplier": 0.009999999776482582,
+  "rashomon_ignore_trivial_extensions": true,
+  "rashomon_model": "",
+  "rashomon_model_set_suffix": "",
+  "rashomon_trie": "tmp/rashomon_subtrie_27_0_25_0_.json",
+  "regularization": 0.012376283295452595,
+  "rule_list": false,
+  "similar_support": false,
+  "stack_limit": 0,
+  "time_limit": 0,
+  "timing": "",
+  "trace": "",
+  "tree": "",
+  "uncertainty_tolerance": 0.0,
+  "upperbound": 0.0,
+  "verbose": true,
+  "worker_limit": 1
+}
+Initializing Optimization Framework
+Feature Index: 0, Feature Name: Online_boarding <= 1.5
+  Inferred Type: Redundant, Empirical Cardinality: 1, Optionality: 0
+Feature Index: 1, Feature Name: Online_boarding <= 3.5
+  Inferred Type: Binary, Empirical Cardinality: 2, Optionality: 0
+Feature Index: 2, Feature Name: Online_boarding <= 4.5
+  Inferred Type: Binary, Empirical Cardinality: 2, Optionality: 0
+Feature Index: 3, Feature Name: Type_of_Travel_Personal Travel <= 0.5
+  Inferred Type: Binary, Empirical Cardinality: 2, Optionality: 0
+Feature Index: 4, Feature Name: Class_Eco <= 0.5
+  Inferred Type: Binary, Empirical Cardinality: 2, Optionality: 0
+Feature Index: 5, Feature Name: Inflight_wifi_service <= 0.5
+  Inferred Type: Binary, Empirical Cardinality: 2, Optionality: 0
+Feature Index: 6, Feature Name: Inflight_wifi_service <= 1.5
+  Inferred Type: Binary, Empirical Cardinality: 2, Optionality: 0
+Feature Index: 7, Feature Name: Inflight_wifi_service <= 2.5
+  Inferred Type: Binary, Empirical Cardinality: 2, Optionality: 0
+Feature Index: 8, Feature Name: Inflight_wifi_service <= 3.5
+  Inferred Type: Binary, Empirical Cardinality: 2, Optionality: 0
+Feature Index: 9, Feature Name: Inflight_wifi_service <= 4.5
+  Inferred Type: Binary, Empirical Cardinality: 2, Optionality: 0
+Feature Index: 10, Feature Name: On_board_service <= 1.5
+  Inferred Type: Binary, Empirical Cardinality: 2, Optionality: 0
+Feature Index: 11, Feature Name: On_board_service <= 2.5
+  Inferred Type: Binary, Empirical Cardinality: 2, Optionality: 0
+Feature Index: 12, Feature Name: On_board_service <= 3.5
+  Inferred Type: Binary, Empirical Cardinality: 2, Optionality: 0
+Feature Index: 13, Feature Name: On_board_service <= 4.5
+  Inferred Type: Binary, Empirical Cardinality: 2, Optionality: 0
+Feature Index: 14, Feature Name: Customer_Type_disloyal Customer <= 0.5
+  Inferred Type: Binary, Empirical Cardinality: 2, Optionality: 0
+Feature Index: 15, Feature Name: Inflight_entertainment <= 0.5
+  Inferred Type: Redundant, Empirical Cardinality: 1, Optionality: 0
+Feature Index: 16, Feature Name: Inflight_entertainment <= 1.5
+  Inferred Type: Binary, Empirical Cardinality: 2, Optionality: 0
+Feature Index: 17, Feature Name: Inflight_entertainment <= 2.5
+  Inferred Type: Binary, Empirical Cardinality: 2, Optionality: 0
+Feature Index: 18, Feature Name: Inflight_entertainment <= 3.5
+  Inferred Type: Binary, Empirical Cardinality: 2, Optionality: 0
+Feature Index: 19, Feature Name: Inflight_entertainment <= 4.5
+  Inferred Type: Binary, Empirical Cardinality: 2, Optionality: 0
+Feature Index: 20, Feature Name: Checkin_service <= 1.5
+  Inferred Type: Binary, Empirical Cardinality: 2, Optionality: 0
+Feature Index: 21, Feature Name: Checkin_service <= 2.5
+  Inferred Type: Binary, Empirical Cardinality: 2, Optionality: 0
+Feature Index: 22, Feature Name: Checkin_service <= 4.5
+  Inferred Type: Binary, Empirical Cardinality: 2, Optionality: 0
+Feature Index: 23, Feature Name: Leg_room_service <= 0.5
+  Inferred Type: Redundant, Empirical Cardinality: 1, Optionality: 0
+Feature Index: 24, Feature Name: Leg_room_service <= 1.5
+  Inferred Type: Redundant, Empirical Cardinality: 1, Optionality: 0
+Feature Index: 25, Feature Name: Leg_room_service <= 3.5
+  Inferred Type: Redundant, Empirical Cardinality: 1, Optionality: 0
+Feature Index: 26, Feature Name: Leg_room_service <= 4.5
+  Inferred Type: Binary, Empirical Cardinality: 2, Optionality: 0
+Feature Index: 27, Feature Name: Online_boarding <= 2.5
+  Inferred Type: Redundant, Empirical Cardinality: 1, Optionality: 0
+Feature Index: 28, Feature Name: satisfaction
+  Inferred Type: Categorical, Empirical Cardinality: 2, Optionality: 0
+Original Dataset Dimension: 47427 x 29
+Binary Dataset Dimension: 47427 x 24
+Dataset Dimensions: 47427 x 22 x 2
+Starting Extraction of Rashomon Set
+Using Rashomon bound: 0.180274
+Time: 0.00458815, Objective: [0.0893565, 0.180274], Boundary: 0.0909172, Graph Size: 1, Queue Size: 44
+Time: 2.12264, Objective: [0.0893565, 0.180274], Boundary: 0.0909172, Graph Size: 5947, Queue Size: 15438
+Time: 2.61677, Objective: [0.101733, 0.180274], Boundary: 0.078541, Graph Size: 7765, Queue Size: 11619
+Time: 2.69322, Objective: [0.101733, 0.180274], Boundary: 0.078541, Graph Size: 8006, Queue Size: 11126
+Time: 2.85622, Objective: [0.101733, 0.180274], Boundary: 0.078541, Graph Size: 8781, Queue Size: 8536
+Time: 2.97134, Objective: [0.101733, 0.180274], Boundary: 0.078541, Graph Size: 9034, Queue Size: 7433
+Time: 3.22429, Objective: [0.102344, 0.180274], Boundary: 0.0779295, Graph Size: 9619, Queue Size: 4550
+Time: 3.49638, Objective: [0.102344, 0.180274], Boundary: 0.0779295, Graph Size: 9903, Queue Size: 0
+Rashomon Set Construction Completed
+Training Duration: 3.511 seconds
+Number of Iterations: 29999 iterations
+Size of Graph: 9903 nodes
+Objective Boundary: [0.102344, 0.180274]
+Optimality Gap: 0.0779295
+Cached subproblem models size: 6786
+Models calls: 16210
+Pruned combinations using scope: 336
+Pruned leaves using scope: 155
+Pruned trivial extensions: 5738
+Max results size: 610
+Re-explore by scope count: 2949
+Re-explore count: 2949
+Extraction Duration: 0.404 seconds
+Stored keys size: 413
+Size of Rashomon Set: 1122
+Memory usage after extraction: 2108
+Insertion of Rashomon Set into Trie: 0.004 seconds
+Storing Models in: tmp/rashomon_subtrie_27_0_25_0_.json
+Output of Rashomon Set in Trie: 0.008 seconds
+Nodes Count in Model Set: 1767
+  1%|          | 6/861 [07:37<12:44:12, 53.63s/it]Using configuration: {
+  "balance": false,
+  "cancellation": true,
+  "cart_lookahead_depth": 4,
+  "continuous_feature_exchange": false,
+  "costs": "",
+  "covered_sets_thresholds": [],
+  "datatset_encoding": "",
+  "depth_budget": 4,
+  "diagnostics": false,
+  "feature_exchange": false,
+  "feature_transform": true,
+  "look_ahead": true,
+  "memory_checkpoints": [],
+  "minimum_captured_points": 0,
+  "model": "",
+  "model_limit": 10000,
+  "non_binary": false,
+  "output_accuracy_model_set": false,
+  "output_covered_sets": [],
+  "precision_limit": 0,
+  "profile": "",
+  "rashomon": true,
+  "rashomon_bound": 0.1518995612859726,
+  "rashomon_bound_adder": 0.0,
+  "rashomon_bound_multiplier": 0.009999999776482582,
+  "rashomon_ignore_trivial_extensions": true,
+  "rashomon_model": "",
+  "rashomon_model_set_suffix": "",
+  "rashomon_trie": "tmp/rashomon_subtrie_27_1_7_1_.json",
+  "regularization": 0.022012751549482346,
+  "rule_list": false,
+  "similar_support": false,
+  "stack_limit": 0,
+  "time_limit": 0,
+  "timing": "",
+  "trace": "",
+  "tree": "",
+  "uncertainty_tolerance": 0.0,
+  "upperbound": 0.0,
+  "verbose": true,
+  "worker_limit": 1
+}
+Initializing Optimization Framework
+Feature Index: 0, Feature Name: Online_boarding <= 1.5
+  Inferred Type: Binary, Empirical Cardinality: 2, Optionality: 0
+Feature Index: 1, Feature Name: Online_boarding <= 3.5
+  Inferred Type: Redundant, Empirical Cardinality: 1, Optionality: 0
+Feature Index: 2, Feature Name: Online_boarding <= 4.5
+  Inferred Type: Redundant, Empirical Cardinality: 1, Optionality: 0
+Feature Index: 3, Feature Name: Type_of_Travel_Personal Travel <= 0.5
+  Inferred Type: Binary, Empirical Cardinality: 2, Optionality: 0
+Feature Index: 4, Feature Name: Class_Eco <= 0.5
+  Inferred Type: Binary, Empirical Cardinality: 2, Optionality: 0
+Feature Index: 5, Feature Name: Inflight_wifi_service <= 0.5
+  Inferred Type: Binary, Empirical Cardinality: 2, Optionality: 0
+Feature Index: 6, Feature Name: Inflight_wifi_service <= 1.5
+  Inferred Type: Binary, Empirical Cardinality: 2, Optionality: 0
+Feature Index: 7, Feature Name: Inflight_wifi_service <= 2.5
+  Inferred Type: Redundant, Empirical Cardinality: 1, Optionality: 0
+Feature Index: 8, Feature Name: Inflight_wifi_service <= 3.5
+  Inferred Type: Redundant, Empirical Cardinality: 1, Optionality: 0
+Feature Index: 9, Feature Name: Inflight_wifi_service <= 4.5
+  Inferred Type: Redundant, Empirical Cardinality: 1, Optionality: 0
+Feature Index: 10, Feature Name: On_board_service <= 1.5
+  Inferred Type: Binary, Empirical Cardinality: 2, Optionality: 0
+Feature Index: 11, Feature Name: On_board_service <= 2.5
+  Inferred Type: Binary, Empirical Cardinality: 2, Optionality: 0
+Feature Index: 12, Feature Name: On_board_service <= 3.5
+  Inferred Type: Binary, Empirical Cardinality: 2, Optionality: 0
+Feature Index: 13, Feature Name: On_board_service <= 4.5
+  Inferred Type: Binary, Empirical Cardinality: 2, Optionality: 0
+Feature Index: 14, Feature Name: Customer_Type_disloyal Customer <= 0.5
+  Inferred Type: Binary, Empirical Cardinality: 2, Optionality: 0
+Feature Index: 15, Feature Name: Inflight_entertainment <= 0.5
+  Inferred Type: Binary, Empirical Cardinality: 2, Optionality: 0
+Feature Index: 16, Feature Name: Inflight_entertainment <= 1.5
+  Inferred Type: Binary, Empirical Cardinality: 2, Optionality: 0
+Feature Index: 17, Feature Name: Inflight_entertainment <= 2.5
+  Inferred Type: Binary, Empirical Cardinality: 2, Optionality: 0
+Feature Index: 18, Feature Name: Inflight_entertainment <= 3.5
+  Inferred Type: Binary, Empirical Cardinality: 2, Optionality: 0
+Feature Index: 19, Feature Name: Inflight_entertainment <= 4.5
+  Inferred Type: Binary, Empirical Cardinality: 2, Optionality: 0
+Feature Index: 20, Feature Name: Checkin_service <= 1.5
+  Inferred Type: Binary, Empirical Cardinality: 2, Optionality: 0
+Feature Index: 21, Feature Name: Checkin_service <= 2.5
+  Inferred Type: Binary, Empirical Cardinality: 2, Optionality: 0
+Feature Index: 22, Feature Name: Checkin_service <= 4.5
+  Inferred Type: Binary, Empirical Cardinality: 2, Optionality: 0
+Feature Index: 23, Feature Name: Leg_room_service <= 0.5
+  Inferred Type: Binary, Empirical Cardinality: 2, Optionality: 0
+Feature Index: 24, Feature Name: Leg_room_service <= 1.5
+  Inferred Type: Binary, Empirical Cardinality: 2, Optionality: 0
+Feature Index: 25, Feature Name: Leg_room_service <= 3.5
+  Inferred Type: Binary, Empirical Cardinality: 2, Optionality: 0
+Feature Index: 26, Feature Name: Leg_room_service <= 4.5
+  Inferred Type: Binary, Empirical Cardinality: 2, Optionality: 0
+Feature Index: 27, Feature Name: Online_boarding <= 2.5
+  Inferred Type: Redundant, Empirical Cardinality: 1, Optionality: 0
+Feature Index: 28, Feature Name: satisfaction
+  Inferred Type: Categorical, Empirical Cardinality: 2, Optionality: 0
+Original Dataset Dimension: 26665 x 29
+Binary Dataset Dimension: 26665 x 24
+Dataset Dimensions: 26665 x 22 x 2
+Starting Extraction of Rashomon Set
+Using Rashomon bound: 0.1519
+Time: 0.00174794, Objective: [0.0841894, 0.1519], Boundary: 0.0677102, Graph Size: 1, Queue Size: 44
+Time: 0.46131, Objective: [0.101629, 0.1519], Boundary: 0.0502705, Graph Size: 1160, Queue Size: 5217
+Time: 1.10082, Objective: [0.101629, 0.1519], Boundary: 0.0502705, Graph Size: 4919, Queue Size: 4304
+Time: 1.24261, Objective: [0.101629, 0.1519], Boundary: 0.0502705, Graph Size: 5681, Queue Size: 0
+Rashomon Set Construction Completed
+Training Duration: 1.247 seconds
+Number of Iterations: 19999 iterations
+Size of Graph: 5681 nodes
+Objective Boundary: [0.101629, 0.1519]
+Optimality Gap: 0.0502705
+Cached subproblem models size: 2126
+Models calls: 4130
+Pruned combinations using scope: 22
+Pruned leaves using scope: 250
+Pruned trivial extensions: 1700
+Max results size: 30
+Re-explore by scope count: 652
+Re-explore count: 652
+Extraction Duration: 0.064 seconds
+Stored keys size: 30
+Size of Rashomon Set: 77
+Memory usage after extraction: 1324
+Insertion of Rashomon Set into Trie: 0 seconds
+Storing Models in: tmp/rashomon_subtrie_27_1_7_1_.json
+Output of Rashomon Set in Trie: 0.001 seconds
+Nodes Count in Model Set: 282
+Using configuration: {
+  "balance": false,
+  "cancellation": true,
+  "cart_lookahead_depth": 4,
+  "continuous_feature_exchange": false,
+  "costs": "",
+  "covered_sets_thresholds": [],
+  "datatset_encoding": "",
+  "depth_budget": 4,
+  "diagnostics": false,
+  "feature_exchange": false,
+  "feature_transform": true,
+  "look_ahead": true,
+  "memory_checkpoints": [],
+  "minimum_captured_points": 0,
+  "model": "",
+  "model_limit": 10000,
+  "non_binary": false,
+  "output_accuracy_model_set": false,
+  "output_covered_sets": [],
+  "precision_limit": 0,
+  "profile": "",
+  "rashomon": true,
+  "rashomon_bound": 0.5796821713447571,
+  "rashomon_bound_adder": 0.0,
+  "rashomon_bound_multiplier": 0.009999999776482582,
+  "rashomon_ignore_trivial_extensions": true,
+  "rashomon_model": "",
+  "rashomon_model_set_suffix": "",
+  "rashomon_trie": "tmp/rashomon_subtrie_27_1_7_0_.json",
+  "regularization": 0.10000000149011612,
+  "rule_list": false,
+  "similar_support": false,
+  "stack_limit": 0,
+  "time_limit": 0,
+  "timing": "",
+  "trace": "",
+  "tree": "",
+  "uncertainty_tolerance": 0.0,
+  "upperbound": 0.0,
+  "verbose": true,
+  "worker_limit": 1
+}
+Initializing Optimization Framework
+Feature Index: 0, Feature Name: Online_boarding <= 1.5
+  Inferred Type: Binary, Empirical Cardinality: 2, Optionality: 0
+Feature Index: 1, Feature Name: Online_boarding <= 3.5
+  Inferred Type: Redundant, Empirical Cardinality: 1, Optionality: 0
+Feature Index: 2, Feature Name: Online_boarding <= 4.5
+  Inferred Type: Redundant, Empirical Cardinality: 1, Optionality: 0
+Feature Index: 3, Feature Name: Type_of_Travel_Personal Travel <= 0.5
+  Inferred Type: Binary, Empirical Cardinality: 2, Optionality: 0
+Feature Index: 4, Feature Name: Class_Eco <= 0.5
+  Inferred Type: Binary, Empirical Cardinality: 2, Optionality: 0
+Feature Index: 5, Feature Name: Inflight_wifi_service <= 0.5
+  Inferred Type: Redundant, Empirical Cardinality: 1, Optionality: 0
+Feature Index: 6, Feature Name: Inflight_wifi_service <= 1.5
+  Inferred Type: Redundant, Empirical Cardinality: 1, Optionality: 0
+Feature Index: 7, Feature Name: Inflight_wifi_service <= 2.5
+  Inferred Type: Redundant, Empirical Cardinality: 1, Optionality: 0
+Feature Index: 8, Feature Name: Inflight_wifi_service <= 3.5
+  Inferred Type: Binary, Empirical Cardinality: 2, Optionality: 0
+Feature Index: 9, Feature Name: Inflight_wifi_service <= 4.5
+  Inferred Type: Binary, Empirical Cardinality: 2, Optionality: 0
+Feature Index: 10, Feature Name: On_board_service <= 1.5
+  Inferred Type: Binary, Empirical Cardinality: 2, Optionality: 0
+Feature Index: 11, Feature Name: On_board_service <= 2.5
+  Inferred Type: Binary, Empirical Cardinality: 2, Optionality: 0
+Feature Index: 12, Feature Name: On_board_service <= 3.5
+  Inferred Type: Binary, Empirical Cardinality: 2, Optionality: 0
+Feature Index: 13, Feature Name: On_board_service <= 4.5
+  Inferred Type: Binary, Empirical Cardinality: 2, Optionality: 0
+Feature Index: 14, Feature Name: Customer_Type_disloyal Customer <= 0.5
+  Inferred Type: Binary, Empirical Cardinality: 2, Optionality: 0
+Feature Index: 15, Feature Name: Inflight_entertainment <= 0.5
+  Inferred Type: Binary, Empirical Cardinality: 2, Optionality: 0
+Feature Index: 16, Feature Name: Inflight_entertainment <= 1.5
+  Inferred Type: Binary, Empirical Cardinality: 2, Optionality: 0
+Feature Index: 17, Feature Name: Inflight_entertainment <= 2.5
+  Inferred Type: Binary, Empirical Cardinality: 2, Optionality: 0
+Feature Index: 18, Feature Name: Inflight_entertainment <= 3.5
+  Inferred Type: Binary, Empirical Cardinality: 2, Optionality: 0
+Feature Index: 19, Feature Name: Inflight_entertainment <= 4.5
+  Inferred Type: Binary, Empirical Cardinality: 2, Optionality: 0
+Feature Index: 20, Feature Name: Checkin_service <= 1.5
+  Inferred Type: Binary, Empirical Cardinality: 2, Optionality: 0
+Feature Index: 21, Feature Name: Checkin_service <= 2.5
+  Inferred Type: Binary, Empirical Cardinality: 2, Optionality: 0
+Feature Index: 22, Feature Name: Checkin_service <= 4.5
+  Inferred Type: Binary, Empirical Cardinality: 2, Optionality: 0
+Feature Index: 23, Feature Name: Leg_room_service <= 0.5
+  Inferred Type: Binary, Empirical Cardinality: 2, Optionality: 0
+Feature Index: 24, Feature Name: Leg_room_service <= 1.5
+  Inferred Type: Binary, Empirical Cardinality: 2, Optionality: 0
+Feature Index: 25, Feature Name: Leg_room_service <= 3.5
+  Inferred Type: Binary, Empirical Cardinality: 2, Optionality: 0
+Feature Index: 26, Feature Name: Leg_room_service <= 4.5
+  Inferred Type: Binary, Empirical Cardinality: 2, Optionality: 0
+Feature Index: 27, Feature Name: Online_boarding <= 2.5
+  Inferred Type: Redundant, Empirical Cardinality: 1, Optionality: 0
+Feature Index: 28, Feature Name: satisfaction
+  Inferred Type: Categorical, Empirical Cardinality: 2, Optionality: 0
+Original Dataset Dimension: 5202 x 29
+Binary Dataset Dimension: 5202 x 24
+Dataset Dimensions: 5202 x 22 x 2
+Starting Extraction of Rashomon Set
+Using Rashomon bound: 0.579682
+Time: 0.000787476, Objective: [0.365552, 0.579682], Boundary: 0.21413, Graph Size: 1, Queue Size: 44
+Time: 0.0824425, Objective: [0.432603, 0.579682], Boundary: 0.147079, Graph Size: 514, Queue Size: 1262
+Time: 0.212592, Objective: [0.432603, 0.579682], Boundary: 0.147079, Graph Size: 3011, Queue Size: 0
+Rashomon Set Construction Completed
+Training Duration: 0.213 seconds
+Number of Iterations: 9999 iterations
+Size of Graph: 3011 nodes
+Objective Boundary: [0.432603, 0.579682]
+Optimality Gap: 0.147079
+Cached subproblem models size: 683
+Models calls: 923
+Pruned combinations using scope: 28
+Pruned leaves using scope: 160
+Pruned trivial extensions: 188
+Max results size: 53
+Re-explore by scope count: 64
+Re-explore count: 64
+Extraction Duration: 0.008 seconds
+Stored keys size: 53
+Size of Rashomon Set: 90
+Memory usage after extraction: 1262
+Insertion of Rashomon Set into Trie: 0 seconds
+Storing Models in: tmp/rashomon_subtrie_27_1_7_0_.json
+Output of Rashomon Set in Trie: 0 seconds
+Nodes Count in Model Set: 302
+Using configuration: {
+  "balance": false,
+  "cancellation": true,
+  "cart_lookahead_depth": 4,
+  "continuous_feature_exchange": false,
+  "costs": "",
+  "covered_sets_thresholds": [],
+  "datatset_encoding": "",
+  "depth_budget": 4,
+  "diagnostics": false,
+  "feature_exchange": false,
+  "feature_transform": true,
+  "look_ahead": true,
+  "memory_checkpoints": [],
+  "minimum_captured_points": 0,
+  "model": "",
+  "model_limit": 10000,
+  "non_binary": false,
+  "output_accuracy_model_set": false,
+  "output_covered_sets": [],
+  "precision_limit": 0,
+  "profile": "",
+  "rashomon": true,
+  "rashomon_bound": 0.3390554189682007,
+  "rashomon_bound_adder": 0.0,
+  "rashomon_bound_multiplier": 0.009999999776482582,
+  "rashomon_ignore_trivial_extensions": true,
+  "rashomon_model": "",
+  "rashomon_model_set_suffix": "",
+  "rashomon_trie": "tmp/rashomon_subtrie_27_0_17_1_.json",
+  "regularization": 0.033061280846595764,
+  "rule_list": false,
+  "similar_support": false,
+  "stack_limit": 0,
+  "time_limit": 0,
+  "timing": "",
+  "trace": "",
+  "tree": "",
+  "uncertainty_tolerance": 0.0,
+  "upperbound": 0.0,
+  "verbose": true,
+  "worker_limit": 1
+}
+Initializing Optimization Framework
+Feature Index: 0, Feature Name: Online_boarding <= 1.5
+  Inferred Type: Redundant, Empirical Cardinality: 1, Optionality: 0
+Feature Index: 1, Feature Name: Online_boarding <= 3.5
+  Inferred Type: Binary, Empirical Cardinality: 2, Optionality: 0
+Feature Index: 2, Feature Name: Online_boarding <= 4.5
+  Inferred Type: Binary, Empirical Cardinality: 2, Optionality: 0
+Feature Index: 3, Feature Name: Type_of_Travel_Personal Travel <= 0.5
+  Inferred Type: Binary, Empirical Cardinality: 2, Optionality: 0
+Feature Index: 4, Feature Name: Class_Eco <= 0.5
+  Inferred Type: Binary, Empirical Cardinality: 2, Optionality: 0
+Feature Index: 5, Feature Name: Inflight_wifi_service <= 0.5
+  Inferred Type: Binary, Empirical Cardinality: 2, Optionality: 0
+Feature Index: 6, Feature Name: Inflight_wifi_service <= 1.5
+  Inferred Type: Binary, Empirical Cardinality: 2, Optionality: 0
+Feature Index: 7, Feature Name: Inflight_wifi_service <= 2.5
+  Inferred Type: Binary, Empirical Cardinality: 2, Optionality: 0
+Feature Index: 8, Feature Name: Inflight_wifi_service <= 3.5
+  Inferred Type: Binary, Empirical Cardinality: 2, Optionality: 0
+Feature Index: 9, Feature Name: Inflight_wifi_service <= 4.5
+  Inferred Type: Binary, Empirical Cardinality: 2, Optionality: 0
+Feature Index: 10, Feature Name: On_board_service <= 1.5
+  Inferred Type: Binary, Empirical Cardinality: 2, Optionality: 0
+Feature Index: 11, Feature Name: On_board_service <= 2.5
+  Inferred Type: Binary, Empirical Cardinality: 2, Optionality: 0
+Feature Index: 12, Feature Name: On_board_service <= 3.5
+  Inferred Type: Binary, Empirical Cardinality: 2, Optionality: 0
+Feature Index: 13, Feature Name: On_board_service <= 4.5
+  Inferred Type: Binary, Empirical Cardinality: 2, Optionality: 0
+Feature Index: 14, Feature Name: Customer_Type_disloyal Customer <= 0.5
+  Inferred Type: Binary, Empirical Cardinality: 2, Optionality: 0
+Feature Index: 15, Feature Name: Inflight_entertainment <= 0.5
+  Inferred Type: Binary, Empirical Cardinality: 2, Optionality: 0
+Feature Index: 16, Feature Name: Inflight_entertainment <= 1.5
+  Inferred Type: Binary, Empirical Cardinality: 2, Optionality: 0
+Feature Index: 17, Feature Name: Inflight_entertainment <= 2.5
+  Inferred Type: Redundant, Empirical Cardinality: 1, Optionality: 0
+Feature Index: 18, Feature Name: Inflight_entertainment <= 3.5
+  Inferred Type: Redundant, Empirical Cardinality: 1, Optionality: 0
+Feature Index: 19, Feature Name: Inflight_entertainment <= 4.5
+  Inferred Type: Redundant, Empirical Cardinality: 1, Optionality: 0
+Feature Index: 20, Feature Name: Checkin_service <= 1.5
+  Inferred Type: Binary, Empirical Cardinality: 2, Optionality: 0
+Feature Index: 21, Feature Name: Checkin_service <= 2.5
+  Inferred Type: Binary, Empirical Cardinality: 2, Optionality: 0
+Feature Index: 22, Feature Name: Checkin_service <= 4.5
+  Inferred Type: Binary, Empirical Cardinality: 2, Optionality: 0
+Feature Index: 23, Feature Name: Leg_room_service <= 0.5
+  Inferred Type: Binary, Empirical Cardinality: 2, Optionality: 0
+Feature Index: 24, Feature Name: Leg_room_service <= 1.5
+  Inferred Type: Binary, Empirical Cardinality: 2, Optionality: 0
+Feature Index: 25, Feature Name: Leg_room_service <= 3.5
+  Inferred Type: Binary, Empirical Cardinality: 2, Optionality: 0
+Feature Index: 26, Feature Name: Leg_room_service <= 4.5
+  Inferred Type: Binary, Empirical Cardinality: 2, Optionality: 0
+Feature Index: 27, Feature Name: Online_boarding <= 2.5
+  Inferred Type: Redundant, Empirical Cardinality: 1, Optionality: 0
+Feature Index: 28, Feature Name: satisfaction
+  Inferred Type: Categorical, Empirical Cardinality: 2, Optionality: 0
+Original Dataset Dimension: 17754 x 29
+Binary Dataset Dimension: 17754 x 25
+Dataset Dimensions: 17754 x 23 x 2
+Starting Extraction of Rashomon Set
+Using Rashomon bound: 0.339055
+Time: 0.0016946, Objective: [0.175786, 0.339055], Boundary: 0.163269, Graph Size: 1, Queue Size: 46
+Time: 0.468985, Objective: [0.208848, 0.339055], Boundary: 0.130208, Graph Size: 1750, Queue Size: 16396
+Time: 0.555668, Objective: [0.208848, 0.339055], Boundary: 0.130208, Graph Size: 2576, Queue Size: 17151
+Time: 0.651336, Objective: [0.208848, 0.339055], Boundary: 0.130208, Graph Size: 3690, Queue Size: 16784
+Time: 0.663913, Objective: [0.208848, 0.339055], Boundary: 0.130208, Graph Size: 3948, Queue Size: 16299
+Time: 0.836033, Objective: [0.208848, 0.339055], Boundary: 0.130208, Graph Size: 5564, Queue Size: 15291
+Time: 0.848374, Objective: [0.208848, 0.339055], Boundary: 0.130208, Graph Size: 5804, Queue Size: 14830
+Time: 1.03232, Objective: [0.208848, 0.339055], Boundary: 0.130208, Graph Size: 7571, Queue Size: 11392
+Time: 1.05184, Objective: [0.208848, 0.339055], Boundary: 0.130208, Graph Size: 7809, Queue Size: 10688
+Time: 1.17174, Objective: [0.208848, 0.339055], Boundary: 0.130208, Graph Size: 8818, Queue Size: 7472
+Time: 1.19516, Objective: [0.208848, 0.339055], Boundary: 0.130208, Graph Size: 8997, Queue Size: 6555
+Time: 1.37285, Objective: [0.208848, 0.339055], Boundary: 0.130208, Graph Size: 9598, Queue Size: 0
+Rashomon Set Construction Completed
+Training Duration: 1.378 seconds
+Number of Iterations: 29999 iterations
+Size of Graph: 9598 nodes
+Objective Boundary: [0.208848, 0.339055]
+Optimality Gap: 0.130208
+Cached subproblem models size: 7420
+Models calls: 19086
+Pruned combinations using scope: 2046
+Pruned leaves using scope: 217
+Pruned trivial extensions: 6312
+Max results size: 372
+Re-explore by scope count: 4216
+Re-explore count: 4216
+Extraction Duration: 0.203 seconds
+Stored keys size: 136
+Size of Rashomon Set: 269
+Memory usage after extraction: 1264
+Insertion of Rashomon Set into Trie: 0.001 seconds
+Storing Models in: tmp/rashomon_subtrie_27_0_17_1_.json
+Output of Rashomon Set in Trie: 0.004 seconds
+Nodes Count in Model Set: 845
+Using configuration: {
+  "balance": false,
+  "cancellation": true,
+  "cart_lookahead_depth": 4,
+  "continuous_feature_exchange": false,
+  "costs": "",
+  "covered_sets_thresholds": [],
+  "datatset_encoding": "",
+  "depth_budget": 4,
+  "diagnostics": false,
+  "feature_exchange": false,
+  "feature_transform": true,
+  "look_ahead": true,
+  "memory_checkpoints": [],
+  "minimum_captured_points": 0,
+  "model": "",
+  "model_limit": 10000,
+  "non_binary": false,
+  "output_accuracy_model_set": false,
+  "output_covered_sets": [],
+  "precision_limit": 0,
+  "profile": "",
+  "rashomon": true,
+  "rashomon_bound": 0.1718994677066803,
+  "rashomon_bound_adder": 0.0,
+  "rashomon_bound_multiplier": 0.009999999776482582,
+  "rashomon_ignore_trivial_extensions": true,
+  "rashomon_model": "",
+  "rashomon_model_set_suffix": "",
+  "rashomon_trie": "tmp/rashomon_subtrie_27_0_17_0_.json",
+  "regularization": 0.008660824038088322,
+  "rule_list": false,
+  "similar_support": false,
+  "stack_limit": 0,
+  "time_limit": 0,
+  "timing": "",
+  "trace": "",
+  "tree": "",
+  "uncertainty_tolerance": 0.0,
+  "upperbound": 0.0,
+  "verbose": true,
+  "worker_limit": 1
+}
+Initializing Optimization Framework
+Feature Index: 0, Feature Name: Online_boarding <= 1.5
+  Inferred Type: Redundant, Empirical Cardinality: 1, Optionality: 0
+Feature Index: 1, Feature Name: Online_boarding <= 3.5
+  Inferred Type: Binary, Empirical Cardinality: 2, Optionality: 0
+Feature Index: 2, Feature Name: Online_boarding <= 4.5
+  Inferred Type: Binary, Empirical Cardinality: 2, Optionality: 0
+Feature Index: 3, Feature Name: Type_of_Travel_Personal Travel <= 0.5
+  Inferred Type: Binary, Empirical Cardinality: 2, Optionality: 0
+Feature Index: 4, Feature Name: Class_Eco <= 0.5
+  Inferred Type: Binary, Empirical Cardinality: 2, Optionality: 0
+Feature Index: 5, Feature Name: Inflight_wifi_service <= 0.5
+  Inferred Type: Binary, Empirical Cardinality: 2, Optionality: 0
+Feature Index: 6, Feature Name: Inflight_wifi_service <= 1.5
+  Inferred Type: Binary, Empirical Cardinality: 2, Optionality: 0
+Feature Index: 7, Feature Name: Inflight_wifi_service <= 2.5
+  Inferred Type: Binary, Empirical Cardinality: 2, Optionality: 0
+Feature Index: 8, Feature Name: Inflight_wifi_service <= 3.5
+  Inferred Type: Binary, Empirical Cardinality: 2, Optionality: 0
+Feature Index: 9, Feature Name: Inflight_wifi_service <= 4.5
+  Inferred Type: Binary, Empirical Cardinality: 2, Optionality: 0
+Feature Index: 10, Feature Name: On_board_service <= 1.5
+  Inferred Type: Binary, Empirical Cardinality: 2, Optionality: 0
+Feature Index: 11, Feature Name: On_board_service <= 2.5
+  Inferred Type: Binary, Empirical Cardinality: 2, Optionality: 0
+Feature Index: 12, Feature Name: On_board_service <= 3.5
+  Inferred Type: Binary, Empirical Cardinality: 2, Optionality: 0
+Feature Index: 13, Feature Name: On_board_service <= 4.5
+  Inferred Type: Binary, Empirical Cardinality: 2, Optionality: 0
+Feature Index: 14, Feature Name: Customer_Type_disloyal Customer <= 0.5
+  Inferred Type: Binary, Empirical Cardinality: 2, Optionality: 0
+Feature Index: 15, Feature Name: Inflight_entertainment <= 0.5
+  Inferred Type: Redundant, Empirical Cardinality: 1, Optionality: 0
+Feature Index: 16, Feature Name: Inflight_entertainment <= 1.5
+  Inferred Type: Redundant, Empirical Cardinality: 1, Optionality: 0
+Feature Index: 17, Feature Name: Inflight_entertainment <= 2.5
+  Inferred Type: Redundant, Empirical Cardinality: 1, Optionality: 0
+Feature Index: 18, Feature Name: Inflight_entertainment <= 3.5
+  Inferred Type: Binary, Empirical Cardinality: 2, Optionality: 0
+Feature Index: 19, Feature Name: Inflight_entertainment <= 4.5
+  Inferred Type: Binary, Empirical Cardinality: 2, Optionality: 0
+Feature Index: 20, Feature Name: Checkin_service <= 1.5
+  Inferred Type: Binary, Empirical Cardinality: 2, Optionality: 0
+Feature Index: 21, Feature Name: Checkin_service <= 2.5
+  Inferred Type: Binary, Empirical Cardinality: 2, Optionality: 0
+Feature Index: 22, Feature Name: Checkin_service <= 4.5
+  Inferred Type: Binary, Empirical Cardinality: 2, Optionality: 0
+Feature Index: 23, Feature Name: Leg_room_service <= 0.5
+  Inferred Type: Binary, Empirical Cardinality: 2, Optionality: 0
+Feature Index: 24, Feature Name: Leg_room_service <= 1.5
+  Inferred Type: Binary, Empirical Cardinality: 2, Optionality: 0
+Feature Index: 25, Feature Name: Leg_room_service <= 3.5
+  Inferred Type: Binary, Empirical Cardinality: 2, Optionality: 0
+Feature Index: 26, Feature Name: Leg_room_service <= 4.5
+  Inferred Type: Binary, Empirical Cardinality: 2, Optionality: 0
+Feature Index: 27, Feature Name: Online_boarding <= 2.5
+  Inferred Type: Redundant, Empirical Cardinality: 1, Optionality: 0
+Feature Index: 28, Feature Name: satisfaction
+  Inferred Type: Categorical, Empirical Cardinality: 2, Optionality: 0
+Original Dataset Dimension: 67773 x 29
+Binary Dataset Dimension: 67773 x 25
+Dataset Dimensions: 67773 x 23 x 2
+Starting Extraction of Rashomon Set
+Using Rashomon bound: 0.171899
+Time: 0.00433803, Objective: [0.0881606, 0.171899], Boundary: 0.0837388, Graph Size: 1, Queue Size: 46
+Time: 4.06065, Objective: [0.0968214, 0.171899], Boundary: 0.075078, Graph Size: 5583, Queue Size: 17050
+Time: 4.23109, Objective: [0.0968214, 0.171899], Boundary: 0.075078, Graph Size: 5691, Queue Size: 17232
+Time: 4.33108, Objective: [0.0968214, 0.171899], Boundary: 0.075078, Graph Size: 6187, Queue Size: 16351
+Time: 4.64292, Objective: [0.0968214, 0.171899], Boundary: 0.075078, Graph Size: 7146, Queue Size: 14438
+Time: 4.98741, Objective: [0.0968214, 0.171899], Boundary: 0.075078, Graph Size: 7891, Queue Size: 12830
+Time: 5.13141, Objective: [0.0968214, 0.171899], Boundary: 0.075078, Graph Size: 8385, Queue Size: 11595
+Time: 5.37043, Objective: [0.0968214, 0.171899], Boundary: 0.075078, Graph Size: 8767, Queue Size: 10364
+Time: 5.56145, Objective: [0.0968214, 0.171899], Boundary: 0.075078, Graph Size: 9080, Queue Size: 9384
+Time: 5.84953, Objective: [0.0968214, 0.171899], Boundary: 0.075078, Graph Size: 9454, Queue Size: 8115
+Time: 5.86477, Objective: [0.0968214, 0.171899], Boundary: 0.075078, Graph Size: 9503, Queue Size: 7971
+Time: 5.87367, Objective: [0.0968214, 0.171899], Boundary: 0.075078, Graph Size: 9526, Queue Size: 7892
+Time: 6.30788, Objective: [0.0968214, 0.171899], Boundary: 0.075078, Graph Size: 10197, Queue Size: 4412
+Time: 6.47758, Objective: [0.0968214, 0.171899], Boundary: 0.075078, Graph Size: 10383, Queue Size: 2722
+Time: 6.48934, Objective: [0.096969, 0.171899], Boundary: 0.0749305, Graph Size: 10386, Queue Size: 2621
+Time: 6.52723, Objective: [0.096969, 0.171899], Boundary: 0.0749305, Graph Size: 10400, Queue Size: 2085
+Time: 6.77955, Objective: [0.096969, 0.171899], Boundary: 0.0749305, Graph Size: 10540, Queue Size: 35
+Time: 6.78022, Objective: [0.096969, 0.171899], Boundary: 0.0749305, Graph Size: 10540, Queue Size: 0
+Rashomon Set Construction Completed
+Training Duration: 6.78 seconds
+Number of Iterations: 39999 iterations
+Size of Graph: 10540 nodes
+Objective Boundary: [0.096969, 0.171899]
+Optimality Gap: 0.0749305
+Cached subproblem models size: 6002
+Models calls: 14949
+Pruned combinations using scope: 380
+Pruned leaves using scope: 227
+Pruned trivial extensions: 5250
+Max results size: 1119
+Re-explore by scope count: 3849
+Re-explore count: 3849
+Extraction Duration: 0.579 seconds
+Stored keys size: 34
+Size of Rashomon Set: 78
+Memory usage after extraction: 3824
+Insertion of Rashomon Set into Trie: 0.001 seconds
+Storing Models in: tmp/rashomon_subtrie_27_0_17_0_.json
+Output of Rashomon Set in Trie: 0.005 seconds
+Nodes Count in Model Set: 191
+  1%|          | 7/861 [08:02<10:29:38, 44.24s/it]  1%|          | 8/861 [08:03<7:16:21, 30.69s/it] Using configuration: {
+  "balance": false,
+  "cancellation": true,
+  "cart_lookahead_depth": 4,
+  "continuous_feature_exchange": false,
+  "costs": "",
+  "covered_sets_thresholds": [],
+  "datatset_encoding": "",
+  "depth_budget": 4,
+  "diagnostics": false,
+  "feature_exchange": false,
+  "feature_transform": true,
+  "look_ahead": true,
+  "memory_checkpoints": [],
+  "minimum_captured_points": 0,
+  "model": "",
+  "model_limit": 10000,
+  "non_binary": false,
+  "output_accuracy_model_set": false,
+  "output_covered_sets": [],
+  "precision_limit": 0,
+  "profile": "",
+  "rashomon": true,
+  "rashomon_bound": 0.3804960250854492,
+  "rashomon_bound_adder": 0.0,
+  "rashomon_bound_multiplier": 0.009999999776482582,
+  "rashomon_ignore_trivial_extensions": true,
+  "rashomon_model": "",
+  "rashomon_model_set_suffix": "",
+  "rashomon_trie": "tmp/rashomon_subtrie_27_0_18_1_.json",
+  "regularization": 0.01756606251001358,
+  "rule_list": false,
+  "similar_support": false,
+  "stack_limit": 0,
+  "time_limit": 0,
+  "timing": "",
+  "trace": "",
+  "tree": "",
+  "uncertainty_tolerance": 0.0,
+  "upperbound": 0.0,
+  "verbose": true,
+  "worker_limit": 1
+}
+Initializing Optimization Framework
+Feature Index: 0, Feature Name: Online_boarding <= 1.5
+  Inferred Type: Redundant, Empirical Cardinality: 1, Optionality: 0
+Feature Index: 1, Feature Name: Online_boarding <= 3.5
+  Inferred Type: Binary, Empirical Cardinality: 2, Optionality: 0
+Feature Index: 2, Feature Name: Online_boarding <= 4.5
+  Inferred Type: Binary, Empirical Cardinality: 2, Optionality: 0
+Feature Index: 3, Feature Name: Type_of_Travel_Personal Travel <= 0.5
+  Inferred Type: Binary, Empirical Cardinality: 2, Optionality: 0
+Feature Index: 4, Feature Name: Class_Eco <= 0.5
+  Inferred Type: Binary, Empirical Cardinality: 2, Optionality: 0
+Feature Index: 5, Feature Name: Inflight_wifi_service <= 0.5
+  Inferred Type: Binary, Empirical Cardinality: 2, Optionality: 0
+Feature Index: 6, Feature Name: Inflight_wifi_service <= 1.5
+  Inferred Type: Binary, Empirical Cardinality: 2, Optionality: 0
+Feature Index: 7, Feature Name: Inflight_wifi_service <= 2.5
+  Inferred Type: Binary, Empirical Cardinality: 2, Optionality: 0
+Feature Index: 8, Feature Name: Inflight_wifi_service <= 3.5
+  Inferred Type: Binary, Empirical Cardinality: 2, Optionality: 0
+Feature Index: 9, Feature Name: Inflight_wifi_service <= 4.5
+  Inferred Type: Binary, Empirical Cardinality: 2, Optionality: 0
+Feature Index: 10, Feature Name: On_board_service <= 1.5
+  Inferred Type: Binary, Empirical Cardinality: 2, Optionality: 0
+Feature Index: 11, Feature Name: On_board_service <= 2.5
+  Inferred Type: Binary, Empirical Cardinality: 2, Optionality: 0
+Feature Index: 12, Feature Name: On_board_service <= 3.5
+  Inferred Type: Binary, Empirical Cardinality: 2, Optionality: 0
+Feature Index: 13, Feature Name: On_board_service <= 4.5
+  Inferred Type: Binary, Empirical Cardinality: 2, Optionality: 0
+Feature Index: 14, Feature Name: Customer_Type_disloyal Customer <= 0.5
+  Inferred Type: Binary, Empirical Cardinality: 2, Optionality: 0
+Feature Index: 15, Feature Name: Inflight_entertainment <= 0.5
+  Inferred Type: Binary, Empirical Cardinality: 2, Optionality: 0
+Feature Index: 16, Feature Name: Inflight_entertainment <= 1.5
+  Inferred Type: Binary, Empirical Cardinality: 2, Optionality: 0
+Feature Index: 17, Feature Name: Inflight_entertainment <= 2.5
+  Inferred Type: Binary, Empirical Cardinality: 2, Optionality: 0
+Feature Index: 18, Feature Name: Inflight_entertainment <= 3.5
+  Inferred Type: Redundant, Empirical Cardinality: 1, Optionality: 0
+Feature Index: 19, Feature Name: Inflight_entertainment <= 4.5
+  Inferred Type: Redundant, Empirical Cardinality: 1, Optionality: 0
+Feature Index: 20, Feature Name: Checkin_service <= 1.5
+  Inferred Type: Binary, Empirical Cardinality: 2, Optionality: 0
+Feature Index: 21, Feature Name: Checkin_service <= 2.5
+  Inferred Type: Binary, Empirical Cardinality: 2, Optionality: 0
+Feature Index: 22, Feature Name: Checkin_service <= 4.5
+  Inferred Type: Binary, Empirical Cardinality: 2, Optionality: 0
+Feature Index: 23, Feature Name: Leg_room_service <= 0.5
+  Inferred Type: Binary, Empirical Cardinality: 2, Optionality: 0
+Feature Index: 24, Feature Name: Leg_room_service <= 1.5
+  Inferred Type: Binary, Empirical Cardinality: 2, Optionality: 0
+Feature Index: 25, Feature Name: Leg_room_service <= 3.5
+  Inferred Type: Binary, Empirical Cardinality: 2, Optionality: 0
+Feature Index: 26, Feature Name: Leg_room_service <= 4.5
+  Inferred Type: Binary, Empirical Cardinality: 2, Optionality: 0
+Feature Index: 27, Feature Name: Online_boarding <= 2.5
+  Inferred Type: Redundant, Empirical Cardinality: 1, Optionality: 0
+Feature Index: 28, Feature Name: satisfaction
+  Inferred Type: Categorical, Empirical Cardinality: 2, Optionality: 0
+Original Dataset Dimension: 33415 x 29
+Binary Dataset Dimension: 33415 x 26
+Dataset Dimensions: 33415 x 24 x 2
+Starting Extraction of Rashomon Set
+Using Rashomon bound: 0.380496
+Time: 0.00212978, Objective: [0.135026, 0.380496], Boundary: 0.24547, Graph Size: 1, Queue Size: 48
+Time: 1.42625, Objective: [0.152593, 0.380496], Boundary: 0.227903, Graph Size: 4733, Queue Size: 24732
+Time: 1.47356, Objective: [0.152593, 0.380496], Boundary: 0.227903, Graph Size: 4882, Queue Size: 24910
+Time: 1.47994, Objective: [0.152593, 0.380496], Boundary: 0.227903, Graph Size: 4939, Queue Size: 24791
+Time: 1.51982, Objective: [0.152593, 0.380496], Boundary: 0.227903, Graph Size: 5284, Queue Size: 24159
+Time: 1.53821, Objective: [0.152593, 0.380496], Boundary: 0.227903, Graph Size: 5444, Queue Size: 23878
+Time: 1.55824, Objective: [0.152593, 0.380496], Boundary: 0.227903, Graph Size: 5615, Queue Size: 23550
+Time: 1.61039, Objective: [0.152593, 0.380496], Boundary: 0.227903, Graph Size: 5718, Queue Size: 23905
+Time: 1.61568, Objective: [0.152593, 0.380496], Boundary: 0.227903, Graph Size: 5755, Queue Size: 23822
+Time: 1.61812, Objective: [0.152593, 0.380496], Boundary: 0.227903, Graph Size: 5775, Queue Size: 23778
+Time: 1.62171, Objective: [0.152593, 0.380496], Boundary: 0.227903, Graph Size: 5796, Queue Size: 23734
+Time: 1.643, Objective: [0.152593, 0.380496], Boundary: 0.227903, Graph Size: 6030, Queue Size: 23295
+Time: 1.66049, Objective: [0.152593, 0.380496], Boundary: 0.227903, Graph Size: 6201, Queue Size: 22974
+Time: 1.67181, Objective: [0.152593, 0.380496], Boundary: 0.227903, Graph Size: 6285, Queue Size: 22807
+Time: 1.68702, Objective: [0.152593, 0.380496], Boundary: 0.227903, Graph Size: 6410, Queue Size: 22544
+Time: 1.69918, Objective: [0.152593, 0.380496], Boundary: 0.227903, Graph Size: 6537, Queue Size: 22282
+Time: 1.71081, Objective: [0.152593, 0.380496], Boundary: 0.227903, Graph Size: 6644, Queue Size: 22069
+Time: 1.81473, Objective: [0.152593, 0.380496], Boundary: 0.227903, Graph Size: 7229, Queue Size: 21494
+Time: 1.8369, Objective: [0.152593, 0.380496], Boundary: 0.227903, Graph Size: 7402, Queue Size: 21075
+Time: 1.8918, Objective: [0.152593, 0.380496], Boundary: 0.227903, Graph Size: 7589, Queue Size: 21112
+Time: 1.97838, Objective: [0.152593, 0.380496], Boundary: 0.227903, Graph Size: 7901, Queue Size: 20775
+Time: 1.98537, Objective: [0.152593, 0.380496], Boundary: 0.227903, Graph Size: 7944, Queue Size: 20681
+Time: 2.12807, Objective: [0.152593, 0.380496], Boundary: 0.227903, Graph Size: 8430, Queue Size: 20241
+Time: 2.14829, Objective: [0.152593, 0.380496], Boundary: 0.227903, Graph Size: 8546, Queue Size: 19940
+Time: 2.4583, Objective: [0.152593, 0.380496], Boundary: 0.227903, Graph Size: 9872, Queue Size: 17207
+Time: 2.50794, Objective: [0.152593, 0.380496], Boundary: 0.227903, Graph Size: 9942, Queue Size: 17298
+Time: 2.50977, Objective: [0.152593, 0.380496], Boundary: 0.227903, Graph Size: 9950, Queue Size: 17274
+Time: 2.63907, Objective: [0.152593, 0.380496], Boundary: 0.227903, Graph Size: 10282, Queue Size: 16453
+Time: 2.65571, Objective: [0.152593, 0.380496], Boundary: 0.227903, Graph Size: 10367, Queue Size: 16163
+Time: 2.81, Objective: [0.152593, 0.380496], Boundary: 0.227903, Graph Size: 10803, Queue Size: 14724
+Time: 2.83153, Objective: [0.152593, 0.380496], Boundary: 0.227903, Graph Size: 10907, Queue Size: 14307
+Time: 2.85613, Objective: [0.260896, 0.380496], Boundary: 0.1196, Graph Size: 11014, Queue Size: 13797
+Time: 3.20449, Objective: [0.260896, 0.380496], Boundary: 0.1196, Graph Size: 11888, Queue Size: 9211
+Time: 3.68417, Objective: [0.260896, 0.380496], Boundary: 0.1196, Graph Size: 12595, Queue Size: 1338
+Time: 3.72348, Objective: [0.260896, 0.380496], Boundary: 0.1196, Graph Size: 12595, Queue Size: 0
+Rashomon Set Construction Completed
+Training Duration: 3.738 seconds
+Number of Iterations: 49999 iterations
+Size of Graph: 12595 nodes
+Objective Boundary: [0.260896, 0.380496]
+Optimality Gap: 0.1196
+Cached subproblem models size: 4825
+Models calls: 10145
+Pruned combinations using scope: 1561
+Pruned leaves using scope: 13
+Pruned trivial extensions: 3533
+Max results size: 1326
+Re-explore by scope count: 1776
+Re-explore count: 1776
+Extraction Duration: 0.263 seconds
+Stored keys size: 10001
+Size of Rashomon Set: 321629
+Memory usage after extraction: 2162
+Insertion of Rashomon Set into Trie: 1.572 seconds
+Storing Models in: tmp/rashomon_subtrie_27_0_18_1_.json
+Output of Rashomon Set in Trie: 1.361 seconds
+Nodes Count in Model Set: 16835

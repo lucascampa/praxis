@@ -7,8 +7,8 @@
         "F1": 0.9206939817418769,
         "Loss": 0.082193,
         "Size": "100 trees, 741 leaves",
-        "Runtime (s)": 2.277,
-        "Peak_Memory (MB)": 4.63
+        "Runtime (s)": 0.403,
+        "Peak_Memory (MB)": 4.71
     },
     {
         "Model": "SPLIT",
@@ -18,7 +18,7 @@
         "F1": 0.9088139281828074,
         "Loss": 0.136402,
         "Size": "8 leaves",
-        "Runtime (s)": 6.717,
-        "Peak_Memory (MB)": 42.96
+        "Runtime (s)": 6.237,
+        "Peak_Memory (MB)": 43.05
     }
 ]

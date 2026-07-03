@@ -26,6 +26,26 @@ PRAXIS is a newer algorithm (ICML 2026) that:
 - Includes built-in **RID** (Rashomon Importance Distribution) computation
 - Faster than RESPLIT via iterative budget refinement
 
+### 3. **RESPLIT investigation.md** (in this repo)
+📄 [RESPLIT investigation.md](./RESPLIT investigation.md)
+
+**READ THIS BEFORE TOUCHING RESPLIT.** Full record of why RESPLIT underperforms on
+this dataset: every hypothesis, test, and result. Three verified defects in the
+released code (silent non-binary input acceptance, float-tie bound exclusion at the
+Python→C++ boundary, C++ global-config leakage between calls) and the corresponding
+monkey-patches in `run_resplit.py`. Standalone reproductions: `verify_bound.py`,
+`verify_leak.py`. RESPLIT **requires binarized input** — use
+`airline-passenger-satisfaction/train_binarized.csv` / `test_binarized.csv`
+(exported by the notebook from the same ThresholdGuessBinarizer PRAXIS uses).
+
+Headline conclusion: RESPLIT's stump-level truncation is **load-bearing** — with it,
+RESPLIT finishes in ~1h but provably misses the optimal tree (best 0.148839 vs true
+0.136402); without it, exact enumeration is intractable (projected days). PRAXIS does
+both in 0.73s. Also note (fixed 2026-07-03): SPLIT/PRAXIS/STreeD all find the
+**identical** optimal tree — earlier apparent structural diversity was a notebook
+printer bug (PRAXIS `get_tree_paths` returns signed ids ±(index+1); decode with
+`names[abs(s)-1]`).
+
 ---
 
 ## Paper Summaries & File Mapping
@@ -299,134 +319,41 @@ print("="*100)
 
 **Part 2: RESPLIT (Command-line Script Only)**
 
-Create `run_resplit.py`:
-```python
-from resplit import RESPLIT
-import pandas as pd
-import json
-from sklearn.metrics import accuracy_score, precision_score, recall_score, f1_score
-
-SELECTED_FEATURES = [
-    'Online_boarding', 'Type_of_Travel_Personal Travel', 'Class_Eco', 
-    'Inflight_wifi_service', 'On_board_service', 'Customer_Type_disloyal Customer', 
-    'Inflight_entertainment', 'Checkin_service', 'Leg_room_service'
-]
-
-data = pd.read_csv('airline-passenger-satisfaction/train_clean_encoded_balanced.csv')
-x_train = data[SELECTED_FEATURES]
-y_train = data['satisfaction']
-x_test = data[SELECTED_FEATURES]
-y_test = data['satisfaction']
-
-config = {
-    "regularization": 0.005,
-    "rashomon_bound_multiplier": 0.03,
-    "depth_budget": 6,
-    "cart_lookahead_depth": 2,
-    "verbose": True
-}
-
-print("Training RESPLIT...")
-model = RESPLIT(config, fill_tree="treefarms")
-model.fit(x_train, y_train)
-
-print(f"\nRashomon set size: {len(model)} trees\n")
-
-results = []
-for i, tree in enumerate(model):
-    pred = tree.predict(x_test)
-    results.append({
-        'Tree': i,
-        'Model': f'RESPLIT (Tree {i})',
-        'Accuracy': float(accuracy_score(y_test, pred)),
-        'Precision': float(precision_score(y_test, pred)),
-        'Recall': float(recall_score(y_test, pred)),
-        'F1': float(f1_score(y_test, pred)),
-        'Size': f"Tree {i} of {len(model)}"
-    })
-
-results_df = pd.DataFrame(results)
-print("="*80)
-print(results_df.to_string(index=False))
-print("="*80)
-
-# Save to JSON for comparison notebook
-output_file = 'results/resplit_metrics.json'
-with open(output_file, 'w') as f:
-    json.dump(results, f, indent=2)
-
-print(f"\n✓ Results saved to {output_file}")
-```
+⚠️ **Do not write a fresh RESPLIT script from scratch — use the existing
+[run_resplit.py](./run_resplit.py).** It embeds hard-won fixes documented in
+[RESPLIT investigation.md](./RESPLIT investigation.md):
+- Loads **binarized** input (`train_binarized.csv`/`test_binarized.csv`, exported by
+  notebook cell-10) — RESPLIT silently produces garbage on raw features
+- Monkey-patches `hash_for_indexing` (OOM on large sets), adds a float-tie tolerance
+  to stump bounds, and pins `cart_lookahead_depth` on stump calls (C++ config leak)
+- Extracts the exact best tree from the compact prefix-trie representation
+  (per-stump minimization) instead of materializing ~10⁹ trees
+- Caches the fitted model to `results/resplit_models_*.pkl` (fit costs ~1h)
 
 Execute:
 ```bash
-python run_resplit.py
+python run_resplit.py 2>&1 | tee logs/resplit_<runname>.txt
 ```
 
-This saves results to `results/resplit_metrics.json` for the comparison notebook to read.
+Saves the unified-schema results to `results/results2.json` for notebook cell-6.
 
-**Part 3: PRAXIS + RESPLIT Comparison (Jupyter-friendly)**
+**Part 3: PRAXIS + full comparison (Jupyter)**
 
-```python
-import json
+The maintained, working version lives in
+[notebooks/comparison.ipynb](./notebooks/comparison.ipynb) (cells 9–17):
+PRAXIS training, binarized-data export, tree printing, and the five-model table
+(XGBoost / SPLIT / RESPLIT / PRAXIS / STreeD). Key API facts learned the hard way:
 
-# 3. Load RESPLIT results from run_resplit.py output
-try:
-    with open('results/resplit_metrics.json', 'r') as f:
-        resplit_results = json.load(f)
-    # Add average RESPLIT result to comparison
-    avg_accuracy = sum(r['Accuracy'] for r in resplit_results) / len(resplit_results)
-    avg_precision = sum(r['Precision'] for r in resplit_results) / len(resplit_results)
-    avg_recall = sum(r['Recall'] for r in resplit_results) / len(resplit_results)
-    avg_f1 = sum(r['F1'] for r in resplit_results) / len(resplit_results)
-    
-    results.append({
-        'Model': f'RESPLIT (avg of {len(resplit_results)} trees)',
-        'Accuracy': avg_accuracy,
-        'Precision': avg_precision,
-        'Recall': avg_recall,
-        'F1': avg_f1,
-        'Size': f"{len(resplit_results)} trees"
-    })
-    print(f"✓ Loaded RESPLIT results ({len(resplit_results)} trees)")
-except FileNotFoundError:
-    print("⚠ RESPLIT results not found. Run `python run_resplit.py` first.")
-
-# 4. Train PRAXIS
-print("Training PRAXIS...")
-from praxis import PRAXIS
-praxis_model = PRAXIS(lambda_reg=0.005, depth_budget=6, rashomon_mult=0.03, lookahead_k=1)
-praxis_model.fit(x_train, y_train)
-
-praxis_pred_single = praxis_model.predict(x_test)
-praxis_pred_ensemble = praxis_model.predict_ensemble(x_test)
-
-results.append({
-    'Model': 'PRAXIS (Best Tree)',
-    'Accuracy': accuracy_score(y_test, praxis_pred_single),
-    'Precision': precision_score(y_test, praxis_pred_single),
-    'Recall': recall_score(y_test, praxis_pred_single),
-    'F1': f1_score(y_test, praxis_pred_single),
-    'Size': f"1 of {len(praxis_model)} trees"
-})
-
-results.append({
-    'Model': 'PRAXIS (Ensemble)',
-    'Accuracy': accuracy_score(y_test, praxis_pred_ensemble),
-    'Precision': precision_score(y_test, praxis_pred_ensemble),
-    'Recall': recall_score(y_test, praxis_pred_ensemble),
-    'F1': f1_score(y_test, praxis_pred_ensemble),
-    'Size': f"{len(praxis_model)} trees (voting)"
-})
-
-# Final comparison table
-results_df = pd.DataFrame(results)
-print("\n" + "="*100)
-print("FINAL COMPARISON: XGBoost vs SPLIT vs PRAXIS vs RESPLIT")
-print("="*100)
-print(results_df.to_string(index=False))
-print("="*100)
-```
+- PRAXIS hyperparameters go into **`fit()`**, not the constructor:
+  `PRAXIS().fit(x_bin, y, lambda_reg=0.005, depth_budget=5, rashomon_mult=0.01, lookahead_k=1)`
+- PRAXIS requires **binary input** — `ThresholdGuessBinarizer().fit_transform(x, y)`
+- `get_tree_objective(i)` returns an **unnormalized integer** objective — use it only
+  for ranking; compute reported loss manually:
+  `(preds != y_train).sum()/N + 0.005 * num_leaves` (same formula for every model)
+- `get_tree_paths(i)` returns signed ids **±(column_index+1)**; decode with
+  `names[abs(s)-1]`, `s > 0` = condition true
+- All models' table losses are computed externally from raw predictions on TRAIN,
+  never taken from a model's internal objective
 
 ---
 

@@ -1,0 +1,11 @@
+stump: 25100 rows, reg_local 0.023385, bound 0.156970 [log: 0.15697]
+
+pipeline repro: lookahead_depth=3, look_ahead=True  -> 5 trees
+gate test:      lookahead_depth=4 (=depth_budget)   -> 24 trees
+no-op test:     lookahead_depth=3, look_ahead=False -> 5 trees
+leak test:      no lookahead keys passed at all     -> 5 trees
+
+Reading: 5 = truncated search, 24 = exact search.
+If case 2 gives 24, cart_lookahead_depth is the gate and depth_budget
+is the safe 'off' value. If case 4 inherits case 3's keys instead of
+using defaults, the overlay/leak is demonstrated in-process.

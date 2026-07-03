@@ -19,7 +19,30 @@ import tracemalloc
 # minimum is the sum of per-socket minima — no enumeration required).
 RESPLIT.hash_for_indexing = lambda self, prefixes: prefixes
 
-MODELS_CACHE = 'results/resplit_models.pkl'
+# --- Patch: float tolerance on the per-stump Rashomon bound ---
+# fill_leaves_with_treefarms() sets each stump's bound to the greedy fill's
+# loss. When greedy finds the optimal subtree (an exact tie), rounding across
+# the Python->C++ boundary breaks the tie the wrong way and TREEFARMS returns
+# an empty menu — killing the whole prefix (verified in verify_bound.py: bound
+# == optimum -> 0 trees; bound * 1.01 -> trees appear). A tiny tolerance keeps
+# ties inside the bound without meaningfully loosening it.
+_original_train_treefarms = RESPLIT.train_treefarms
+
+def _train_treefarms_with_tolerance(self, X, y, feature_set='', **kwargs):
+    if 'rashomon_bound' in kwargs:
+        kwargs['rashomon_bound'] = kwargs['rashomon_bound'] * (1 + 1e-4) + 1e-6
+    # The C++ extension's configure() overlays onto its previous global config
+    # instead of resetting it, so stump-level calls inherit the top-level
+    # cart_lookahead_depth=3 and enumerate truncated (lookahead) menus instead
+    # of exact ones. The look_ahead boolean is a no-op; the integer is the
+    # gate, and setting it equal to depth_budget disables the truncation
+    # (verified in verify_leak.py: 5 trees truncated vs 24 exact).
+    kwargs['cart_lookahead_depth'] = kwargs['depth_budget']
+    return _original_train_treefarms(self, X, y, feature_set, **kwargs)
+
+RESPLIT.train_treefarms = _train_treefarms_with_tolerance
+
+MODELS_CACHE = 'results/resplit_models_exactstumps.pkl'
 
 
 def get_num_leaves(tree):

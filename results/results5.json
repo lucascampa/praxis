@@ -7,8 +7,8 @@
         "F1": 0.9206939817418769,
         "Loss": 0.082193,
         "Size": "100 trees, 741 leaves",
-        "Runtime (s)": 2.277,
-        "Peak_Memory (MB)": 4.63,
+        "Runtime (s)": 0.403,
+        "Peak_Memory (MB)": 4.71,
         "Rashomon_Set_Size": "N/A"
     },
     {
@@ -19,8 +19,8 @@
         "F1": 0.9088139281828074,
         "Loss": 0.136402,
         "Size": "8 leaves",
-        "Runtime (s)": 6.717,
-        "Peak_Memory (MB)": 42.96,
+        "Runtime (s)": 6.237,
+        "Peak_Memory (MB)": 43.05,
         "Rashomon_Set_Size": "N/A"
     },
     {
@@ -31,9 +31,9 @@
         "F1": 0.8773335606512659,
         "Loss": 0.148839,
         "Size": "6 leaves",
-        "Runtime (s)": 3536.83,
-        "Rashomon_Set_Size": 1437372873,
-        "Peak_Memory (MB)": 169.05
+        "Runtime (s)": 3387.598,
+        "Rashomon_Set_Size": 1464900442,
+        "Peak_Memory (MB)": 169.13
     },
     {
         "Model": "PRAXIS (Best Tree)",
@@ -43,7 +43,7 @@
         "F1": 0.9088139281828074,
         "Loss": 0.136402,
         "Size": "8 leaves",
-        "Runtime (s)": 0.737,
+        "Runtime (s)": 0.709,
         "Rashomon_Set_Size": 140,
         "Peak_Memory (MB)": 6.27
     },
@@ -55,8 +55,8 @@
         "F1": 0.9088139281828074,
         "Loss": 0.136402,
         "Size": "8 leaves",
-        "Runtime (s)": 179.838,
+        "Runtime (s)": 147.293,
         "Rashomon_Set_Size": "N/A",
-        "Peak_Memory (MB)": 43.37
+        "Peak_Memory (MB)": 43.42
     }
 ]

@@ -7,8 +7,8 @@
     "Test_Recall": 0.9055873295204575,
     "Test_F1": 0.8773335606512659,
     "Num_Leaves": 6,
-    "Rashomon_Set_Size": 1437372873,
-    "Runtime (s)": 3536.83,
-    "Peak_Memory (MB)": 169.05
+    "Rashomon_Set_Size": 1464900442,
+    "Runtime (s)": 3387.598,
+    "Peak_Memory (MB)": 169.13
   }
 ]
