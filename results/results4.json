@@ -25,15 +25,15 @@
     },
     {
         "Model": "RESPLIT (Best Tree)",
-        "Accuracy": 0.6734252500675858,
-        "Precision": 0.5826373501505596,
-        "Recall": 0.9023317201935768,
-        "F1": 0.7080715321411309,
-        "Loss": 0.331557,
-        "Size": "5 leaves",
-        "Runtime (s)": 34.521,
-        "Rashomon_Set_Size": 6,
-        "Peak_Memory (MB)": 19.32
+        "Accuracy": 0.8888502684123122,
+        "Precision": 0.8507894519302306,
+        "Recall": 0.9055873295204575,
+        "F1": 0.8773335606512659,
+        "Loss": 0.148839,
+        "Size": "6 leaves",
+        "Runtime (s)": 3073.548,
+        "Rashomon_Set_Size": 1654709630,
+        "Peak_Memory (MB)": 171.02
     },
     {
         "Model": "PRAXIS (Best Tree)",
@@ -43,7 +43,7 @@
         "F1": 0.9088139281828074,
         "Loss": 0.136402,
         "Size": "8 leaves",
-        "Runtime (s)": 0.726,
+        "Runtime (s)": 0.743,
         "Rashomon_Set_Size": 140,
         "Peak_Memory (MB)": 6.27
     }

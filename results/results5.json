@@ -1,0 +1,62 @@
+[
+    {
+        "Model": "XGBoost",
+        "Accuracy": 0.9292086664349438,
+        "Precision": 0.9056860742254,
+        "Recall": 0.9362076550813903,
+        "F1": 0.9206939817418769,
+        "Loss": 0.082193,
+        "Size": "100 trees, 741 leaves",
+        "Runtime (s)": 2.277,
+        "Peak_Memory (MB)": 4.63,
+        "Rashomon_Set_Size": "N/A"
+    },
+    {
+        "Model": "SPLIT",
+        "Accuracy": 0.9190901015718534,
+        "Precision": 0.8992248062015504,
+        "Recall": 0.9186097668279807,
+        "F1": 0.9088139281828074,
+        "Loss": 0.136402,
+        "Size": "8 leaves",
+        "Runtime (s)": 6.717,
+        "Peak_Memory (MB)": 42.96,
+        "Rashomon_Set_Size": "N/A"
+    },
+    {
+        "Model": "RESPLIT (Best Tree)",
+        "Accuracy": 0.8888502684123122,
+        "Precision": 0.8507894519302306,
+        "Recall": 0.9055873295204575,
+        "F1": 0.8773335606512659,
+        "Loss": 0.148839,
+        "Size": "6 leaves",
+        "Runtime (s)": 3073.548,
+        "Rashomon_Set_Size": 1654709630,
+        "Peak_Memory (MB)": 171.02
+    },
+    {
+        "Model": "PRAXIS (Best Tree)",
+        "Accuracy": 0.9190901015718534,
+        "Precision": 0.8992248062015504,
+        "Recall": 0.9186097668279807,
+        "F1": 0.9088139281828074,
+        "Loss": 0.136402,
+        "Size": "8 leaves",
+        "Runtime (s)": 0.743,
+        "Rashomon_Set_Size": 140,
+        "Peak_Memory (MB)": 6.27
+    },
+    {
+        "Model": "STreeD",
+        "Accuracy": 0.9190901015718534,
+        "Precision": 0.8992248062015504,
+        "Recall": 0.9186097668279807,
+        "F1": 0.9088139281828074,
+        "Loss": 0.136402,
+        "Size": "8 leaves",
+        "Runtime (s)": 165.985,
+        "Rashomon_Set_Size": "N/A",
+        "Peak_Memory (MB)": 43.35
+    }
+]

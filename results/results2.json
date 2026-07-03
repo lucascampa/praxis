@@ -1,15 +1,14 @@
 [
   {
     "Model": "RESPLIT (Best Tree)",
-    "Tree_Index": 0,
-    "Train_Loss": 0.331557,
-    "Test_Accuracy": 0.6734252500675858,
-    "Test_Precision": 0.5826373501505596,
-    "Test_Recall": 0.9023317201935768,
-    "Test_F1": 0.7080715321411309,
-    "Num_Leaves": 5,
-    "Rashomon_Set_Size": 6,
-    "Runtime (s)": 34.521,
-    "Peak_Memory (MB)": 19.32
+    "Train_Loss": 0.148839,
+    "Test_Accuracy": 0.8888502684123122,
+    "Test_Precision": 0.8507894519302306,
+    "Test_Recall": 0.9055873295204575,
+    "Test_F1": 0.8773335606512659,
+    "Num_Leaves": 6,
+    "Rashomon_Set_Size": 1654709630,
+    "Runtime (s)": 3073.548,
+    "Peak_Memory (MB)": 171.02
   }
 ]
