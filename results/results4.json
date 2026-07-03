@@ -31,9 +31,9 @@
         "F1": 0.8773335606512659,
         "Loss": 0.148839,
         "Size": "6 leaves",
-        "Runtime (s)": 3073.548,
-        "Rashomon_Set_Size": 1654709630,
-        "Peak_Memory (MB)": 171.02
+        "Runtime (s)": 3536.83,
+        "Rashomon_Set_Size": 1437372873,
+        "Peak_Memory (MB)": 169.05
     },
     {
         "Model": "PRAXIS (Best Tree)",
@@ -43,7 +43,7 @@
         "F1": 0.9088139281828074,
         "Loss": 0.136402,
         "Size": "8 leaves",
-        "Runtime (s)": 0.743,
+        "Runtime (s)": 0.737,
         "Rashomon_Set_Size": 140,
         "Peak_Memory (MB)": 6.27
     }

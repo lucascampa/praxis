@@ -112,7 +112,7 @@ y_test = test_data['satisfaction']
 config = {
     "regularization": 0.005,
     "rashomon_bound_multiplier": 0.01,
-    "depth_budget": 5,
+    "depth_budget": 6,
     "cart_lookahead_depth": 3,
     "verbose": True
 }

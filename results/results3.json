@@ -31,8 +31,8 @@
         "F1": 0.8773335606512659,
         "Loss": 0.148839,
         "Size": "6 leaves",
-        "Runtime (s)": 3073.548,
-        "Rashomon_Set_Size": 1654709630,
-        "Peak_Memory (MB)": 171.02
+        "Runtime (s)": 3536.83,
+        "Rashomon_Set_Size": 1437372873,
+        "Peak_Memory (MB)": 169.05
     }
 ]
