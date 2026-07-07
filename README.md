@@ -11,28 +11,33 @@ Both are applied to the same airline satisfaction dataset to evaluate scalabilit
 See the original [write-up](https://medium.com/@lucascampagnaro/i-built-an-end-to-end-interpretable-machine-learning-research-pipeline-0ba67d0ba700) for DIMEX context.
 
 ## Features & Workflow
-- **Preprocessing**: Missing-value cleaning, label binarization, categorical encoding, SMOTE, and undersampling
-- **XGBoost toolkit**: Training, model metadata, feature selection, and predictions
-- **SPLIT toolkit**: Training, model metadata, predictions, and RESPLIT Rashomon set enumeration
-- **PRAXIS toolkit**: Training, Rashomon set enumeration, disagreement analysis, and RID (Rashomon Importance Distribution)
+- **Preprocessing** (`dimex`): Missing-value cleaning, label binarization, categorical encoding, SMOTE, and undersampling
+- **XGBoost toolkit** (`dimex`): Training, model metadata, feature selection, and predictions
+- **SPLIT toolkit** (`dimex`): Training, model metadata, and predictions
+- **RESPLIT runner** (`run_resplit.py`): Command-line Rashomon set enumeration, with workarounds for three defects in the released RESPLIT code (see [RESPLIT investigation.md](RESPLIT%20investigation.md))
+- **Rashomon set analysis** (`prxs`): Export PRAXIS Rashomon sets to JSON, rebuild trees from their path representation, and draw labeled tree diagrams
 
 1. Preprocess the data (same as DIMEX)
 2. Feature selection with XGBoost (same as DIMEX)
-3. Train RESPLIT and PRAXIS on selected features
+3. Train SPLIT, RESPLIT, PRAXIS, and STreeD on the selected features ([notebooks/comparison.ipynb](notebooks/comparison.ipynb) + `run_resplit.py`)
 4. Compare Rashomon sets, tree counts, runtimes, and feature importance
+5. Analyze Rashomon set *structure*: tree diagrams, split-variable usage, root stability ([notebooks/tree_structure.ipynb](notebooks/tree_structure.ipynb))
 
 ## Project Structure
 ```
-├── airline-passenger-satisfaction/ # Dataset used
-├── dimex/
-├── notebooks/ # Notebooks running dimex with different seed values
-├── results/ # Comparison table of the different results from running XGBoost and SPLIT using different parameters and seed values
+├── airline-passenger-satisfaction/ # Dataset (raw, cleaned, encoded, balanced, binarized)
+├── dimex/ # DIMACS Externship package (old project: SPLIT vs XGBoost)
+├── prxs/ # Current-project package: Rashomon set structure analysis
+├── run_resplit.py # RESPLIT runner (command-line only)
+├── verify_bound.py, verify_leak.py # Standalone repros of RESPLIT defects
+├── notebooks/ # DIMEX seed notebooks + comparison.ipynb + tree_structure.ipynb
+├── results/ # Comparison tables (results*.json), Rashomon set export (praxis_trees.json), cached RESPLIT models
 ├── environment.yml # Conda environment file (instead of requirements.txt)
 ├── .gitignore
 ├── LICENSE
 ├── README.md
 ├── SETUP.md # Setup guide
-└── setup.py # Run this to install dimex
+└── setup.py # Run this to install the dimex and prxs packages
 ```
 
 ## Installation
@@ -40,55 +45,49 @@ See [SETUP.md](SETUP.md) for full installation instructions.
 
 ## Quick Start
 
+**1. Model comparison** — run [notebooks/comparison.ipynb](notebooks/comparison.ipynb)
+(XGBoost, SPLIT, PRAXIS, STreeD), with `python run_resplit.py` from a terminal for the
+RESPLIT part (it cannot run in Jupyter). The notebook builds the five-model table and
+exports the PRAXIS Rashomon set to `results/praxis_trees.json`.
+
+**2. Rashomon set structure analysis** — run
+[notebooks/tree_structure.ipynb](notebooks/tree_structure.ipynb). It works entirely
+from the JSON export (no re-fitting) via the `prxs` package:
+
 ```python
-import dimex as dx
+from prxs import load_trees, draw_tree
 
-# Preprocess: clean, encode, balance
-data_clean, stats, fname = dx.clean_missing('airline-passenger-satisfaction/train.csv')
-data_encoded, fname = dx.binarize_encode(fname, 'satisfied', 'neutral or dissatisfied')
-x_train, x_test, y_train, y_test = dx.split_dataset(data_encoded, test_size=0.3, random_state=42)
-x_train_bal, y_train_bal = dx.smote(x_train, y_train)
+payload = load_trees('results/praxis_trees.json')
+trees = payload['trees']                    # ranked by objective (best first)
+print(payload['n_trees_total'], 'trees')
 
-# Feature selection with XGBoost
-xgb_model, _, _ = dx.train_xgb(x_train_bal, y_train_bal)
-x_selected, gain_info = dx.cumulative_gain(xgb_model, x_train_bal, y_train_bal, 0.80)
-
-# Train SPLIT (single optimal tree)
-split_model, split_tree, split_meta = dx.train_split(x_selected, y_train_bal, 
-                                                      lookahead=2, full_depth=5, reg=0.01)
-split_pred, split_acc = dx.prediction_split(split_model, x_test, y_test)
-
-# Train PRAXIS (Rashomon set)
-praxis_model, x_binary, praxis_meta = dx.train_praxis(x_selected, y_train_bal,
-                                                       lambda_reg=0.01, depth_budget=5, 
-                                                       rashomon_mult=0.03, lookahead_k=1)
-praxis_pred, praxis_acc, details = dx.prediction_praxis(praxis_model, x_test, y_test, use_ensemble=False)
-
-print(f"SPLIT:  {split_acc:.4f} accuracy, {split_meta['leaves']} leaves, {split_meta['runtime']:.2f}s")
-print(f"PRAXIS: {praxis_acc:.4f} accuracy, {praxis_meta['n_trees']} trees, {praxis_meta['runtime']:.2f}s")
-
-# Visualize
-dx.cm(y_test, split_pred[0])
+# Diagram any tree: feature-named nodes, yes/no edges, class-colored leaves
+draw_tree(trees[0], payload['feature_names'])
 ```
 
-**For detailed workflows**, see notebooks:
-- `notebooks/Black-Box to Glass-Box modeling [RANDOM_SEED=42].ipynb` — DIMEX baseline
-- `notebooks/RESPLIT_vs_PRAXIS_comparison.ipynb` — Full RESPLIT vs. PRAXIS comparison
+Node labels can be translated to plain English through the hand-written
+`feature_labels` dict in the notebook (e.g. `Customer_Type_disloyal Customer <= 0.5`
+→ "Loyal customer?").
 
-## Expected Results
+## Results (airline dataset, 9-feature subset, λ=0.005, depth 5, 1% Rashomon slack)
 
-**From DIMEX (SPLIT baseline):**
-- SPLIT: 91.97% accuracy, 8 leaves, ~5s on 9-feature subset
-- XGBoost: 93.58% accuracy, 755 leaves
-- **Tradeoff**: 1.6% accuracy loss for 94% fewer leaves (interpretability win)
+| Model | Test accuracy | Train loss | Size | Runtime | Rashomon set |
+|---|---|---|---|---|---|
+| XGBoost | 92.9% | 0.082 | 100 trees, 741 leaves | 0.4s | — |
+| SPLIT | 91.9% | 0.136 | 8 leaves | 6.2s | — |
+| RESPLIT (best tree) | 88.9% | 0.149 | 6 leaves | 3,388s | 1.46×10⁹ trees* |
+| PRAXIS (best tree) | 91.9% | 0.136 | 8 leaves | **0.7s** | 140 trees |
+| STreeD | 91.9% | 0.136 | 8 leaves | 147s | — |
 
-**PRAXIS Comparison Targets:**
-- How large is the PRAXIS Rashomon set vs. RESPLIT's?
-- Do PRAXIS trees have better feature importance stability (RID)?
-- Runtime: PRAXIS vs. RESPLIT?
-- Uncertainty quantification: Can Rashomon disagreement improve model calibration?
+\* RESPLIT's count is inflated by its compact-trie representation and its best tree
+provably misses the optimum — see [RESPLIT investigation.md](RESPLIT%20investigation.md).
 
-Results will be in `notebooks/RESPLIT_vs_PRAXIS_comparison.ipynb` and `results/`.
+**Key findings so far:**
+- SPLIT, PRAXIS, and STreeD find the *identical* optimal tree (100% prediction agreement)
+- PRAXIS is ~4,800× faster than RESPLIT on this dataset and actually contains the optimal tree
+- All 140 Rashomon set trees share the same root split (`Inflight_wifi_service <= 0.5`,
+  i.e. "WiFi not rated" → satisfied); five splits are universal across the set, and
+  structural diversity lives in the lower levels (7–10 leaves, depth uniformly 5)
 
 ## References
 

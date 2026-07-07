@@ -124,24 +124,36 @@ praxis/
 │   ├── train.csv, test.csv               # Raw data
 │   ├── train_clean.csv, test_clean.csv   # After missing-value removal
 │   ├── train_clean_encoded.csv           # After one-hot encoding
-│   └── train_clean_encoded_balanced.csv  # After SMOTE balancing
+│   ├── train_clean_encoded_balanced.csv  # After SMOTE balancing
+│   └── train_binarized.csv, test_binarized.csv   # ThresholdGuessBinarizer output (comparison.ipynb export cell)
 │
-├── dimex/                                 # Main Python package
+├── dimex/                                 # DIMEX package (DIMACS Externship: SPLIT vs XGBoost — old project)
 │   ├── __init__.py                       # Public API exports
 │   ├── preprocessing.py                  # Data cleaning, encoding, balancing
 │   ├── xgb_runner.py                     # XGBoost training & feature selection
 │   ├── split_runner.py                   # SPLIT training & evaluation
-│   ├── praxis_runner.py                  # PRAXIS training & evaluation (NEW)
 │   └── reporting.py                      # Confusion matrices & plots
+│
+├── prxs/                                  # Current-project package: Rashomon set structure analysis
+│   ├── __init__.py                       # Public API exports
+│   └── rashomon_trees.py                 # Export/load PRAXIS trees, rebuild from paths, draw diagrams
+│
+├── run_resplit.py                         # RESPLIT runner (command-line only; embeds bug workarounds)
+├── verify_bound.py, verify_leak.py        # Standalone repros of RESPLIT defects
 │
 ├── notebooks/                             # Analysis notebooks
 │   ├── Black-Box to Glass-Box modeling [RANDOM_SEED=42].ipynb       # DIMEX: SPLIT vs XGBoost
 │   ├── Black-Box to Glass-Box modeling [RANDOM_SEED=50].ipynb       # DIMEX: SPLIT vs XGBoost (seed=50)
 │   ├── Black-Box to Glass-Box modeling [RANDOM_SEED=99].ipynb       # DIMEX: SPLIT vs XGBoost (seed=99)
+│   ├── comparison.ipynb                  # XGBoost/SPLIT/RESPLIT/PRAXIS/STreeD comparison (maintained)
+│   ├── tree_structure.ipynb              # Rashomon set tree diagrams & structure analysis (July 7 guidance)
 │   └── (original)/                       # Backups
 │
 ├── results/                               # Output figures & tables
-│   └── Results.png                       # DIMEX comparison chart
+│   ├── Results.png                       # DIMEX comparison chart
+│   ├── results1..5.json                  # Cumulative model-comparison tables (built by comparison.ipynb)
+│   ├── praxis_trees.json                 # Full PRAXIS Rashomon set export (prxs schema, 140 trees)
+│   └── resplit_models_*.pkl              # Cached fitted RESPLIT models (fit costs ~1h)
 │
 ├── LICENSE                                # MIT License
 └── .gitignore
@@ -155,9 +167,19 @@ praxis/
 |------|---------|---|
 | `dimex/preprocessing.py` | Data cleaning & encoding | `clean_missing()`, `binarize_encode()`, `smote()` |
 | `dimex/xgb_runner.py` | XGBoost training & feature selection | `train_xgb()`, `cumulative_gain()` |
-| `dimex/split_runner.py` | SPLIT algorithm interface | `train_split()`, `prediction_split()` |
+| `dimex/split_runner.py` | SPLIT algorithm interface | `train_split()`, `prediction_split()`, `binarized_features()` |
 | `dimex/reporting.py` | Visualization | `cm()` (confusion matrices) |
-| `notebooks/*.ipynb` | Analysis workflows (DIMEX) | SPLIT vs XGBoost comparison across 3 random seeds |
+| `prxs/rashomon_trees.py` | Rashomon set tree export & diagrams | `export_praxis_trees()`, `load_trees()`, `build_tree()`, `draw_tree()`, `sample_tree_indices()` |
+| `run_resplit.py` | RESPLIT execution (command-line only) | Embeds all RESPLIT workarounds — never rewrite from scratch |
+| `notebooks/comparison.ipynb` | Five-model comparison + Rashomon set export | XGBoost / SPLIT / RESPLIT / PRAXIS / STreeD |
+| `notebooks/tree_structure.ipynb` | Rashomon set structure analysis | Diagrams, split-usage tables, hand-written `feature_labels` |
+| `notebooks/Black-Box*.ipynb` | Analysis workflows (DIMEX, old project) | SPLIT vs XGBoost comparison across 3 random seeds |
+
+⚠️ **`dimex` preprocessing functions write csvs as a side effect** (`clean_missing`,
+`binarize_encode`, `smote` all save into `airline-passenger-satisfaction/`). SMOTE
+output is **not byte-reproducible across library versions** — never regenerate the
+csvs outside the WSL `praxis-env`; if they get clobbered, restore with
+`git checkout -- airline-passenger-satisfaction/`.
 
 ---
 
@@ -188,7 +210,10 @@ praxis/
 
 ## Pipeline Workflow
 
-**Status**: Steps 1-2 complete; steps 3-5 are the active comparison work.
+**Status**: Steps 1-5 complete (see `results/results5.json` and the five-model table
+in comparison.ipynb). Step 6 is the active work: Rashomon set *structure* analysis
+per the July 7 externship guidance (tree diagrams, split-variable drift, TGB
+parameter sweeps, RID).
 
 ```
 1. Data Preparation (✅ COMPLETE via DIMEX notebooks)
@@ -323,7 +348,7 @@ print("="*100)
 [run_resplit.py](./run_resplit.py).** It embeds hard-won fixes documented in
 [RESPLIT investigation.md](./RESPLIT investigation.md):
 - Loads **binarized** input (`train_binarized.csv`/`test_binarized.csv`, exported by
-  notebook cell-10) — RESPLIT silently produces garbage on raw features
+  the comparison.ipynb binarized-export cell) — RESPLIT silently produces garbage on raw features
 - Monkey-patches `hash_for_indexing` (OOM on large sets), adds a float-tie tolerance
   to stump bounds, and pins `cart_lookahead_depth` on stump calls (C++ config leak)
 - Extracts the exact best tree from the compact prefix-trie representation
@@ -335,25 +360,50 @@ Execute:
 python run_resplit.py 2>&1 | tee logs/resplit_<runname>.txt
 ```
 
-Saves the unified-schema results to `results/results2.json` for notebook cell-6.
+Saves the unified-schema results to `results/results2.json`, which the comparison.ipynb
+Part-2 cell merges into the running results table.
 
 **Part 3: PRAXIS + full comparison (Jupyter)**
 
 The maintained, working version lives in
-[notebooks/comparison.ipynb](./notebooks/comparison.ipynb) (cells 9–17):
-PRAXIS training, binarized-data export, tree printing, and the five-model table
-(XGBoost / SPLIT / RESPLIT / PRAXIS / STreeD). Key API facts learned the hard way:
+[notebooks/comparison.ipynb](./notebooks/comparison.ipynb) (Part 3 onward):
+PRAXIS training, binarized-data export, Rashomon set export, tree printing, and the
+five-model table (XGBoost / SPLIT / RESPLIT / PRAXIS / STreeD). Key API facts
+learned the hard way:
 
 - PRAXIS hyperparameters go into **`fit()`**, not the constructor:
   `PRAXIS().fit(x_bin, y, lambda_reg=0.005, depth_budget=5, rashomon_mult=0.01, lookahead_k=1)`
 - PRAXIS requires **binary input** — `ThresholdGuessBinarizer().fit_transform(x, y)`
-- `get_tree_objective(i)` returns an **unnormalized integer** objective — use it only
-  for ranking; compute reported loss manually:
-  `(preds != y_train).sum()/N + 0.005 * num_leaves` (same formula for every model)
+- `get_tree_objective(i)` returns a **tuple** `(N × regularized_loss, regularized_loss)`
+  — e.g. `(27, 0.09)`. Verified 2026-07-07: `objective[1]` equals the externally
+  computed `(preds != y_train).sum()/N + λ·num_leaves` exactly. Sorting by the tuple
+  works (lexicographic); never call `int()` on it. Table losses are still computed
+  externally from raw predictions (same formula for every model) as a cross-check
 - `get_tree_paths(i)` returns signed ids **±(column_index+1)**; decode with
   `names[abs(s)-1]`, `s > 0` = condition true
 - All models' table losses are computed externally from raw predictions on TRAIN,
   never taken from a model's internal objective
+- `tree-praxis` also installs on **Windows** (pip) — handy for quick local tests
+  without WSL
+
+**Part 4: Rashomon set structure analysis (July 7 guidance)**
+
+Two-stage workflow, decoupled so the analysis never re-fits PRAXIS:
+
+1. **Export** (comparison.ipynb, the cell right after the binarized-data export): `prxs.export_praxis_trees()`
+   writes `results/praxis_trees.json` — all trees ranked by objective, with signed-id
+   paths, leaf predictions, per-tree regularized loss, leaves/depth, and split features.
+2. **Analyze** ([notebooks/tree_structure.ipynb](./notebooks/tree_structure.ipynb)):
+   loads the JSON via `prxs.load_trees()`; shows the feature-index→name mapping,
+   structure summary, split-variable usage and root-split tallies, and diagrams
+   beginning/middle/end trees with `prxs.draw_tree()`.
+
+`draw_tree` conventions: internal nodes = binarized feature, edges = yes/no
+(yes ⇔ condition true), leaves colored blue=satisfied / yellow=not satisfied
+(CVD-safe pair) with the class written as text. Human-readable node labels come
+from the **hand-written** `feature_labels` dict in tree_structure.ipynb — when
+editing it, phrase labels so "yes" still means the raw `<=` condition is TRUE
+(e.g. `Customer_Type_disloyal Customer <= 0.5` → "Loyal customer?").
 
 ---
 
@@ -595,19 +645,19 @@ pip install -e .
 - [x] **SPLIT vs XGBoost Comparison**: Across 3 random seeds (42, 50, 99) in Black-Box notebooks
 - [x] **Paper Analysis**: SPLIT and PRAXIS papers reviewed and contextualized
 
-### Remaining Work (RESPLIT vs PRAXIS Comparison)
+### ✅ Completed (RESPLIT vs PRAXIS Comparison)
+- [x] **RESPLIT script**: `run_resplit.py` (command-line only; see RESPLIT investigation.md for the three upstream defects it works around)
+- [x] **Five-model comparison**: XGBoost / SPLIT / RESPLIT / PRAXIS / STreeD in comparison.ipynb → `results/results5.json`
+- [x] **Rashomon set export**: `prxs.export_praxis_trees()` → `results/praxis_trees.json` (140 trees)
+- [x] **Structure analysis scaffolding**: `notebooks/tree_structure.ipynb` (mapping, summary, usage, root tallies, diagrams)
 
-#### RESPLIT Command-line Execution
-- [ ] **RESPLIT script**: Create `run_resplit.py` to execute RESPLIT on airline 9-feature subset (cmd-line only)
-- [ ] **Config tuning**: Test `rashomon_bound_multiplier` values (0.01, 0.03, 0.05, 0.1)
-- [ ] **Results export**: Save Rashomon set trees and statistics to JSON
-
-#### RESPLIT vs. PRAXIS Comparative Analysis
-- [ ] **Direct comparison**: Run RESPLIT and compare against PRAXIS:
-  - [ ] Rashomon set sizes (expect PRAXIS ≥ 98% recall of RESPLIT set)
-  - [ ] Runtime ratio (target: 100-1000× speedup for PRAXIS)
-  - [ ] Feature importance stability comparison
-  - [ ] Tree structure similarity (same splits, thresholds?)
+### Remaining Work (July 7 guidance + open items)
+- [ ] **Takeaways**: Fill in the takeaways cell of tree_structure.ipynb after inspecting the sampled diagrams
+- [ ] **Human-readable labels**: Finish hand-translating the `feature_labels` dict (2 of 28 done)
+- [ ] **TGB vs RID importance ranking**: Table/diagram comparing ThresholdGuessBinarizer variable ranking vs Rashomon median importance; track RID memory & runtime
+- [ ] **TGB parameter sweeps**: Repeat with different TGB depth/iteration settings; is the small-setting variable set contained in the large-setting one?
+- [ ] **Leaf-partition distributions**: Per-tree data distribution over leaves; compare across the set and across TGB/PRAXIS parameters
+- [ ] **Config tuning**: Test `rashomon_mult` values (0.01, 0.03, 0.05, 0.1)
 - [ ] **Multi-seed robustness**: Test across multiple random seeds (42, 50, 99)
 - [ ] **Scaling experiment**: Test on 16 or 19 features to identify PRAXIS advantage threshold
 
@@ -629,6 +679,32 @@ pip install -e .
 
 ## Documentation Updates
 
+### 2026-07-07: prxs package, tree diagrams, and the "wifi root" resolution
+- ✅ **New `prxs` package** (separate from `dimex`, which is the old DIMACS Externship
+  project): export/load/reconstruct/diagram PRAXIS Rashomon set trees
+- ✅ **New `notebooks/tree_structure.ipynb`**: July 7 guidance analysis — run the export
+  cell in comparison.ipynb first, then this notebook (no PRAXIS re-fit needed)
+- ✅ **Corrected API fact**: PRAXIS `get_tree_objective(i)` returns a *tuple*
+  `(N × loss, loss)`, not an integer; `objective[1]` is the exact normalized
+  regularized loss
+
+**First structural results (rashomon_mult=0.01, 140 trees)**: loss 0.136402–0.143071,
+7–10 leaves, depth uniformly 5. Five splits are universal (in all 140 trees):
+`Inflight_wifi_service <= 0.5 / 4.5`, `Type_of_Travel_Personal Travel <= 0.5`,
+`Customer_Type_disloyal Customer <= 0.5`, `Inflight_entertainment <= 3.5`.
+**Every tree roots at `Inflight_wifi_service <= 0.5 → satisfied`** — that split
+isolates 3,887 rows (rating 0 = "not rated/N/A") at 99.8% purity (8 errors), so no
+near-optimal tree can give it up. Diversity lives in the lower levels.
+
+**Resolved (index-numbering illusion)**: the old DIMEX SPLIT trees seemed to root
+elsewhere, but SPLIT tree printouts use *per-model encoder indices* — `feature: 0`
+in one model and `feature: 4` in another are both wifi ≤ 0.5. Confirmed three ways:
+(a) current split_model's `binarized_features` map decodes its root to wifi ≤ 0.5,
+(b) the current split_tree printout is character-identical to old model_8's,
+(c) old tree_0's root-true leaf loss `0.002058142563328147` = `float32(8/3887)`,
+uniquely the wifi==0 subset. Note: SPLIT's printed leaf losses are **per-leaf error
+rates in float32** (misclassified/leaf_size), not global-N losses.
+
 ### 2026-06-30: Paper Analysis & Integration
 - ✅ Extracted and analyzed first 8 pages of SPLIT paper (Babbar et al., ICML 2025)
 - ✅ Extracted and analyzed first 9 pages of PRAXIS paper (Harary et al., ICML 2026)
@@ -647,6 +723,6 @@ pip install -e .
 
 ---
 
-**Last updated**: 2026-06-30  
+**Last updated**: 2026-07-07  
 **Project owner**: Lucas Campagnaro  
-**Environment**: Python 3.10, conda, WSL (Linux)
+**Environment**: Python 3.10, conda, WSL (Linux); `tree-praxis` also runs on Windows for quick local tests
