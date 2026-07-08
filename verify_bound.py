@@ -69,7 +69,7 @@ def local_objective(tree, X, y, reg_local):
     return errors / len(y) + reg_local * get_num_leaves(tree), errors
 
 
-train_data = pd.read_csv('airline-passenger-satisfaction/train_binarized.csv')
+train_data = pd.read_csv('data/airline-passenger-satisfaction/train_binarized.csv')
 x_train = train_data.drop(columns=['satisfaction'])
 y_train = train_data['satisfaction']
 n_full = len(y_train)

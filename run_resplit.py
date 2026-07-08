@@ -124,11 +124,11 @@ def print_paths(node, names, path=None):
 
 # Binarized data exported from notebooks/comparison.ipynb (same ThresholdGuessBinarizer
 # output PRAXIS uses — RESPLIT requires binary features, see SPLIT paper Appendix A.8)
-train_data = pd.read_csv('airline-passenger-satisfaction/train_binarized.csv')
+train_data = pd.read_csv('data/airline-passenger-satisfaction/train_binarized.csv')
 x_train = train_data.drop(columns=['satisfaction'])
 y_train = train_data['satisfaction']
 
-test_data = pd.read_csv('airline-passenger-satisfaction/test_binarized.csv')
+test_data = pd.read_csv('data/airline-passenger-satisfaction/test_binarized.csv')
 x_test = test_data.drop(columns=['satisfaction'])
 y_test = test_data['satisfaction']
 

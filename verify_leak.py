@@ -30,7 +30,7 @@ def get_num_leaves(tree):
     return get_num_leaves(tree.left_child) + get_num_leaves(tree.right_child)
 
 
-train_data = pd.read_csv('airline-passenger-satisfaction/train_binarized.csv')
+train_data = pd.read_csv('data/airline-passenger-satisfaction/train_binarized.csv')
 x_train = train_data.drop(columns=['satisfaction'])
 y_train = train_data['satisfaction']
 n_full = len(y_train)

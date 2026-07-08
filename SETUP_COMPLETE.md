@@ -31,7 +31,7 @@ The `praxis` project has been fully configured and is ready to run. Below is a c
 - ✅ **notebooks/RESPLIT_vs_PRAXIS_comparison.ipynb** — **NEW** Main comparison notebook
 
 ### Data
-- ✅ **airline-passenger-satisfaction/** — Dataset shared with DIMEX (unchanged)
+- ✅ **data/airline-passenger-satisfaction/** — Dataset shared with DIMEX (unchanged)
 
 ### Results
 - ✅ **results/Results.png** — DIMEX comparison chart (from original work)

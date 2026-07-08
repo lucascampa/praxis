@@ -74,7 +74,7 @@ Source: Kaggle public dataset.
 
 ```
 dimex/
-├── airline-passenger-satisfaction/   # Raw and processed CSV files
+├── data/airline-passenger-satisfaction/   # Raw and processed CSV files
 ├── dimex/                            # Python package
 │   ├── preprocessing.py              # Cleaning, encoding, balancing
 │   ├── xgb_runner.py                 # XGBoost training & feature selection

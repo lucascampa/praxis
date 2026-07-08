@@ -44,7 +44,7 @@ threshold guessing (SPLIT paper App. A.8 lists RESPLIT among algorithms *requiri
 binarization).
 
 **Fix**: notebook exports the exact `ThresholdGuessBinarizer` output PRAXIS uses →
-`airline-passenger-satisfaction/train_binarized.csv` / `test_binarized.csv`;
+`data/airline-passenger-satisfaction/train_binarized.csv` / `test_binarized.csv`;
 `run_resplit.py` loads those. Result: 1 prefix → **861 prefixes**, 6 trees → **1.65B
 trees**. Best tree improved 0.3316 → 0.148839. Still not 0.136402.
 

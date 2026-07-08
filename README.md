@@ -25,7 +25,7 @@ See the original [write-up](https://medium.com/@lucascampagnaro/i-built-an-end-t
 
 ## Project Structure
 ```
-├── airline-passenger-satisfaction/ # Dataset (raw, cleaned, encoded, balanced, binarized)
+├── data/airline-passenger-satisfaction/ # Dataset (raw, cleaned, encoded, balanced, binarized)
 ├── dimex/ # DIMACS Externship package (old project: SPLIT vs XGBoost)
 ├── prxs/ # Current-project package: Rashomon set structure analysis
 ├── run_resplit.py # RESPLIT runner (command-line only)
@@ -103,4 +103,8 @@ provably misses the optimum — see [RESPLIT investigation.md](RESPLIT%20investi
 
 ## Documentation
 
-For complete context, see [CLAUDE.md](CLAUDE.md) and [SPLIT context.md](SPLIT%20context.md).
+- [CLAUDE.md](CLAUDE.md) — operational context: how to run everything, API traps, findings log
+- [papers/PAPERS.md](papers/PAPERS.md) — paper summaries (SPLIT 2025, PRAXIS 2026)
+- [data/DATA.md](data/DATA.md) — dataset documentation and feature lists
+- [RESPLIT investigation.md](RESPLIT%20investigation.md) — why RESPLIT underperforms here (defect record)
+- [SPLIT context.md](SPLIT%20context.md) — DIMEX (original externship) background
